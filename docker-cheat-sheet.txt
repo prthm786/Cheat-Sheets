@@ -27,7 +27,7 @@ $ docker container run --rm -it <image>
 
 
 # Checks logs of container 
-$ docker logs <container>
+$ docker container logs  <container>
 
 $ docker start <container>
 $ docker stop <container>
@@ -105,5 +105,29 @@ $ docker run -itd --rm --network none --name <container> <image>
 
 # Remove a container from a network
 $ docker network disconnect bridge <container>
-____________________________________________
+______________________________________________
 
+############### Dockerfile ####################
+$ touch index.html
+<html>
+ <body>
+  <div> Hello World </div>
+ </body>
+</html>
+
+# Create a Dockerfile
+$ nano Dockerfile
+FROM nginx
+ADD index.html /usr/share/nginx/html
+
+
+# Build the image with the tag 'myapp' using Dockerfile
+$ docker build -t myapp .
+
+
+# Create a container using the image build 
+$ docker run -d -p 9000:80 myapp
+
+
+# check for the nginx app page 
+$ curl localhost:9000
