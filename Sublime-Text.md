@@ -38,4 +38,5 @@
 33) `Ctrl + shift + L`
 34) `ctrl + shift + d` -> duplicate line 
 35) `ctrl + p` -> goto anything ( : , @ , # ) 
-
+36) `ctrl + k, ctrl + l` -> convert to Lowercase
+37) `ctrl + k, ctrl + u` -> convert to Uppercasa
