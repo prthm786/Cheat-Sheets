@@ -1,21 +1,30 @@
 #          Docker Commands Cheat Sheet 
 
 $ docker --version 
+
 $ docker --help
 
-$ docker pull <image>   -> pull an image from docker hub 
+# Pull an image from docker hub 
+$ docker pull <image>   
 
-$ docker ps  -> list running containers 
+# List running containers 
+$ docker ps 
 $ docker ps -a 
 
-$ docker run --name <container> <image>   -> create a container 
-$ docker run -dt --name <container> <image>  -> create a container to run it as a daemon(in background)  
-$ docker exec -it <container> bash  -> interact with the container, run cmds inside a container 
+# Create a container 
+$ docker run --name <container> <image>   
+ 
+# Create a container to run it as a daemon(in background)
+$ docker run -dt --name <container> <image>    
 
-$ docker run -td -p <host_port>:<container_port> 
-<image> 
+# Interact with the container, run cmds inside a container 
+$ docker exec -it <container> bash
 
-$ docker container run --rm -it <image>.  -> run a container interactively and remove after exiting 
+# Run a container and publishing a port 
+$ docker run -td -p <host_port>:<container_port> <image> 
+
+# Run a container interactively and remove after exiting
+$ docker container run --rm -it <image> 
 
 $ docker start <container>
 $ docker stop <container>
