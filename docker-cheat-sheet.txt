@@ -41,9 +41,9 @@ $ docker commit <container_hash> <img_name>:<version>
 # Copy Files from container to local machine 
 $ docker cp <container_hash>:<source> <target>
 
-
 # Copy Files to container from local machine
-$ docker cp <taeget> <container_hash>:<source>
+$ docker cp <target> <container_hash>:<source>
+
 
 # Remove running container 
 $ docker rm -f <container>   
@@ -55,13 +55,55 @@ $ docker image ls
 # Removes image 
 $ docker image rm <image_hash> 
 
+_______________________________________________
+################# NETWORKING ##################
+# Network Types
+## Bridge 
+## User defined Bridge 
+## Host 
+## Macvlan
+## IPvlan
+## None 
 
-# List of network images 
+$ docker network --help 
+
+# List of network 
 $ docker network ls     
 
-
-# Create a new network 
+# Create a new user defined Bridge network  
 $ docker network create <networkname>     
 
-# Create a new container with a specified network 
+# Inspecting network 
+$ docker inspect <networkname> 
+
+
+# Create a new container with a specified user defined bridge network 
 $ docker run -itd --rm --network <network> --name <container> <image>    
+
+
+# Creating a container in host network 
+$ docker run -itd --rm --network host --name <container> nginx   
+
+
+# Creating a Macvlan network 
+$ docker network create -d macvlan --subnet <your_subnet> --gatwway <your_gateway> -o parent=<your_host_interface> <networkname>
+
+# Creating a container in macvlan network 
+$ docker run -itd --rm --network <macvlan_network> --ip <ip_address>--name <container> <image>   
+
+
+# Creating a IPvlan network 
+$ docker network create -d ipvlan --subnet <your_subnet> --gatwway <your_gateway> -o parent=<your_host_interface> <networkname>
+
+# Creating a container in ipvlan network 
+$ docker run -itd --rm --network <ipvlan_network> --ip <ip_address>--name <container> <image>
+
+
+Creating a container in none network 
+$ docker run -itd --rm --network none --name <container> <image> 
+
+
+# Remove a container from a network
+$ docker network disconnect bridge <container>
+____________________________________________
+
