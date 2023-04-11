@@ -26,6 +26,8 @@ $ docker run -td -p <host_port>:<container_port> <image>
 $ docker container run --rm -it <image> 
 
 
+$ docker container inspect <container>
+
 # Checks logs of container 
 $ docker container logs  <container>
 
