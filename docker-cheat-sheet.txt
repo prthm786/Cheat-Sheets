@@ -107,6 +107,20 @@ $ docker run -itd --rm --network none --name <container> <image>
 $ docker network disconnect bridge <container>
 ______________________________________________
 
+Volume
+
+# --volume <local_file_system_dir>:<container file_system_dir>:<read_write_access>
+
+$ docker container run \
+    --rm \
+    --publish 3000:3000 \
+    --name hello-dock-dev \
+    --volume $(pwd):/home/node/app \
+    hello-dock:dev
+
+# Anonymous Volumes 
+# --volume <container file system directory absolute path>:<read write access>
+
 ############### Dockerfile ####################
 $ touch index.html
 <html>
@@ -124,6 +138,7 @@ ADD index.html /usr/share/nginx/html
 # Build the image with the tag 'myapp' using Dockerfile
 $ docker build -t myapp .
 
+$ docker build -t <image_repo>:<image_tag>
 
 # Create a container using the image build 
 $ docker run -d -p 9000:80 myapp
@@ -131,3 +146,11 @@ $ docker run -d -p 9000:80 myapp
 
 # check for the nginx app page 
 $ curl localhost:9000
+
+
+
+
+# Loging in to docker hub 
+$ docker login 
+
+$ docker image push <image_repo>:<image_tag>
