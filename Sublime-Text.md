@@ -24,7 +24,7 @@
 19) `ctrl + w` -> close tab 
 20) `ctrl + space` -> for intellisense
 21) `ctrl + alt + shift + p` -> for viewing scope 
-22) `ctrl + '`'` -> python console 
+22) `ctrl + `` -> python console 
 23) `ctrl + shift + N` -> new window 
 24) `ctrl + Q` -> start recording macro / stop recording macro
 25) `ctrl + shift + Q` -> start playing  macro
