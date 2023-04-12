@@ -9,6 +9,8 @@ $ echo "<msg>"
 $ echo %<var_name>%
 Eg:- echo %PATH%
 
+$ timeout <seconds>
+
 
 ########### File Handling ##########
 
@@ -55,6 +57,9 @@ $ copy /Y <file1>+<file2> <newfile> # copying multiple files into a file
 $ copy *.txt merged.txt  # copying all text files in current directory into merged.txt 
 $ copy /A 
 $ copy /B <image>+<any_file> <same_image>  # store any file inside image 
+
+
+$ type <file> | clip   # storing contents of a file in the clipboard 
 
 
 $ type <file>  # display content of a file
@@ -163,6 +168,8 @@ $ tracert -4|-6 <host>
 
 $ route print 
 
+$ arp -a  # display ARP table 
+
 
 
 ########## System Info #############
@@ -172,3 +179,6 @@ $ systeminfo
 
 $ powercfg /energy 
 $ powercfg /batteryreport
+
+$ net user  # all users of the system 
+
