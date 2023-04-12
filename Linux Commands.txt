@@ -279,10 +279,27 @@ $ sudo ufw delete allow 80
 
 $ alias <aliasname>="<alias_content>"
 Eg:- alias i="sudo apt install"
+     alias u=”sudo apt update && sudo apt upgrade “
 
+$ unalias <alias_name>    # delete aliases 
+
+
+###### Environment Variables ########
+
+USER   #  The currently logged-in user name.
+HOME   # The path to the current user’s home directory.
+SHELL  # The pathname of the current user’s shell.
+PATH   # A list of directories that the shell searches for executable files.
+PWD    # The path to your current working directory (PWD stands for “Print Working Directory”).
+UID    # The current user’s unique identifier.
+
+
+$ echo $<variable_name>  # display value of variables
+
+$ echo $SHELL  # display value of SHELL variable 
+$ echo $PATH  # display value of PATH variable
 
 $ env   # prints all environment variables
-$ echo $<variable_name> 
 
 $ export <var_name>=<var_value>
 $ printenv $<variable_name>
