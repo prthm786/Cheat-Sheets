@@ -180,6 +180,8 @@ $ systeminfo
 $ powercfg /energy 
 $ powercfg /batteryreport
 
+$ whoami /all 
+$ whoami /user 
 $ whoami /priv    # privileged assigned to current user 
 $ whoami /groups 
 
@@ -191,4 +193,4 @@ $ net localgroup <groupname>
 $ sc query windefend
 
 $ netsh firewall show state  # state of windows firewall 
-$ 
+
