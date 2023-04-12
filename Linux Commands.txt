@@ -1,6 +1,5 @@
                 Linux Commands 
 
-
 $ man <command>  # show manual page for <command>
 $ <command> --help 
 $ which <command>
@@ -250,6 +249,29 @@ $ systemctl is-enabled <servicename>
 
 
 
+####### Firewall ###########
+
+ufw 
+etc/default/ufw
+
+$ sudo apt install ufw
+$ systemctl status/enable ufw
+
+$ ufw status 
+$ ufw status numbered 
+$ ufw delete <number>
+$ ufw enable / disable
+$ ufw reset
+$ ufw allow/deny http/tcp or 80
+$ ufw allow/deny ssh / https / ftp
+$ ufw allow/deny from <ipaddress>
+$ ufw allow from <ipaddress> to any port <portno>
+$ ufw allow from <ipaddress> to any port <portno> proto <protocol>
+$ ufw allow from <ipaddress> to any port 22 proto tcp
+$ ufw default allow outgoing
+$ ufw default deny incoming
+$ sudo ufw delete <Action> <To>
+$ sudo ufw delete allow 80
 
 
 
