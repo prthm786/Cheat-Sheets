@@ -33,7 +33,6 @@ $ cd /
 $ pushd <dir>
 $ popd
 
-
 $ mkdir <dir>
 $ md <dir>
 
@@ -46,7 +45,6 @@ $ type <file1> <file2> > <newfile>  # creating new file from the contents of <fi
 
 $ move <source> <destination> 
 $ move /Y <file> <dir>
-
 
 $ copy <source> <destination> 
 $ copy /Y <file> <dir>
@@ -72,6 +70,9 @@ $ del /Q <file>   # quietly deleting files
 
 $ del <file1> <file2>  # deleting multiple files 
 
+$ start <dir>  # opening <dir> in file explorer
+$ start .      # opening current directory in file explorer 
+_________________________________________
 
 
 #### Command Prompt Customisation ####
