@@ -20,6 +20,8 @@ $ dir /O:N    # sort listing by Name
 $ dir /O:S    # sort by size 
 $ dir /O:E    # by extension
 $ dir /O:D    # by date/time 
+$ dir /R 
+$ dir /Q 
 
 $ dir /A:D /P /W <dir> 
 $ dir /A:-D /O:E /P <dir>
@@ -35,10 +37,12 @@ $ popd
 $ mkdir <dir>
 $ md <dir>
 
+$ tree <dir>   # display directory structure
+
 $ type NUL > <file>   # creating empty file 
 $ echo "<content>" > <file>  # creating file with <content> 
 $ copy con <file>    # places standard input into the file  
-$ type <file1> <file2> > <newfile>. # creating new file from the contents of <file1> and <file2> 
+$ type <file1> <file2> > <newfile>  # creating new file from the contents of <file1> and <file2> 
 
 $ move <source> <destination> 
 $ move /Y <file> <dir>
@@ -46,7 +50,7 @@ $ move /Y <file> <dir>
 
 $ copy <source> <destination> 
 $ copy /Y <file> <dir>
-$ copy /Y <file1> <file2> <newfile> # copying multiple files into a file 
+$ copy /Y <file1>+<file2> <newfile> # copying multiple files into a file 
 
 
 $ type <file>  # display content of a file
@@ -55,10 +59,18 @@ $ type <file1> <file2>  # display content of multiple files
 
 $ rmdir <dir>   # deleting a directory 
 $ rmdir /S <dir>   # recursively deletes all subdirectories and files before deleting the <dir> itself 
+$ rd <dir>     # deleting a directory 
+$ rmdir <dir1> <dir2>  # deleting multiple directories
 
 $ del <file>    # deleting a file 
+$ erase <file>
 
-$ del <file1> <file2>.  # deleting multiple files 
+$ del /A:H <file>   # deleting file based on attreibutes 
+$ del /A:R <file> 
+$ del /P <file>   # prompts for confirmation before delete
+$ del /Q <file>   # quietly deleting files 
+
+$ del <file1> <file2>  # deleting multiple files 
 
 
 
