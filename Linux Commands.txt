@@ -7,14 +7,22 @@ $ whoami
 $ whereis <command>
 $ whatis <command>
 $ date 
-$ who
-$ uptime 
+$ who 
+
+/var/logs
+
+
+$ htop || sudo apt install htop && htop
+
+$ sudo apt update && sudo apt upgrsde
+
+
 
 ############# System Info #############
 $ hostname 
-$ uname -a 
+$ uname -a   show kernel info 
 
-cat /etc/os-release 
+$ cat /etc/os-release 
 $ cat /proc/cpuinfo   # Cpu information
 $ cat proc/meminfo    # Memory information
 $ free           # Show memory and swap usage
@@ -23,6 +31,8 @@ $ df             # Show the disk usage
 $ df -h 
 $ du             # Show directory space usage
 $ du -h 
+$ uptime
+______________________________________
 
 
 
@@ -59,6 +69,9 @@ $ cd ..
 $ pwd # print current directory
 
 $ touch <file>  # creating empty file
+
+$ touch file{1,,10} 
+
 $ echo "<content>" > filename.txt    # creating a file with content 
 $ echo "<content>" >> filename.txt   # appending to a file 
 
@@ -68,10 +81,15 @@ $ mv <filename> <newfilename>  # renames file
 
 $ tail -n <file>  # last n lines of file 
 $ head -n <file>  # first 10 lines of file 
+
 $ cat <file>   # list all content of a file
 $ cat > <file>  # places standard input to a file  
+$ cat << EOF > <file>    # places all the input  until 'EOF' is received
+
+
 $ nano <file>   # edit contents of a file
 $ nano -l <file>   # display line number in file 
+
 $ rmdir <directory>
 $ rm <file>
 $ rm -rf <dir>
@@ -83,6 +101,7 @@ $ chmod <file_permissions> <file>
 $ tree     # Lists the contents of a directory recursively
 
 $ ln -s <file_link> <source>     # create a link
+______________________________________
 
 
 
@@ -141,7 +160,7 @@ $ arp -a/-e
 
 $ cat /etc/resolv.conf
 $ cat /etc/hosts 
-
+______________________________________
 
 
 
@@ -174,7 +193,6 @@ $ su - <user>      # switches to <user>
 $ su -             # switches to root, require root credentials 
 
 
-
 $ sudo usermod -l <username> <newusername>  
 # change <username> of the <user>
 $ sudo usermod <username> --shell /bin/bash 
@@ -190,6 +208,7 @@ $ groups <username>
 $ sudo userdel <user>    # Deletes a user account and related file
 
 $ gpasswd -d <username> <groupname>
+______________________________________
 
 
 
@@ -207,6 +226,7 @@ $ fg <n>   # Brings job <n> to the foreground
 $ bg    # List stopped or background jobs,resume a stopped job in the background
 
 $ jobs       # Lists all processes that are running in the background
+______________________________________
 
 
 
@@ -229,6 +249,7 @@ $ sudo apt search <string>
 $ sudo apt search –full <string>
 $ sudo apt-cache search <package>
 $ sudo apt-add-repository <repository>
+______________________________________
 
 
 
@@ -246,6 +267,7 @@ $ systemctl enable <servicename>
 $ systemctl disable <servicename>
 $ systemctl is-active <servicename>
 $ systemctl is-enabled <servicename>
+______________________________________
 
 
 
@@ -272,8 +294,48 @@ $ ufw default allow outgoing
 $ ufw default deny incoming
 $ sudo ufw delete <Action> <To>
 $ sudo ufw delete allow 80
+______________________________________
 
 
+
+####### Compression/Decompression ######
+
+tar 
+gzip -> gzip command compresses files
+unzip
+
+
+$ gzip <file>   # create a compressed file named <file>.gz 
+$ gzip -k <file>   # by default gzip deletes original file but -k keeps the original file as well 
+$ gzip -1 <file>  # sets compression level between 1-9, -1 -> least compression  and -9 -> max compression
+$ gzip -d <file>.gz  # Decompression
+
+
+.tar - archive files are usually not compressed.
+.tar.gz – archive file compressed with gzip tool
+.tar.bz2 – archive file compressed with bzip2 tool
+
+
+$ tar -cvf file.tar <multiple_files>  
+# uncompressed tar Archive 
+$ tar -cvf file.tar <folder>  # uncompressed tar Archive
+$ tar -xvf file.tar  # Extracting files from Archive
+
+
+$ tar -czvf file.tar.gz <folder>   # gzip compression on the tar Archive
+$ tar -xvzf file.tar.gz  # Extracting a gzip tar Archive *.tar.gz 
+
+
+$ tar -rvf existing-archive-name.tar <folder>
+# Add content to the existing archive 
+ 
+
+$ tar czf file.tar | wc -c  # checking size of tar 
+$ $ tar czf file1.tar.gz | wc -c   # checking size of tar.gz
+
+
+$ tar -tf file.tar   # list the contents of tar 
+______________________________________
 
 
 
@@ -282,6 +344,8 @@ Eg:- alias i="sudo apt install"
      alias u=”sudo apt update && sudo apt upgrade “
 
 $ unalias <alias_name>    # delete aliases 
+
+
 
 
 ###### Environment Variables ########
@@ -305,3 +369,4 @@ $ export <var_name>=<var_value>
 $ printenv $<variable_name>
 
 $ source <file>
+______________________________________
