@@ -11,7 +11,7 @@ $ date
 $ who
 $ uptime 
 
-################# System Info #################
+############# System Info #############
 $ hostname 
 $ uname -a 
 
@@ -27,7 +27,7 @@ $ du -h
 
 
 
-############### File Management ###############
+########### File Management ###########
 
 ls 
 cd
@@ -87,7 +87,7 @@ $ ln -s <file_link> <source>     # create a link
 
 
 
-################# Networking ##################
+########### Networking ############
 
 ip
 ifconfig 
@@ -146,7 +146,7 @@ $ cat /etc/hosts
 
 
 
-############### User Management ############### 
+########## User Management ########## 
 
 adduser 
 useradd – lazy
@@ -194,7 +194,7 @@ $ gpasswd -d <username> <groupname>
 
 
 
-############## Process Handling ###############
+######### Process Handling ##########
 
 $ ps   
 $ top 
@@ -211,7 +211,7 @@ $ jobs       # Lists all processes that are running in the background
 
 
 
-############ Package Management ###############
+####### Package Management #########
 
 $ sudo apt edit-resources
 $ sudo apt install <package>
@@ -233,7 +233,7 @@ $ sudo apt-add-repository <repository>
 
 
 
-############## Service Handling ###############
+######### Service Handling ##########
 
 $ cat etc/services 
 lib/systemd # systemctl
