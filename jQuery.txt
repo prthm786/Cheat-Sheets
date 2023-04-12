@@ -1,14 +1,17 @@
                   jQuery Notes 
 
-jQuery is a JavaScript library designed to simplify HTML DOM tree traversal and manipulation, and event handling, CSS animation, and Ajax.
+jQuery is a JavaScript library designed to simplify HTML 
+DOM tree traversal and manipulation, and event handling, 
+CSS animation, and Ajax.
 
 https://jquery.com/
 
-jQuery's syntax is designed to make it easier to navigate a document, select DOM elements, create animations, handle events, and develop Ajax applications. jQuery also provides capabilities for developers to create plug-ins on top of the JavaScript library. 
+jQuery's syntax is designed to make it easier to navigate
+a document, select DOM elements, create animations, handle events, 
+and develop Ajax applications. jQuery also provides capabilities for 
+developers to create plug-ins on top of the JavaScript library. 
 
 https://www.w3schools.com/jquery/default.asp
-
-https://github.com/bradtraversy/jquery_crash_course
 
 $(document).ready(function(){
   $("button").click(function(){
@@ -40,6 +43,7 @@ $(document).ready(function(){
 
 DOM Manipulation
 https://www.w3schools.com/jquery/jquery_ref_html.asp
+
 Adding Elements 
 .after()
 $("button").click(function(){
