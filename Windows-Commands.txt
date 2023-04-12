@@ -5,6 +5,9 @@ $ help <command>
 
 $ cls    # clears the screen 
 
+$ echo "<msg>"
+$ echo %<var_name>%
+Eg:- echo %PATH%
 
 
 ########### File Handling ##########
@@ -49,6 +52,9 @@ $ move /Y <file> <dir>
 $ copy <source> <destination> 
 $ copy /Y <file> <dir>
 $ copy /Y <file1>+<file2> <newfile> # copying multiple files into a file 
+$ copy *.txt merged.txt  # copying all text files in current directory into merged.txt 
+$ copy /A 
+$ copy /B <image>+<any_file> <same_image>  # store any file inside image 
 
 
 $ type <file>  # display content of a file
@@ -66,12 +72,18 @@ $ erase <file>
 $ del /A:H <file>   # deleting file based on attreibutes 
 $ del /A:R <file> 
 $ del /P <file>   # prompts for confirmation before delete
+$ del /S <directory>  # recursively deletes all files in directory 
 $ del /Q <file>   # quietly deleting files 
-
+$ del /F <files>  # forece deleting read only files 
 $ del <file1> <file2>  # deleting multiple files 
 
 $ start <dir>  # opening <dir> in file explorer
 $ start .      # opening current directory in file explorer 
+
+
+$ subst <drive_letter>: "<path>"   # creates a virtual drive using the physical path provided 
+ 
+$ subst /d <drive_letter>:   # deleting the virtual drive 
 _________________________________________
 
 
@@ -80,12 +92,83 @@ _________________________________________
 $ title <title>
 
 $ prompt $G
-$ prompt $D$B$N$G
+$ prompt $D$B$P$G
 
 $ color <bg_color><fg_color>
 Eg:- color 0b 
 
 
 
-$ doskey /history     # history of commands ran. in the current session 
+$ doskey /history     # history of commands ran in the current session 
 
+$ doskey /MACROS
+$ doskey /MACROS:ALL
+
+$ doskey <command_name>=<command_value>
+
+
+
+############# Networking ##############
+
+netstst 
+ping 
+tracert 
+nslookup
+netsh 
+ipconfig 
+
+$ netstat -a   # display all listening ports 
+$ netstat -n   # display port numbers and addresses 
+$ netstat -o   # display process id
+$ netstat -p <proto>   # used to specify protocol either TCP or UDP
+$ netstst -r   # display routing table 
+$ netstst -e   # display ethernet statistics
+$ netstat -t <interval> 
+$ netstat -f   # displays FQDN 
+
+$ netstst -e -t 5 
+$ netstst -af 
+
+$ ping -t <host>   # ping until stopped 
+$ ping -n <count> <host>   # no of echo packets to send
+# ping -i <ttl> <host>     # specifying time to live 
+$ ping -4 <host>
+$ ping -6 <host> 
+
+
+$ ipconfig /?   # display help 
+$ iponfig 
+$ ipconfig /all   # display full conf info 
+$ ipconfig /release    # release ipv4 for specified adapter 
+$ ipconfig /release    # renew ipv4 address
+$ ipconfig /displaydns  # display contents of DNS Cache 
+$ ipconfig /flushdns   # clears DNS cache
+
+
+$ netsh wlan show profiles    # dospaly network  profiles 
+$ netsh wlan show networks    # display all available networks 
+$ netsh wlan show profile "<network_name>" key=clear     # display password for the specified <network>
+$ netsh interface ip show dnsservers
+$ netsh interface ip show tcpconnections
+$ netsh interface ip show address | findstr "IP Address" 
+$ netsh interface ip show interface 
+
+
+$ tracert -d <host>  # do not resolve hostnames 
+$ tracert -h <max_hops> <host>
+$ tracert -w <timeout> <host>   # wait timeout (in ms) for each reply 
+$ tracert -r <host> # trace round trip path
+$ tracert -s <source_addr> <host>
+$ tracert -4|-6 <host>
+
+$ route print 
+
+
+
+########### System Info ###############
+
+$ getmac /v 
+$ systeminfo
+
+$ powercfg /energy 
+$ powercfg /batteryreport
