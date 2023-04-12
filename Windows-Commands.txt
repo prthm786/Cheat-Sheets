@@ -1,1 +1,54 @@
+          Windows Command Prompt Cmds 
+
+$ help 
+$ help <command>
+
+$ cls    # clears the screen 
+
+
+
+########### File Handling ##########
+$ mkdir <dir>
+$ md <dir>
+
+$ type NUL > <file>   # creating empty file 
+$ echo "<content>" > <file>  # creating file with <content> 
+$ copy con <file>    # places standard input into the file  
+$ type <file1> <file2> > <newfile>. # creating new file from the contents of <file1> and <file2> 
+
+$ move <source> <destination> 
+$ move /Y <file> <dir>
+
+
+$ copy <source> <destination> 
+$ copy /Y <file> <dir>
+$ copy /Y <file1> <file2> <newfile> # copying multiple files into a file 
+
+
+$ type <file>  # display content of a file
+$ type <file1> <file2>  # display content of multiple files 
+
+
+$ rmdir <dir>   # deleting a directory 
+$ rmdir /S <dir>   # recursively deletes all subdirectories and files before deleting the <dir> itself 
+
+$ del <file>    # deleting a file 
+
+$ del <file1> <file2>.  # deleting multiple files 
+
+
+
+#### Command Prompt Customisation ####
+
+$ title <title>
+
+$ prompt $G
+$ prompt $D$B$N$G
+
+$ color <bg_color><fg_color>
+Eg:- color 0b 
+
+
+
+$ doskey /history     # history of commands ran. in the current session 
 
