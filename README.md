@@ -3,8 +3,8 @@
 Here you will find list of cheat sheets of 
 various languages, tools and frameworks 
 
-- [Linux](Linux-Commands.txt)
-- [Windows Cmd](Windows-Commands.txt)
+- [Linux Commands](Linux-Commands.txt)
+- [Windows Commands](Windows-Commands.txt)
 - [Docker](Docker.txt)
 - [Sublime Text](Sublime-Text.md)
 - [Git](Git.txt)
