@@ -8,6 +8,30 @@ $ cls    # clears the screen
 
 
 ########### File Handling ##########
+
+$ dir    # list contents to current directory
+$ dir /P  # pauses after each screen is full
+$ dir /W  # display widely 
+$ dir /A:D  # list only directories with the current directory 
+$ dir /A:-D   # list only files 
+$ dir /A:H    # list hideen. files 
+$ dir /A:R    # list read only files 
+$ dir /O:N    # sort listing by Name
+$ dir /O:S    # sort by size 
+$ dir /O:E    # by extension
+$ dir /O:D    # by date/time 
+
+$ dir /A:D /P /W <dir> 
+$ dir /A:-D /O:E /P <dir>
+
+$ cd <dir>.  # change directory to <dir>
+$ cd ..     # change to parent directory 
+$ cd /   
+
+$ pushd <dir>
+$ popd
+
+
 $ mkdir <dir>
 $ md <dir>
 
