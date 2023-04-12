@@ -5,6 +5,8 @@ various languages, tools and frameworks
 
 - [Linux](Linux Commands.txt)
 - [Docker](Docker.txt)
+- [Sublime Text](Sublime-Text.md)
+- [Git](Git.txt)
 
 I'll be updating this repo frequently.
 
