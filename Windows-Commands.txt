@@ -180,5 +180,15 @@ $ systeminfo
 $ powercfg /energy 
 $ powercfg /batteryreport
 
-$ net user  # all users of the system 
+$ whoami /priv    # privileged assigned to current user 
+$ whoami /groups 
 
+$ net users # all users of the system 
+$ net user <username>   # info about the given user 
+$ net localgroup
+$ net localgroup <groupname>
+
+$ sc query windefend
+
+$ netsh firewall show state  # state of windows firewall 
+$ 
