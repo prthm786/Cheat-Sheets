@@ -1,0 +1,52 @@
+                Linux Commands 
+
+
+$ man <command>  # show manual page for <command>
+$ which <command>
+$ whoami 
+$ whereis <command>
+$ whatis <command>
+
+$ ls # list files in directory 
+$ ls -al # list all files 
+$ cd <directory>
+$ cd .. 
+$ pwd # print current directory
+
+$ touch <file>  # creating empty file
+$ echo "<content>" > filename.txt    # creating a file with content 
+$ echo "<content>" >> filename.txt   # appending to a file 
+
+$ mkdir <dir_name>  # creating directory 
+$ mv <file> <destination> 
+$ mv <filename> <newfilename>  # renames file 
+
+$ tail -n <file>  # last n lines of file 
+$ head -n <file>  # first 10 lines of file 
+$ cat <file>   # list all content of a file
+$ cat > <file>  # places standard input to a file  
+$ nano <file>   # edit contents of a file
+$ nano -l <file>   # display line number in file 
+$ rmdir <directory>
+$ rm <file>
+$ rm -rf <dir>
+$ file <file>   # determine type of file 
+$ find . -type f -empty   # finding empty files in current directory
+$ sudo find / -name "<name>" 
+
+$ netstat -l  # all listening ports 
+$ netstat -plunt   # display all listening TCP and UDP process with processid 
+$ ping <host> 
+$ ping -c <number> <host>    # number of packets to send to the host
+$ ping -s <number> -c <number> <host> # size of packets
+$ ping -c <number> -q <host>   # only get the summary
+$ ping -i <number> <host>   # default ping wait for 1 sec to send next packet change this time by using -i 
+$ ping -f <host>   # ping flood 
+$ ssh <user>@<host>
+$ ssh -p <port> <user>@<host>
+
+$ ip address | grep <interface>
+$ cat /etc/resolv.conf
+$ cat /etc/hosts 
+
+$ alias <aliasname>="<alias_content>"
