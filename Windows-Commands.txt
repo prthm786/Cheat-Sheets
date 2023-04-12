@@ -108,7 +108,7 @@ $ doskey <command_name>=<command_value>
 
 
 
-############# Networking ##############
+########### Networking ############
 
 netstst 
 ping 
@@ -165,7 +165,7 @@ $ route print
 
 
 
-########### System Info ###############
+########## System Info #############
 
 $ getmac /v 
 $ systeminfo
