@@ -105,6 +105,48 @@ ______________________________________
 
 
 
+######### Output Handling #########
+
+awk
+grep
+more 
+less 
+head 
+tail
+
+awk ‘{action}’ <file>
+awk ‘/regex pattern/{action}’ <file>
+
+
+$ awk ‘{print $0}’ <file>     # print all the contents of a file
+$ awk ‘{print NR,$0}’ <file>  # line-number count
+$ awk ‘{print $1}’ <file>     # print specific column
+$ awk ‘{print $1, $4}’ <file> # print 2 columns
+$ awk ‘{print $NF}’ <file>    # print last column
+
+$ awk ‘{print $1}’ <file> | head -1 
+# print specific line of a column
+$ awk ‘/^O/’ <file> 
+$ awk ‘!/0$/’ <file> 
+$ awk ‘ /io/{print $0}’ <file>   # prints lines with 'io' 
+
+
+
+grep <pattern> <file>
+
+
+sed ‘ s/[ regex ]/[ replacement ]/[flags]'. <filename>
+
+$ sed ‘s/cat/concatenate/g’ <file>   # replaces every word 'cat' with 'concatenate' 
+
+
+$ sed ‘2,3s/cat/concatenate/’ <file>   # replace 2nd and 3rd 'cat' with 'concatenate' 
+
+$ sed ‘3d’ <file>   # delete 3rd line 
+______________________________________
+
+
+
 ########### Networking ############
 
 ip
@@ -338,6 +380,13 @@ $ tar -tf file.tar   # list the contents of tar
 ______________________________________
 
 
+
+
+$ nano -l ~/.bashrc
+if [ -f ~/.bash_aliases ]; then
+ . ~/.bash_aliases
+fi
+$ source ~/.bashrc   # reloading .bashrc file 
 
 $ alias <aliasname>="<alias_content>"
 Eg:- alias i="sudo apt install"
