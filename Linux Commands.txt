@@ -2,10 +2,56 @@
 
 
 $ man <command>  # show manual page for <command>
+$ <command> --help 
 $ which <command>
 $ whoami 
 $ whereis <command>
 $ whatis <command>
+$ date 
+$ who
+$ uptime 
+
+################# System Info #################
+$ hostname 
+$ uname -a 
+
+cat /etc/os-release 
+$ cat /proc/cpuinfo   # Cpu information
+$ cat proc/meminfo    # Memory information
+$ free           # Show memory and swap usage
+$ free -h 
+$ df             # Show the disk usage 
+$ df -h 
+$ du             # Show directory space usage
+$ du -h 
+
+
+
+############### File Management ###############
+
+ls 
+cd
+popd
+pushd
+pwd
+touch 
+mdkir 
+file 
+mv 
+cp 
+tail
+head
+nano
+rmdir 
+rm
+find 
+tree 
+chmod 
+cat 
+nano
+vim
+ln
+unlink
 
 $ ls # list files in directory 
 $ ls -al # list all files 
@@ -34,8 +80,32 @@ $ file <file>   # determine type of file
 $ find . -type f -empty   # finding empty files in current directory
 $ sudo find / -name "<name>" 
 
-$ netstat -l  # all listening ports 
+$ chmod <file_permissions> <file>
+$ tree     # Lists the contents of a directory recursively
+
+$ ln -s <file_link> <source>     # create a link
+
+
+
+################# Networking ##################
+
+ip
+ifconfig 
+netstat 
+ping 
+ssh 
+nslookup
+curl 
+wget 
+arp
+route 
+
+$ netstat -r       # display routing table 
+$ netstat -l       # all listening ports 
+$ netstat -tln     # display all listening TCP ports 
+$ netstat -uln     # display all listening UDP ports 
 $ netstat -plunt   # display all listening TCP and UDP process with processid 
+
 $ ping <host> 
 $ ping -c <number> <host>    # number of packets to send to the host
 $ ping -s <number> -c <number> <host> # size of packets
@@ -45,8 +115,154 @@ $ ping -f <host>   # ping flood
 $ ssh <user>@<host>
 $ ssh -p <port> <user>@<host>
 
+$ nslookup <host>
+
+$ curl <url>        # display the content of the URL on the terminal
+$ curl -# -O <url>
+
+$ curl -o <output_file> <url>   # download file from the url 
+$ curl -O <url>.     # saves it with the same name as in the <url>
+
+$ curl -u <username>:<password> -T <file_to_upload> <ftp_url>     # upload a file to the FTP server
+
+$ curl --data "param1=&param2=" <url>
+$ curl -X "POST" -d "param1=John&param2=Doe" <url>
+
+$ wget <url>
+$ wget -O <file> <url>
+
+$ ip -4 addr      # show ipv4 address 
+$ ip -6 addr      # show ipv4 address 
+
+$ ip address 
 $ ip address | grep <interface>
+$ ip address show <interface>    # show the information related to all interfaces available on our system
+
+$ arp -a/-e
+
 $ cat /etc/resolv.conf
 $ cat /etc/hosts 
 
+
+
+
+############### User Management ############### 
+
+adduser 
+useradd – lazy
+deluser / userdel
+passwd 
+addgroup / groupadd
+usermod 
+groups 
+groups –current user
+gpasswd
+groupadd
+visudo – for changing group permissions 
+delgroup / groupdel
+groupmod
+Users
+Sudo
+
+$ cat /etc/passwd     # this file has username and password 
+$ cat /etc/shadow     # holds encrypted password of user accounts
+$ cat /etc/group      # contains group info for all accounts
+$ cat /etc/gshadow 
+
+$ sudo adduser <usermame>     # create a new user 
+$ sudo passwd <user>      # change password for <user>
+$ su - <user>      # switches to <user>
+$ su -             # switches to root, require root credentials 
+
+
+
+$ sudo usermod -l <username> <newusername>  
+# change <username> of the <user>
+$ sudo usermod <username> --shell /bin/bash 
+
+$ sudo useradd 
+
+$ sudo groupadd <group_name>    # Removes a group from the system
+$ sudo usermod -aG <group> <user>
+
+$ groups 
+$ groups <username>
+
+$ sudo userdel <user>    # Deletes a user account and related file
+
+$ gpasswd -d <username> <groupname>
+
+
+
+############## Process Handling ###############
+
+$ ps   
+$ top 
+$ ps -aux 
+$ kill -l 
+$ kill <processid>
+
+$ fg       # Brings the most recent job to foreground
+$ fg <n>   # Brings job <n> to the foreground
+
+$ bg    # List stopped or background jobs,resume a stopped job in the background
+
+$ jobs       # Lists all processes that are running in the background
+
+
+
+############ Package Management ###############
+
+$ sudo apt edit-resources
+$ sudo apt install <package>
+$ sudo apt reinstall <package>
+$ sudo apt remove <package>
+$ sudo apt autoremove
+
+$ suudo apt purge <package> # delete conf files as well
+$ sudo apt install –only-upgrade <package>
+$ sudo apt update      # update apt repo sources 
+$ sudo apt upgrade     # upgrade all package, install new versions 
+$ sudo apt dist-upgrade <package>
+$ sudo apt list –installed/--upgradable
+$ sudo apt show <packagename>
+$ sudo apt search <string> 
+$ sudo apt search –full <string>
+$ sudo apt-cache search <package>
+$ sudo apt-add-repository <repository>
+
+
+
+############## Service Handling ###############
+
+$ cat etc/services 
+lib/systemd # systemctl
+etc/init.d # service
+
+$ systemctl status <servicename>
+$ systemctl start <servicename>
+$ systemctl stop <servicename>
+$ systemctl restart <servicename>
+$ systemctl enable <servicename>
+$ systemctl disable <servicename>
+$ systemctl is-active <servicename>
+$ systemctl is-enabled <servicename>
+
+
+
+
+
+
+
+
 $ alias <aliasname>="<alias_content>"
+Eg:- alias i="sudo apt install"
+
+
+$ env   # prints all environment variables
+$ echo $<variable_name> 
+
+$ export <var_name>=<var_value>
+$ printenv $<variable_name>
+
+$ source <file>
