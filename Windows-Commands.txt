@@ -169,7 +169,7 @@ $ tracert -4|-6 <host>
 $ route print 
 
 $ arp -a  # display ARP table 
-
+_________________________________________
 
 
 ########## System Info #############
@@ -193,4 +193,16 @@ $ net localgroup <groupname>
 $ sc query windefend
 
 $ netsh firewall show state  # state of windows firewall 
+_________________________________________
 
+
+$ find /V <string> <file> 
+$ find /C <string> <file> # count of lines containing string 
+
+$ find /N <string> <file>  # display line numbers 
+$ find /I <string> <file>  # ignore case 
+
+$ find /C /I <string> <file>
+
+
+$ Findstr 
