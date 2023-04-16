@@ -240,4 +240,4 @@ $ findstr /i <string> <files>  # ignore case
 $ findstr /s <string> <dir> # searches recursively
 
 
-$ findstr /s /i /m <word> *.*  # display names of all files that contain the <word> in current directory and all subdirectories 
+$ findstr /s /i /m  <word> *.*  # display names of all files that contain the <word> in current directory and all subdirectories 
