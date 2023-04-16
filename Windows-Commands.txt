@@ -213,13 +213,31 @@ _______________________________________
 
 
 
-$ find /V <string> <file> 
-$ find /C <string> <file> # count of lines containing string 
+# Searches for a string of text in a file or files
 
-$ find /N <string> <file>  # display line numbers 
-$ find /I <string> <file>  # ignore case 
+$ find /c <string> <file> # count of lines containing string 
 
-$ find /C /I <string> <file>
+$ find /n <string> <file>  # display line numbers 
+$ find /i <string> <file>  # ignore case 
+$ find /v <string> <file> # displays lines that don't contain the <string>
+
+$ find /c /i <string> <file>
 
 
-$ Findstr 
+
+$ findstr <strings> <files>
+$ findstr /a:<color> <strings> <files>
+
+$ findstr /c:<string> <files>
+
+$ findstr /r <strings> <files>    # processes search strings as regular expressions
+
+$ findstr /m <strings> # prints only filename if string matches 
+$ findstr /n <string> <files>  # display line numbers 
+$ findstr /v <string> <files> # displays lines that don't contain the <string>
+$ findstr /x # display lines that matches exactly
+$ findstr /i <string> <files>  # ignore case 
+$ findstr /s <string> <dir> # searches recursively
+
+
+$ findstr /s /i /m <word> *.*  # display names of all files that contain the <word> in current directory and all subdirectories 
