@@ -9,6 +9,18 @@ $ echo "<msg>"
 $ echo %<var_name>%
 Eg:- echo %PATH%
 
+
+$ set <variable>=<value> # creating q environment variable for current session only 
+$ set /p <variable>=<promptString>.  # create a environment variable and prompt the user for input
+$ set /a <variable>=<expression>  # for creating a variable with numerical value 
+
+
+# Creates or modifies environment variables in the user or system environment
+$ setx <variable> <value>  # create a environment variable in local environment.
+
+$ setx <variable> <value> /m. # create a environment variable in system environment. 
+
+
 $ timeout <seconds>
 
 
@@ -115,17 +127,6 @@ $ doskey /MACROS
 $ doskey /MACROS:ALL
 
 $ doskey <command_name>=<command_value>
-
-
-$ set <variable>=<value>
-$ set /p <variable>=<promptString>.  # create a environment variable and prompt the user for input
-$ set /a <variable>=<expression> 
-
-
-# Creates or modifies environment variables in the user or system environment
-$ setx <variable> <value>  # create a environment variable in local environment.
-
-$ setx <variable> <value> /m. # create a environment variable in system environment. 
 
 
 ########### Networking ############
