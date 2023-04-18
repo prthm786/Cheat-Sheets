@@ -237,10 +237,10 @@ fullname:"<Name>"
 $ net user jayj Cyk4^g3B /add /passwordreq:yes /times:monday-friday,8am-5pm /fullname:"Jay Jamison"
 
 
-$ net user <username> /delete    # deleting user from the system 
+$ net user <username> /delete      # deleting user from the system 
 
 
-$ net user <username> <options>   # updates user 
+$ net user <username> <options>    # updates user 
 _______________________________________
 
 
@@ -248,11 +248,11 @@ _______________________________________
 
 # Searches for a string of text in a file or files
 
-$ find /c <string> <file> # count of lines containing string 
+$ find /c <string> <file>   # count of lines containing string 
 
-$ find /n <string> <file>  # display line numbers 
-$ find /i <string> <file>  # ignore case 
-$ find /v <string> <file> # displays lines that don't contain the <string>
+$ find /n <string> <file>   # display line numbers 
+$ find /i <string> <file>   # ignore case 
+$ find /v <string> <file>   # displays lines that don't contain the <string>
 
 $ find /c /i <string> <file>
 
@@ -263,17 +263,17 @@ $ findstr /a:<color> <strings> <files>
 
 $ findstr /c:<string> <files>
 
-$ findstr /r <strings> <files>    # processes search strings as regular expressions
+$ findstr /r <strings> <files>     # processes search strings as regular expressions
 
-$ findstr /m <strings> # prints only filename if string matches 
-$ findstr /n <string> <files>  # display line numbers 
-$ findstr /v <string> <files> # displays lines that don't contain the <string>
+$ findstr /m <strings>  # prints only filename if string matches 
+$ findstr /n <string> <files>      # display line numbers 
+$ findstr /v <string> <files>      # displays lines that don't contain the <string>
 $ findstr /x # display lines that matches exactly
-$ findstr /i <string> <files>  # ignore case 
+$ findstr /i <string> <files>      # ignore case 
 $ findstr /s <string> <dir> # searches recursively
 
 
-$ findstr /s /i /m  <word> *.*  # display names of all files that contain the <word> in current directory and all subdirectories 
+$ findstr /s /i /m  <word> *.*       # display names of all files that contain the <word> in current directory and all subdirectories 
 
 
 
