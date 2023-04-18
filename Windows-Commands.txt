@@ -10,6 +10,9 @@ $ echo %<var_name>%
 Eg:- echo %PATH%
 
 
+$ pause   # pauses screen
+
+
 $ set <variable>=<value> # creating q environment variable for current session only 
 $ set /p <variable>=<promptString>.  # create a environment variable and prompt the user for input
 $ set /a <variable>=<expression>  # for creating a variable with numerical value 
@@ -283,3 +286,14 @@ $ fc /N <file1> <file2>    # display line no.
 
 
 
+
+$ more <file>   # display content of a file 1 screen at a time 
+
+$ more <file1> <file2>     # display content of multiple files 1 screen at a time 
+
+$ more +<n> <file>   # display content after first <n> lines 
+
+$ more +<n> <file1> +<n> <file2>
+
+$ <command> | more 
+$ type <file> | more 
