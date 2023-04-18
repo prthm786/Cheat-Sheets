@@ -83,9 +83,11 @@ $ tail -n <file>  # last n lines of file
 $ head -n <file>  # first 10 lines of file 
 
 $ cat <file>   # list all content of a file
-$ cat > <file>  # places standard input to a file  
+$ cat > <file>  # places standard input to a file until Ctrl + C is pressed 
 $ cat << EOF > <file>    # places all the input  until 'EOF' is received
 
+$ cat -n <file>   # show line numbers 
+$ cat <file1> <file2> > <newfile> # create a new file with content of both files <file1> and <file2> 
 
 $ nano <file>   # edit contents of a file
 $ nano -l <file>   # display line number in file 
@@ -95,12 +97,15 @@ $ rm <file>    # removes a file
 $ rm -rf <dir>     # removes contents of directories recursively
 $ rm --dir <emptydir>   # removes empty directory
 
-$ rm *.txt removes all text files 
+$ rm *.txt    # removes all text files 
 
 
 $ file <file>   # determine type of file 
 $ find . -type f -empty   # finding empty files in current directory
+
+$ find . -type d # find directories 
 $ sudo find / -name "<name>" 
+
 
 $ chmod <file_permissions> <file>
 $ tree     # Lists the contents of a directory recursively
