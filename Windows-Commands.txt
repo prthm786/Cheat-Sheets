@@ -120,13 +120,13 @@ Eg:- color 0b
 
 
 
-
 $ doskey /history     # history of commands ran in the current session 
 
 $ doskey /MACROS
 $ doskey /MACROS:ALL
 
 $ doskey <command_name>=<command_value>
+
 
 
 ########### Networking ############
@@ -188,6 +188,7 @@ $ arp -a  # display ARP table
 _______________________________________
 
 
+
 ########## System Info #############
 
 $ getmac /v 
@@ -210,6 +211,35 @@ $ sc query windefend
 
 $ netsh firewall show state  # state of windows firewall 
 _______________________________________
+
+
+
+######## User Management ########
+
+$ net users   # show all users 
+$ net user <username>   # info about specific user 
+
+
+$ net user <username> <password> /add <options>
+# create a new user 
+
+options
+passwordreq:yes | no
+passwordchg:yes | no
+fullname:"<Name>"
+/expires: <MM/DD/YYYY> | <DD/MM/YYYY> | <mmm,dd,YYYY> | never 
+/times: <day>-<day>, <time>-<time> | all 
+
+
+$ net user jayj Cyk4^g3B /add /passwordreq:yes /times:monday-friday,8am-5pm /fullname:"Jay Jamison"
+
+
+$ net user <username> /delete    # deleting user from the system 
+
+
+$ net user <username> <options>   # updates user 
+_______________________________________
+
 
 
 
@@ -241,3 +271,15 @@ $ findstr /s <string> <dir> # searches recursively
 
 
 $ findstr /s /i /m  <word> *.*  # display names of all files that contain the <word> in current directory and all subdirectories 
+
+
+
+$ fc <file1> <file2>    # display the differences between 2 files or set of files 
+
+$ fc /C <file1> <file2> # ignore case of characters
+
+$ fc /B <file1> <file2>    # binary comparison
+$ fc /N <file1> <file2>    # display line no.
+
+
+
