@@ -101,6 +101,12 @@ $ git stash clear  # clears all the stash
 $ git diff   # show changes in current modified  file and file in staging area 
 $ git diff --staged # show the difference between the staging area and the latest commit 
 
+
+
+$ git restore --staged <file>    # to remove file from staging area 
+
+
 .gitignore 
 # add filenames to .gitignore you want git to ignore and not track 
+
 
