@@ -9,13 +9,10 @@ $ whatis <command>
 $ date 
 $ who 
 
-/var/logs
+$ ls -al /var/logs     # logs are stored 
 
 
 $ htop || sudo apt install htop && htop
-
-$ sudo apt update && sudo apt upgrsde
-
 
 
 ############# System Info #############
@@ -25,11 +22,13 @@ $ uname -a   show kernel info
 $ cat /etc/os-release 
 $ cat /proc/cpuinfo   # Cpu information
 $ cat proc/meminfo    # Memory information
-$ free           # Show memory and swap usage
+$ free            # Show memory and swap usage
 $ free -h 
-$ df             # Show the disk usage 
+
+$ df              # Show the disk usage 
 $ df -h 
-$ du             # Show directory space usage
+
+$ du              # Show directory space usage
 $ du -h 
 $ uptime
 ______________________________________
@@ -62,53 +61,66 @@ vim
 ln
 unlink
 
-$ ls # list files in directory 
-$ ls -al # list all files 
+Redirection / Data Streams
+1> or >   # redirecting stdout to a file 
+>>
+2>        # redirecting stderr 
+
+Eg:-  find /etc -type f 1> ~/results.txt 2> ~/errors.txt
+
+
+$ ls            # list files in directory 
+$ ls -al        # list all files 
 $ cd <directory>
 $ cd .. 
-$ pwd # print current directory
+$ pwd           # print current directory
 
 $ touch <file>  # creating empty file
 
-$ touch file{1,,10} 
+$ touch file{1..10}   # creating 10 files 
 
-$ echo "<content>" > filename.txt    # creating a file with content 
-$ echo "<content>" >> filename.txt   # appending to a file 
+$ echo "<content>" > filename.txt   # creating a file with content 
+$ echo "<content>" >> filename.txt  # appending to a file 
 
-$ mkdir <dir_name>  # creating directory 
-$ mv <file> <destination> 
+$ mkdir <dir_name>       # creating directory 
+
+$ mv <file> <destination>  
 $ mv <filename> <newfilename>  # renames file 
 
-$ tail -n <file>  # last n lines of file 
-$ head -n <file>  # first 10 lines of file 
+$ tail -n <file>      # last n lines of file 
+$ head -n <file>      # first n lines of file 
 
-$ cat <file>   # list all content of a file
-$ cat > <file>  # places standard input to a file until Ctrl + C is pressed 
+$ cat <file>     # list all content of a file
+$ cat > <file>   # places standard input to a file until Ctrl + C is pressed 
+
 $ cat << EOF > <file>    # places all the input  until 'EOF' is received
 
 $ cat -n <file>   # show line numbers 
+
 $ cat <file1> <file2> > <newfile> # create a new file with content of both files <file1> and <file2> 
 
-$ nano <file>   # edit contents of a file
-$ nano -l <file>   # display line number in file 
+$ nano <file>        # edit contents of a file
+$ nano -l <file>     # display line number in file 
+ 
+$ rmdir <directory>       # removing a <directory>
+$ rm <file>               # removes a file 
+$ rm -rf <dir>            # removes contents of directories recursively
+$ rm --dir <emptydir>     # removes empty directory
 
-$ rmdir <directory>
-$ rm <file>    # removes a file 
-$ rm -rf <dir>     # removes contents of directories recursively
-$ rm --dir <emptydir>   # removes empty directory
-
-$ rm *.txt    # removes all text files 
+$ rm *.txt                # removes all text files 
 
 
-$ file <file>   # determine type of file 
+$ file <file>             # determine type of file 
+
 $ find . -type f -empty   # finding empty files in current directory
 
-$ find . -type d # find directories 
+$ find . -type d          # find directories 
+
 $ sudo find / -name "<name>" 
 
 
-$ chmod <file_permissions> <file>
-$ tree     # Lists the contents of a directory recursively
+$ chmod <file_permissions> <file>   # changes file mod 
+$ tree                     # Lists the contents of a directory recursively
 
 $ ln -s <file_link> <source>     # create a link
 ______________________________________
@@ -147,6 +159,7 @@ grep <pattern> <file>
 
 sed ‘ s/[ regex ]/[ replacement ]/[flags]'. <filename>
 
+
 $ sed ‘s/cat/concatenate/g’ <file>   # replaces every word 'cat' with 'concatenate' 
 
 
@@ -176,24 +189,29 @@ $ netstat -tln     # display all listening TCP ports
 $ netstat -uln     # display all listening UDP ports 
 $ netstat -plunt   # display all listening TCP and UDP process with processid 
 
+
 $ ping <host> 
 $ ping -c <number> <host>    # number of packets to send to the host
-$ ping -s <number> -c <number> <host> # size of packets
+$ ping -s <number> -c <number> <host> 
+# size of packets
+
 $ ping -c <number> -q <host>   # only get the summary
 $ ping -i <number> <host>   # default ping wait for 1 sec to send next packet change this time by using -i 
 $ ping -f <host>   # ping flood 
 $ ssh <user>@<host>
 $ ssh -p <port> <user>@<host>
 
+
 $ nslookup <host>
 
-$ curl <url>        # display the content of the URL on the terminal
+
+$ curl <url>           # display the content of the URL on the terminal
 $ curl -# -O <url>
 
 $ curl -o <output_file> <url>   # download file from the url 
-$ curl -O <url>.     # saves it with the same name as in the <url>
+$ curl -O <url>                 # saves it with the same name as in the <url>
 
-$ curl -u <username>:<password> -T <file_to_upload> <ftp_url>     # upload a file to the FTP server
+$ curl -u <username>:<password> -T <file_to_upload> <ftp_url>      # upload a file to the FTP server
 
 $ curl --data "param1=&param2=" <url>
 $ curl -X "POST" -d "param1=John&param2=Doe" <url>
@@ -201,12 +219,14 @@ $ curl -X "POST" -d "param1=John&param2=Doe" <url>
 $ wget <url>
 $ wget -O <file> <url>
 
+
 $ ip -4 addr      # show ipv4 address 
 $ ip -6 addr      # show ipv4 address 
 
 $ ip address 
 $ ip address | grep <interface>
-$ ip address show <interface>    # show the information related to all interfaces available on our system
+$ ip address show <interface>    
+# show the information related to all interfaces available on our system
 
 $ arp -a/-e
 
@@ -240,7 +260,7 @@ $ cat /etc/group      # contains group info for all accounts
 $ cat /etc/gshadow 
 
 $ sudo adduser <usermame>     # create a new user 
-$ sudo passwd <user>      # change password for <user>
+$ sudo passwd <user>          # change password for <user>
 $ su - <user>      # switches to <user>
 $ su -             # switches to root, require root credentials 
 
@@ -272,6 +292,9 @@ $ ps -aux
 $ kill -l 
 $ kill <processid>
 
+# Use ctrl + Z to make a process a background job 
+
+
 $ fg       # Brings the most recent job to foreground
 $ fg <n>   # Brings job <n> to the foreground
 
@@ -283,6 +306,11 @@ ______________________________________
 
 
 ####### Package Management #########
+
+
+$ sudo apt update && sudo apt upgrade
+# updates the repositories and downloads all the updates 
+
 
 $ sudo apt edit-resources
 $ sudo apt install <package>
@@ -308,8 +336,9 @@ ______________________________________
 ######### Service Handling ##########
 
 $ cat etc/services 
-lib/systemd # systemctl
-etc/init.d # service
+
+lib/systemd.    # systemctl
+etc/init.d      # service
 
 $ systemctl status <servicename>
 $ systemctl start <servicename>
@@ -397,6 +426,10 @@ if [ -f ~/.bash_aliases ]; then
  . ~/.bash_aliases
 fi
 $ source ~/.bashrc   # reloading .bashrc file 
+
+
+
+#### Aliases #####
 
 $ alias <aliasname>="<alias_content>"
 Eg:- alias i="sudo apt install"
