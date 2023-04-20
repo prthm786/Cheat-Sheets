@@ -1,11 +1,12 @@
-               Javascript Notes 
+# Javascript Notes 
 
-MDN Docs
+## MDN Docs
 https://developer.mozilla.org
 https://www.w3schools.com
 FreeCodeCamp
 https://javascript.info
 
+## Freecodecamp
 https://www.freecodecamp.org/news/10-javascript-libraries-you-should-try/
 
 https://en.wikipedia.org/wiki/List_of_JavaScript_libraries
@@ -20,74 +21,90 @@ https://www.freecodecamp.org/news/javascript-projects-for-beginners/#how-to-crea
 
 https://www.geeksforgeeks.org/top-10-javascript-frameworks-to-learn-in-2021/
 
+
 Keywords
 Block Scopes 
 
 XmlHttpRequest  & Fetch API
 Async and Defer attribute for script loading ( asset loading )
 Js APIs 
+
  
 Data types & their conversions
-Number
-number for numbers of any kind: integer or floating-point, integers are limited by ±(253-1).
-BigInt ( n )
+- Number
+numbers of any kind: integer or floating-point, integers are limited by ±(253-1).
+
+- BigInt ( n )
 bigint for integer numbers of arbitrary length
-String
+
+- String
 string for strings. A string may have zero or more characters, there’s no separate single-character type
-Null
+
+- Null
 null for unknown values – a standalone type that has a single value null.
-Undefined
+
+- Undefined
 undefined for unassigned values – a standalone type that has a single value undefined.
-Boolean
+
+- Boolean
 boolean for true/false.
-Objects
+
+- Objects
 object for more complex data structures.
-Symbols
+
+- Symbols
 symbol for unique identifiers.
 
+
 For getting Number type from string type 
-parsesInt()
-parseFloat()
+`parsesInt()`
+`parseFloat()`
+
 
 Typeof operator
 typeof operator allows us to see which type is stored in a variable.
 
+
 Variables
 Variables and variables hoisting 
-let vs var vs const 
-var 
-             functionally scoped
-             var variable is hoisted 
-             var variable can be redeclared 
-let/const 
-             block scoped
-             let/const varaible is not hoisted 
-             let/const varaible can't be redeclared 
-             const variable can be reassigned as well 
-             but we can modify properties of objects 
+
+### let vs var vs const 
+- var 
+  -- functionally scoped
+  -- var variable is hoisted 
+  -- var variable can be redeclared 
+- let/const 
+  -- block scoped
+  -- let/const varaible is not hoisted 
+  -- let/const varaible can't be redeclared 
+  -- const variable can be reassigned as well 
+  -- but we can modify properties of objects 
              declared with const
 
 let variable = null || " value "
-|| returns the first truthy value.
-?? returns the first defined value.
-Null coalescing 
+- || returns the first truthy value.
+- ?? returns the first defined value.
+
+#### Null coalescing 
 ?? returns the first argument if it’s not null/undefined. Otherwise, the second one.
 ​let user;
 alert(user ?? "Anonymous"); // Anonymous (user not defined)
 
 let variable = null ?? " value "
-  
-Maths functions 
+ 
+ 
+### Maths functions 
 
-Date Functions  
+### Date Functions  
+
 https://www.freecodecamp.org/news/javascript-date-format-how-to-format-a-date-in-js/
 To create a new Date object call new Date() with one of the following arguments:
 
-new Date()
+`new Date()`
 Without arguments – create a Date object for the current date and time:
 
-let now = new Date();
-alert( now ); // shows current date/time
+`let now = new Date();
+alert( now ); // shows current date/time`
 
 getFullYear()
 getMonth() 
@@ -96,7 +113,8 @@ getHours(), getMinutes(), getSeconds(), getMilliseconds()
 getDay()
 getTime()
 
-Loops 
+### Loops 
+
 for 
 for / in 
 for / of 
@@ -108,11 +126,12 @@ do {
 
 break , continue
 
-Conditionals
+
+### Conditionals
 If - else 
 If - elseif - else 
 Switch 
-let a = 2 + 2;
+`let a = 2 + 2;
 switch (a) {
   case 3:
     alert( 'Too small' );
@@ -125,29 +144,33 @@ switch (a) {
     break;
   default:
     alert( "I don't know such values" );
-}
+}`
+
 ​Ternary operator ( condn ? Good : Bad ; )
 
-let age = prompt('age?', 18);
+`let age = prompt('age?', 18);
 let msg = (age < 3) ? 'Hi, baby!' :
   (age < 18) ? 'Hello!' :
   (age < 100) ? 'Greetings!' :
   'What an unusual age!';
-alert( msg );
+alert( msg );`
 
-Error Handling 
+
+### Error Handling 
 try{} 
 catch() {} 
 finally{} 
 throw
 Error Object
 
-Objects
+
+### Objects
+
 An object is created with curly braces {} and a list of properties. A property is a key-value pair where the key must be a string and the value can be of any type.
 
  Regular JS object always treats the key as a string. Even when you pass it a primitive or object, it internally converts the key into a string.
 
-let user = new Object();
+`let user = new Object();
 // "object constructor" syntax
 let user = {}; 
  // "object literal" syntax
@@ -157,7 +180,7 @@ let user = {     // an object
 // by key "name" store value "John"
   age: 30       
  // by key "age" store value 30
-};
+};`
 
 delete // operator
 delete user.age;
@@ -165,15 +188,16 @@ delete user.age;
 For .. in
 To walk over all keys of an object, there exists a special form of the loop: for..in.
 
-for (key in object) {
+`for (key in object) {
   // runs the body for each key among object properties
-}
+}`
+
 Object.values(obj)
 Object.keys(obj)
 Object.entries(obj)
 
 
-Arrays [ ] 
+### Arrays [ ] 
 ​Creation 
 ​Slicing 
 ​inserting , pushing ( push() or rest operator )
@@ -200,10 +224,11 @@ Objects { }
 Arrays vs Sets 
 Objects vs Maps 
 
+
 Maps & Sets
 https://www.freecodecamp.org/news/how-to-use-javascript-collections-map-and-set/
 
-Maps 
+### Maps 
 Map is a collection of keyed data items, just like an Object. But the main difference is that Map allows keys of any type.
 
 Methods and properties are:
@@ -275,7 +300,9 @@ console.log(Array.from(map));
 Using the spread operator:
 console.log([...map]);
 
-Sets
+
+### Sets
+
 A Set is a special type collection – “set of values” (without keys), where each value may occur only once.
 Its main methods are:
 
@@ -320,11 +347,15 @@ Set to Array
 let arr = [...h]
 log(arr)
 
-Functions
+
+### Functions
+
 https://www.freecodecamp.org/news/javascript-function-iife-parameters-code-blocks-explained/
-function show() {
+
+`function show() {
   alert( 'Hello!' );
-}
+}`
+
 Parameters
 Default Values 
 function show(from, text = "no text given") {
@@ -353,7 +384,8 @@ JSON.stringify()
 JSON.parse()
 
 
-Js Browser APIs 
+### Js Browser APIs 
+
 FileReader Api
 Media recorder
 StreamRecorder
@@ -381,26 +413,29 @@ Classes and inheritance
 DOM Object ( window object )
 BOM
 
-DOM Access
+
+### DOM Access
 document.getElementById()
 document.getElementsByTagname()
 document.getElementsByClassname()
 document.querySelector()
 document.querySelectorAll()
 
-DOM Traversal
+### DOM Traversal
 .parentNode
 .childNodes // a collection – a special array-like iterable object.
 .firetChild  , .lastChild  , .nextSibling , .previousSibling , .nodeName
 parentElement, children, firstElementChild, lastElementChild, previousElementSibling, nextElementSibling. 
 
-DOM manipulation
+
+### DOM manipulation
 .innerHTML
 .innerText
 .textContent
 document.createElement()
 
-Attributes
+
+### Attributes
 .hasAttribute(name) , .getAttribute(name).
 .setAttribute(name,value)  , .removeAttribute(name)
 
@@ -429,7 +464,8 @@ beforebegin" – insert html immediately before elem,
 .cloneNode()
 The call elem.cloneNode(true) creates a “deep” clone of the element – with all attributes and subelements. If we call elem.cloneNode(false), then the clone is made without child elements.
 ​
-CSS
+
+### CSS
 .className
 .classList // returns array 
 .classList.add/remove("class") 
@@ -440,17 +476,19 @@ CSS
 getComputedStyle(element, [pseudo])
 element
 
+
 Prompt() , Confirm() , Alert()
 setInterval() and setTimeout()
 Closures 
 Lexical Scoping 
 Regex 
 
-Storage 
+### Storage 
 document.cookies 
 LocalStorage
 SessionStorage
 IndexedDB
+
 
 ES6
 Arrow Functions , Anonymous Functions and IIFE
@@ -468,7 +506,8 @@ Optional Chaining
 
 ES2021
 
-DOM Events
+
+### DOM Events
 DOMContentloaded
 Load
 Beforeunload
@@ -476,7 +515,7 @@ Unload
 Onload
 Onerror
 
-Event Propagation Model
+### Event Propagation Model
 Bubbling 
 Capturing 
 Event Delegation 
@@ -490,7 +529,7 @@ event.target to get the element that was the target of the event (that is, the i
 Import / Export modules 
 AJAX 
 
-jQuery 
+### jQuery 
 https://jquery.com
 https://www.w3schools.com/jquery/default.asp
 
@@ -509,5 +548,5 @@ https://getbootstrap.com/
 https://getbootstrap.com/docs/5.1/examples/
 
 
-Unit Testing framework ( Jest , Mocha , vitest ) 
+Unit Testing framework ( Jest, Mocha, vitest ) 
 Cypress
