@@ -4,7 +4,7 @@ $ docker --version
 $ docker --help
 
 # Pull an image from docker hub 
-$ docker pull <image>   
+$ docker pull <image_name>   
 
 # List running containers 
 $ docker ps 
@@ -44,18 +44,37 @@ $ docker commit <container_hash> <img_name>:<version>
 $ docker cp <container_hash>:<source> <target>
 
 # Copy Files to container from local machine
-$ docker cp <target> <container_hash>:<source>
+$ docker cp <source> <container_hash>:<target>
 
 
 # Remove running container 
 $ docker rm -f <container>   
 $ docker stats 
 
+
+############ Images #############
 # List of docker image 
-$ docker image ls 
+$ docker images or docker image ls 
 
 # Removes image 
-$ docker image rm <image_hash> 
+$ docker image rm <image_name>
+
+# Removes all unused images 
+$ docker image prune 
+
+# Saves image into a tar archive 
+$ docker image save <image_name> -o <file>
+or
+$ docker save <image_name> -o <file>
+
+# Loads images from tar archive 
+$ docker image load -i <file>
+or 
+$ docker load -i <file> 
+
+# Get information about an image 
+$ docker image inspect <image_name>
+__________________________________
 
 
 ############## NETWORKING ###############
@@ -75,8 +94,20 @@ $ docker network ls
 # Create a new user defined Bridge network  
 $ docker network create <networkname>     
 
+# Removes network 
+$ docker network rm <networkname>
+
+# Removes unused networks 
+$ docker network prune 
+
 # Inspecting network 
 $ docker inspect <networkname> 
+
+# Attaching a container to a network 
+$ docker network connect <network> <container>
+
+# Removing a container from a network 
+$ docker network disconnect <network> <container>
 
 
 # Create a new container with a specified user defined bridge network 
@@ -115,34 +146,27 @@ __________________________________
 For persistent storage
 /var/lib/docker/volumes
 
+$ docker volume --help
+
 # Creating a volume 
 $ docker volume create <vol_name>
 
 # Listing of Volumes
 $ docker volume ls
 
+# Get information about a volume 
 $ docker volume inspect <vol_name>
 
 # Remove a volume 
 $ docker volume rm <vol_name>
 
+# remove all unused volumes 
+$ docker volume prune 
+
 $ docker run -d \
   --name devtest \
   -v myvol2:/app \
   nginx:latest
-
-
-# --volume <local_file_system_dir>:<container file_system_dir>:<read_write_access>
-
-$ docker container run \
-    --rm \
-    --publish 3000:3000 \
-    --name hello-dock-dev \
-    --volume $(pwd):/home/node/app \
-    hello-dock:dev
-
-# Anonymous Volumes 
-# --volume <container file system directory absolute path>:<read write access>
 __________________________________
 
 
