@@ -57,8 +57,8 @@ $ docker image ls
 # Removes image 
 $ docker image rm <image_hash> 
 
-_______________________________________________
-################# NETWORKING ##################
+
+############## NETWORKING ###############
 # Network Types
 ## Bridge 
 ## User defined Bridge 
@@ -107,9 +107,30 @@ $ docker run -itd --rm --network none --name <container> <image>
 
 # Remove a container from a network
 $ docker network disconnect bridge <container>
-______________________________________________
+__________________________________
 
-Volume
+
+############ Volumes ##############
+
+For persistent storage
+/var/lib/docker/volumes
+
+# Creating a volume 
+$ docker volume create <vol_name>
+
+# Listing of Volumes
+$ docker volume ls
+
+$ docker volume inspect <vol_name>
+
+# Remove a volume 
+$ docker volume rm <vol_name>
+
+$ docker run -d \
+  --name devtest \
+  -v myvol2:/app \
+  nginx:latest
+
 
 # --volume <local_file_system_dir>:<container file_system_dir>:<read_write_access>
 
@@ -122,6 +143,8 @@ $ docker container run \
 
 # Anonymous Volumes 
 # --volume <container file system directory absolute path>:<read write access>
+__________________________________
+
 
 ############### Dockerfile ####################
 $ touch index.html
