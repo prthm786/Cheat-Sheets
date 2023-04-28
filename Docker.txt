@@ -28,7 +28,17 @@ $ docker run --name <container> <image>
 $ docker run -dt --name <container> <image>    
 
 # Interact with the container, run cmds inside a container 
-$ docker exec -it <container> bash
+$ docker exec -it <container> <command> <arg>
+$ docker exec -it --privileged <container> <command> 
+
+
+# Get a bash shell of the container 
+$ docker exec -it <container> bash 
+or 
+$ docker attach <container>
+or 
+$ docker container attach <container>
+
 
 # Run a container and publishing a port 
 $ docker run -td -p <host_port>:<container_port> <image> 
@@ -36,6 +46,8 @@ $ docker run -td -p <host_port>:<container_port> <image>
 # Run a container interactively and remove after exiting 
 $ docker container run --rm -it <image> 
 
+
+# Get information about the container
 $ docker container inspect <container>
 
 # Show running processes inside container 
@@ -52,10 +64,10 @@ $ docker logs -n <no> <container> # no of lines   to show
 
 $ docker start <container>
 $ docker stop <container>
-
+$ docker restart <container>
 
 # Create an new image(custom image) from the container 
-$ docker commit <container_hash> <img_name>:<version>
+$ docker commit <container> <img_name>:<version>
 
 
 # Copy Files from container to local machine 
@@ -73,6 +85,9 @@ $ docker rm -f <container>
 
 # All removes anonymous volumes  
 $ docker rm -v <container>
+
+# Removes all stopped containers 
+$ docker container prune 
 
 $ docker stats 
 
