@@ -25,5 +25,9 @@
 23. `Alt + shift + up/down arrow` -> copy line  cursor above or below 
 24. `F11` -> toggle full screen mode 
 25. `Ctrl + "= / -"` -> zoom in or out 
-26. `Ctrl + k ctrl + t` -> Change theme
+26. `Ctrl + k ctrl + t` -> Change Theme
 27. `Ctrl + k ctrl + s` -> Keyboard Shortcuts
+28. `Ctrl + N` -> New tab 
+29. `Ctrl + c` -> Copy text ( no highlight reqd )
+30. `Ctrl + x` -> Cut text ( no highlight reqd )
+
