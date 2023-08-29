@@ -3,16 +3,29 @@
 $ man <command>  # show manual page for <command>
 $ <command> --help 
 $ which <command>
-$ whoami 
+$ whoami
 $ whereis <command>
 $ whatis <command>
 $ date 
 $ who 
+$ history 
+$ history -c     # clears history 
 
-$ ls -al /var/logs     # logs are stored 
+$ echo "<some_text>" # displays text on the screen
+$ echo -e "<some_text>" # this option enable interpretation of escape sequences  
 
 
-$ htop || sudo apt install htop && htop
+$ ls -al /var/logs # logs are stored 
+
+
+Running Multiple Commands 
+
+$ <command1> ; <command2>
+$ <command1> && <command2> # runs second command only if first command is successful 
+$ <command1> || <command2> # runs second command if first command fails
+
+
+$ Eg:- bat <file> || sudo apt install bat && bat <file> # using logical operstors to run command on conditions 
 
 
 ############# System Info #############
@@ -20,17 +33,18 @@ $ hostname
 $ uname -a   show kernel info 
 
 $ cat /etc/os-release 
-$ cat /proc/cpuinfo   # Cpu information
-$ cat proc/meminfo    # Memory information
-$ free            # Show memory and swap usage
+$ cat /proc/cpuinfo  # Cpu information
+$ cat proc/meminfo   # Memory information
+$ free    # Show memory and swap usage
 $ free -h 
 
-$ df              # Show the disk usage 
+$ df      # Show the disk usage 
 $ df -h 
 
-$ du              # Show directory space usage
+$ du      # Show directory space usage
 $ du -h 
-$ uptime
+$ uptime 
+$ uptime | awk '{print $3}'
 ______________________________________
 
 
@@ -61,12 +75,15 @@ vim
 ln
 unlink
 
-Redirection / Data Streams
+
+Redirection/Data Streams
+
 1> or >   # redirecting stdout to a file 
 >>
 2>        # redirecting stderr 
 
 Eg:-  find /etc -type f 1> ~/results.txt 2> ~/errors.txt
+
 
 
 $ ls            # list files in directory 
@@ -160,8 +177,7 @@ grep <pattern> <file>
 sed ‘ s/[ regex ]/[ replacement ]/[flags]'. <filename>
 
 
-$ sed ‘s/cat/concatenate/g’ <file>   # replaces every word 'cat' with 'concatenate' 
-
+$ sed ‘s/cat/concatenate/g’ <file>   # replaces every word 'cat' with 'concatenate' 
 
 $ sed ‘2,3s/cat/concatenate/’ <file>   # replace 2nd and 3rd 'cat' with 'concatenate' 
 
@@ -331,7 +347,7 @@ $ sudo apt-cache search <package>
 $ sudo apt-add-repository <repository>
 
 
-Snap Package 
+Snap Package Manager
 $ sudo snap install <package> # installs package 
 $ sudo snap find <package> # searches for package
 $ sudo snap info <package> # gives details about the package
@@ -343,7 +359,7 @@ ______________________________________
 
 ######### Service Handling ##########
 
-$ cat etc/services 
+$ cat /etc/services 
 
 lib/systemd.    # systemctl
 etc/init.d      # service
@@ -363,7 +379,7 @@ ______________________________________
 ####### Firewall ###########
 
 ufw 
-etc/default/ufw
+/etc/default/ufw
 
 $ sudo apt install ufw
 $ systemctl status/enable ufw
@@ -371,10 +387,10 @@ $ systemctl status/enable ufw
 $ ufw status 
 $ ufw status numbered 
 $ ufw delete <number>
-$ ufw enable / disable
+$ ufw enable/disable
 $ ufw reset
 $ ufw allow/deny http/tcp or 80
-$ ufw allow/deny ssh / https / ftp
+$ ufw allow/deny ssh/https/ftp
 $ ufw allow/deny from <ipaddress>
 $ ufw allow from <ipaddress> to any port <portno>
 $ ufw allow from <ipaddress> to any port <portno> proto <protocol>
