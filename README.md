@@ -6,7 +6,8 @@ various languages, tools and frameworks
 - [Linux Commands](Linux-Commands.txt)
 - [Windows Commands](Windows-Commands.txt)
 - [Docker](Docker.txt)
-- [Sublime Text](Sublime-Text.md)
+- [Sublime Text Shortcuts](Sublime-Text.md)
+- [VS Code Shortcuts](VSCode.md)
 - [Git](Git.txt)
 
 I'll be updating this repo frequently.
