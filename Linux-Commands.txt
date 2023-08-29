@@ -198,8 +198,6 @@ $ ping -s <number> -c <number> <host>
 $ ping -c <number> -q <host>   # only get the summary
 $ ping -i <number> <host>   # default ping wait for 1 sec to send next packet change this time by using -i 
 $ ping -f <host>   # ping flood 
-$ ssh <user>@<host>
-$ ssh -p <port> <user>@<host>
 
 
 $ nslookup <host>
@@ -307,28 +305,38 @@ ______________________________________
 
 ####### Package Management #########
 
-
+APT Package Manager
 $ sudo apt update && sudo apt upgrade
 # updates the repositories and downloads all the updates 
-
-
+
 $ sudo apt edit-resources
 $ sudo apt install <package>
 $ sudo apt reinstall <package>
 $ sudo apt remove <package>
 $ sudo apt autoremove
 
-$ suudo apt purge <package> # delete conf files as well
+$ sudo apt purge <package> # delete conf files as well
 $ sudo apt install –only-upgrade <package>
 $ sudo apt update      # update apt repo sources 
 $ sudo apt upgrade     # upgrade all package, install new versions 
 $ sudo apt dist-upgrade <package>
-$ sudo apt list –installed/--upgradable
-$ sudo apt show <packagename>
+$ sudo apt list –installed # shows all installed packages
+$ sudo apt list --upgradable
+$ sudo apt show <package> # gives details about the package
+
 $ sudo apt search <string> 
 $ sudo apt search –full <string>
+ 
 $ sudo apt-cache search <package>
 $ sudo apt-add-repository <repository>
+
+
+Snap Package 
+$ sudo snap install <package> # installs package 
+$ sudo snap find <package> # searches for package
+$ sudo snap info <package> # gives details about the package
+$ sudo snap refresh # updates the package 
+$ sudo snap list # list of packages install using snap 
 ______________________________________
 
 
@@ -442,12 +450,12 @@ $ unalias <alias_name>    # delete aliases
 
 ###### Environment Variables ########
 
-USER   #  The currently logged-in user name.
-HOME   # The path to the current user’s home directory.
-SHELL  # The pathname of the current user’s shell.
-PATH   # A list of directories that the shell searches for executable files.
-PWD    # The path to your current working directory (PWD stands for “Print Working Directory”).
-UID    # The current user’s unique identifier.
+USER   #  The currently logged-in user name
+HOME   # The path to the current user’s home directory
+SHELL  # The pathname of the current user’s shell
+PATH   # A list of directories that the shell searches for executable files
+PWD    # The path to your current working directory (PWD stands for “Print Working Directory”)
+UID    # The current user’s unique identifier
 
 
 $ echo $<variable_name>  # display value of variables
@@ -462,3 +470,4 @@ $ printenv $<variable_name>
 
 $ source <file>
 ______________________________________
+
