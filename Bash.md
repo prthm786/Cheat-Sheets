@@ -1,18 +1,20 @@
 #            Bash 
 
-## Variables  
+### Variables 
 
-## Operators
+### Operators
 
-## Conditionals (If-Else and Case)
+### Conditionals (If-Else and Case)
 
-## Loops (For, While and Until loop)
+### Loops (For, While and Until loop)
 
-## Array ## Functions 
+### Array Handling
+ 
+### Functions 
  
 
 
-## Variables
+### Variables
 
 <Var_Name>=<Value>
 MYVAR="Hello World"
@@ -21,7 +23,7 @@ echo "$MYVAR" # printing a variable
 echo "${MYVAR}"
 
 
-## Operators
+### Operators
 
 Conditional Operators
 
@@ -72,22 +74,29 @@ File Test Operator
 -f operator
 
 
-## Conditionals
+### Conditionals
 
-if [ condition ]
+If-Else 
+
+`
+if [[ condition ]]
 then
     # Commands to execute if the condition is true
 fi 
+`
 
 
-if [ condition ]
+`
+if [[ condition ]]
 then
     # Commands to execute if the condition is true
 else
     # Commands to execute if the condition is false
 fi
-  
+`  
 
+Case Statement
+`
 case $Var in
     0)
         Echo “Zero!”
@@ -100,5 +109,35 @@ case $Var in
         Echo “Invalid”
         ;;
 esac
+`
 
+
+### Loops 
+
+For Loop
+
+for $Var in <Array>
+do
+    # loop 
+done 
+
+Eg:-
+`
+Numbers=”One Two Three List”
+for n in $numbers
+do
+    echo $n
+done
+`
+
+While loop
+
+`
+C=0
+while [ $C -le 5 ]
+do
+    Echo -n “$C“
+    ((c++)) 
+ one
+`
 
