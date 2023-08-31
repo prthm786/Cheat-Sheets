@@ -11,7 +11,9 @@
 > Array Handling
  
 > Functions 
- 
+
+> String Handling 
+
 
 ### Variables
 --- 
@@ -99,25 +101,26 @@ Bitwise Operators
 > &: Bitwise And 
 
 > |: Bitwise OR 
-> Bitwise XOR (^)  
-> ~: Bitwise complement
 
+> Bitwise XOR (^) 
+ 
+> ~: Bitwise complement
 
 
 File Test Operator
-> -b operator  # block special file
+> -b operator # block special file
 
-> -c operator  # character special file
+> -c operator # character special file
 
-> -d operator  # directory
+> -d operator # directory
 
-> -e operator  # exists
+> -e operator # exists
 
-> -r operator  # read access
+> -r operator # read access
 
-> -w operator  # write access
+> -w operator # write access
 
-> -x operator  # execute access 
+> -x operator # execute access 
 
 > -s operator
 
@@ -146,6 +149,7 @@ else
     # Commands to execute if the condition is false
 fi
 ```
+
 
 Case Statement
 
@@ -190,7 +194,7 @@ done
 
 Iterating Through An Array
 ```bash
-Numbers=”One Two Three List”
+numbers=”One Two Three List”
 for n in $numbers
 do
     echo $n
@@ -225,14 +229,14 @@ do
 done
 ```
 
-Eg:- 
+Example
 ```bash
 C=0
 while [ $C -le 5 ]
 do
-    Echo -n “$C“
-    ((c++)) 
- done
+    echo -n “$C“
+    ((C++))  # incrementing count var
+done
 ```
 ---
 ---
@@ -288,13 +292,12 @@ echo "${letters[@]}"
 ### Functions 
 ---
 
- without an Argument 
+Function without an Argument 
 ```bash
 # Function Creation 
 hello_world() {
     echo "Hello World" 
 }
-
 # Calling a function  
 hello_world 
 ```
@@ -304,11 +307,44 @@ Function with an Argument
 func_with_arg() {
   echo "Arg1: $1"
   echo "Arg2: $2"
+  echo "All Argument: $@"
 }
 
 func_with_arg 12 23 
+
+
 ```
 ---
 ---
 
 
+### String Handling 
+---
+
+```bash
+STR_VAR="Hello World" 
+
+# Length of string variable 
+LEN=${#STR_VAR}
+echo $LEN
+
+# Substring Extraction 
+SUBSTR="${STR_VAR:0:5}" 
+echo $SUBSTR
+# Output "Hello"
+
+# String Concatenation 
+STR1="Hello"
+STR2="World"
+CONCAT_STR="$STR1 $STR2" 
+echo $CONCAT_STR
+# Output "Hello World"
+
+# Substring Replacement
+NEW_STR="${STR_VAR/World/Universe}" 
+echo $NEW_STR
+# "World" with "Universe"
+
+```
+---
+---
