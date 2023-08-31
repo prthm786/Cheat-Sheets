@@ -21,7 +21,7 @@ MYVAR="Hello World"
 
 echo "$MYVAR" # printing a variable  
 echo "${MYVAR}"
-
+------------------------------------
 
 ### Operators
 
@@ -72,31 +72,33 @@ File Test Operator
 -x operator  # execute access 
 -s operator
 -f operator
+------------------------------------
 
 
 ### Conditionals
 
 If-Else 
 
-`
+```bash
 if [[ condition ]]
 then
     # Commands to execute if the condition is true
 fi 
-`
+```
 
 
-`
+```bash
 if [[ condition ]]
 then
     # Commands to execute if the condition is true
 else
     # Commands to execute if the condition is false
 fi
-`  
+```
 
 Case Statement
-`
+
+```bash
 case $Var in
     0)
         Echo “Zero!”
@@ -109,35 +111,81 @@ case $Var in
         Echo “Invalid”
         ;;
 esac
-`
+```
+------------------------------------
 
 
 ### Loops 
 
 For Loop
 
+```bash
 for $Var in <Array>
 do
     # loop 
 done 
+``` 
 
 Eg:-
-`
+```bash
 Numbers=”One Two Three List”
 for n in $numbers
 do
     echo $n
 done
-`
+```
 
 While loop
 
-`
+```bash
+while <condition>
+do
+    # loop 
+done
+```
+
+Eg:- 
+```bash
 C=0
 while [ $C -le 5 ]
 do
     Echo -n “$C“
     ((c++)) 
- one
-`
+ done
+```
+------------------------------------
+
+
+### Array Handling
+
+Array Creation 
+
+```bash
+ARRAY=("ABC" "BCD" "CDE" "EFG")
+echo $ARRAY
+```
+
+Printing Array Length
+```bash
+echo ${#ARRAY(@)} 
+```
+------------------------------------
+
+
+### Functions 
+
+Function Creation 
+```bash
+hello_world()
+{
+    echo "Hello World" 
+}
+``` 
+Function calling 
+```bash 
+hello_world 
+```
+
+------------------------------------
+
 
