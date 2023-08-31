@@ -11,8 +11,7 @@
 > Array Handling
  
 > Functions 
- 
-
+ 
 
 ### Variables
 --- 
@@ -24,12 +23,32 @@ MYVAR="Hello World"
 echo "$MYVAR" # printing a variable  
 echo "${MYVAR}"
 ``` 
+
+Reading Input from the user 
+```bash 
+read -p "Enter Input" input 
+echo "$input"
+``` 
+
+Creating Random Numbers 
+```bash
+# Creating a random integer between 0 and 32,767
+randNo=$RANDOM
+
+# Print the random number
+echo "Random Number: $randNo"
+
+randNo=$((RANDOM % 10))
+# Random No between 0 to 9
+echo "Random No between 0 to 9: $randNo"
+```
 ---
 ---
 
 
 ### Operators
 ---
+
 Conditional Operators
 
 > -eq: Equal to
@@ -109,6 +128,7 @@ File Test Operator
 
 ### Conditionals
 ---
+
 If-Else 
 
 ```bash
@@ -148,6 +168,7 @@ esac
 
 
 ### Loops 
+---
 
 For Loop
 
@@ -219,8 +240,8 @@ do
 
 ### Array Handling
 ---
-Array Creation 
 
+Array Creation 
 ```bash
 ARRAY=("ABC" "BCD" "CDE" "EFG")
 echo $ARRAY
@@ -239,7 +260,21 @@ do
 done
 ```
 
-# Using Brace expansion to create the array
+Concatenating Arrays
+```bash
+arr1=("apple" "banana" "cherry")
+arr2=("orange" "pear" "guava")
+
+mergedArr=("${arr1[@]}" "${arr2[@]}")
+
+# Looping through the merged array
+for item in "${mergedArr[@]}"
+do
+    echo "Merged Array: $item"
+done
+```
+
+Using Brace expansion to create the array
 ```bash
 letters=({a..z})
 
@@ -252,14 +287,15 @@ echo "${letters[@]}"
 
 ### Functions 
 ---
-Function Creation 
+
+ without an Argument 
 ```bash
+# Function Creation 
 hello_world() {
     echo "Hello World" 
 }
-``` 
-Function calling 
-```bash 
+
+# Calling a function  
 hello_world 
 ```
 
