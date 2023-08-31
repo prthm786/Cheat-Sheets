@@ -1,30 +1,33 @@
 #            Bash 
 
-### Variables 
+> Variables 
 
-### Operators
+> Operators
 
-### Conditionals (If-Else and Case)
+> Conditionals (If-Else and Case)
 
-### Loops (For, While and Until loop)
+> Loops (For, While and Until loop)
 
-### Array Handling
+> Array Handling
  
-### Functions 
+> Functions 
  
 
 
 ### Variables
+--- 
 
 <Var_Name>=<Value>
 MYVAR="Hello World"
 
 echo "$MYVAR" # printing a variable  
 echo "${MYVAR}"
-------------------------------------
+---
+---
+
 
 ### Operators
-
+---
 Conditional Operators
 
 -eq: Equal to
@@ -72,11 +75,12 @@ File Test Operator
 -x operator  # execute access 
 -s operator
 -f operator
-------------------------------------
+---
+---
 
 
 ### Conditionals
-
+---
 If-Else 
 
 ```bash
@@ -85,7 +89,6 @@ then
     # Commands to execute if the condition is true
 fi 
 ```
-
 
 ```bash
 if [[ condition ]]
@@ -112,7 +115,8 @@ case $Var in
         ;;
 esac
 ```
-------------------------------------
+---
+---
 
 
 ### Loops 
@@ -126,12 +130,40 @@ do
 done 
 ``` 
 
-Eg:-
+Traditional For loop
+```bash 
+numbers=()
+for ((i=97; i<=122; i++)) 
+di
+   numbers+=( "$i" )
+done
+```
+
+Iterating Through An Array
 ```bash
 Numbers=”One Two Three List”
 for n in $numbers
 do
     echo $n
+done
+```
+
+Iterating Through a Range
+```bash
+for number in {1..5}
+do
+    echo "Number: $number"
+done
+```
+
+Iterating Through Files
+```bash
+for file in /path/to/directory/*
+do
+    if [ -f "$file" ]; then
+        echo "$(cat $file)" 
+        # printing the contents of a file using Command Substitution
+    fi
 done
 ```
 
@@ -153,11 +185,12 @@ do
     ((c++)) 
  done
 ```
-------------------------------------
+---
+---
 
 
 ### Array Handling
-
+---
 Array Creation 
 
 ```bash
@@ -169,11 +202,29 @@ Printing Array Length
 ```bash
 echo ${#ARRAY(@)} 
 ```
-------------------------------------
+
+Looping through an Array
+```bash
+for Element in "${ARRAY[@]}" 
+do
+    echo "$Element"
+done
+```
+
+# Using Brace expansion to create the array
+```bash
+
+=({a..z})
+
+# Print the array
+echo "${letters[@]}"
+```
+---
+---
 
 
 ### Functions 
-
+---
 Function Creation 
 ```bash
 hello_world()
@@ -186,6 +237,7 @@ Function calling
 hello_world 
 ```
 
-------------------------------------
+---
+---
 
 
