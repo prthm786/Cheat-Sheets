@@ -45,6 +45,10 @@ $ du      # Show directory space usage
 $ du -h 
 $ uptime 
 $ uptime | awk '{print $3}'
+
+$ lsblk # list block devices 
+
+$ lspci # list peripheral devices linke sound cards, graphic cards etc 
 ______________________________________
 
 
@@ -421,25 +425,45 @@ $ gzip -d <file>.gz  # Decompression
 .tar.bz2 – archive file compressed with bzip2 tool
 
 
+Tar <options> <source> <destination>
+
+-c	Create a new archive.
+-z	Use gzip compression.
+-v	Provide verbose output.
+-f	Archive file name.
+-x	Extract from a compressed file.
+-A	Append tar files to an existing archive.
+-d	Show differences between an archive and a local filesystem.
+-delete	Delete from the archive.
+-r	Append files to the end of an archive.
+-t	List the contents of an archive.
+-u	Append but don’t overwrite the current archive.
+
+
 $ tar -cvf file.tar <multiple_files>  
-# uncompressed tar Archive 
-$ tar -cvf file.tar <folder>  # uncompressed tar Archive
-$ tar -xvf file.tar  # Extracting files from Archive
+# creating a tar Archive
+$ tar -cvf file.tar <folder>  
+# creating a tar Archive using folder
+$ tar -xvf file.tar 
+# Extracting files from Archive
 
 
-$ tar -czvf file.tar.gz <folder>   # gzip compression on the tar Archive
-$ tar -xvzf file.tar.gz  # Extracting a gzip tar Archive *.tar.gz 
+$ tar -czvf file.tar.gz <folder>   
+# gzip compression on the tar Archive
+$ tar -xvzf file.tar.gz  
+# Extracting a gzip tar Archive *.tar.gz 
 
 
 $ tar -rvf existing-archive-name.tar <folder>
 # Add content to the existing archive 
  
 
-$ tar czf file.tar | wc -c  # checking size of tar 
-$ $ tar czf file1.tar.gz | wc -c   # checking size of tar.gz
+$ tar -czf file.tar | wc -c  # checking size of tar 
+$ $ tar -czf file1.tar.gz | wc -c   # checking size of tar.gz
 
 
-$ tar -tf file.tar   # list the contents of tar 
+$ tar 
+ file.tar   # list the contents of tar 
 ______________________________________
 
 
