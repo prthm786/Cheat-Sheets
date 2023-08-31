@@ -17,11 +17,13 @@
 ### Variables
 --- 
 
+```bash
 <Var_Name>=<Value>
 MYVAR="Hello World"
 
 echo "$MYVAR" # printing a variable  
 echo "${MYVAR}"
+``` 
 ---
 ---
 
@@ -30,51 +32,77 @@ echo "${MYVAR}"
 ---
 Conditional Operators
 
--eq: Equal to
--ne: Not equal to
--lt: Less than
--le: Less than or equal to
--gt: Greater than
--ge: Greater than or equal to
-==: String equality
-!=: String inequality
+> -eq: Equal to
+
+> -ne: Not equal to
+
+> -lt: Less than
+
+> -le: Less than or equal to
+
+> -gt: Greater than
+
+> -ge : Greater than or equal to
+
+> ==: String equality
+
+> !=: String inequality
 
 
 Arithmetic Operators 
 
-+: Addition
--: Subtraction 
-*: Multiplication 
-/: Division 
-%: Modulus  
-**: Exponentiation 
-++: Increment Operator 
---: Decrement Operator 
+> +: Addition
+
+> -: Subtraction 
+
+> *: Multiplication 
+
+> /: Division 
+
+> %: Modulus  
+
+> **: Exponentiation 
+
+> ++: Increment Operator 
+
+> --: Decrement Operator 
 
 
 Logical Operators
-&&: Logical AND 
-||: Logical OR
-!: Not Equal to
+> &&: Logical AND 
+
+> ||: Logical OR
+
+> !: Not Equal to
 
 
 Bitwise Operators
-&: Bitwise And 
-|: Bitwise OR 
-Bitwise XOR (^)  
-~: Bitwise complement
+> &: Bitwise And 
+
+> |: Bitwise OR 
+> Bitwise XOR (^)  
+> ~: Bitwise complement
+
 
 
 File Test Operator
--b operator  # block special file 
--c operator  # character special file
--d operator  # directory
--e operator  # exists
--r operator  # read access
--w operator  # write access
--x operator  # execute access 
--s operator
--f operator
+> -b operator  # block special file
+
+> -c operator  # character special file
+
+> -d operator  # directory
+
+> -e operator  # exists
+
+> -r operator  # read access
+
+> -w operator  # write access
+
+> -x operator  # execute access 
+
+> -s operator
+
+> -f operator
 ---
 ---
 
@@ -134,7 +162,7 @@ Traditional For loop
 ```bash 
 numbers=()
 for ((i=97; i<=122; i++)) 
-di
+do
    numbers+=( "$i" )
 done
 ```
@@ -170,7 +198,7 @@ done
 While loop
 
 ```bash
-while <condition>
+while [ <condition> ]
 do
     # loop 
 done
@@ -200,7 +228,7 @@ echo $ARRAY
 
 Printing Array Length
 ```bash
-echo ${#ARRAY(@)} 
+echo " Length of Array: ${#ARRAY(@)}"
 ```
 
 Looping through an Array
@@ -213,8 +241,7 @@ done
 
 # Using Brace expansion to create the array
 ```bash
-
-=({a..z})
+letters=({a..z})
 
 # Print the array
 echo "${letters[@]}"
@@ -227,8 +254,7 @@ echo "${letters[@]}"
 ---
 Function Creation 
 ```bash
-hello_world()
-{
+hello_world() {
     echo "Hello World" 
 }
 ``` 
@@ -237,6 +263,15 @@ Function calling
 hello_world 
 ```
 
+Function with an Argument 
+```bash
+func_with_arg() {
+  echo "Arg1: $1"
+  echo "Arg2: $2"
+}
+
+func_with_arg 12 23 
+```
 ---
 ---
 
