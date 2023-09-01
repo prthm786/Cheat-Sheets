@@ -1,24 +1,23 @@
-                  jQuery Notes 
+# jQuery Notes 
 
 jQuery is a JavaScript library designed to simplify HTML 
 DOM tree traversal and manipulation, and event handling, 
 CSS animation, and Ajax.
-
-https://jquery.com/
 
 jQuery's syntax is designed to make it easier to navigate
 a document, select DOM elements, create animations, handle events, 
 and develop Ajax applications. jQuery also provides capabilities for 
 developers to create plug-ins on top of the JavaScript library. 
 
-https://www.w3schools.com/jquery/default.asp
-
+```javascript
 $(document).ready(function(){
   $("button").click(function(){
     $(this).hide();
   });
 });
+```
 
+```javascript 
 $(document).ready(function(){
   // code...
 });
@@ -26,23 +25,25 @@ $(document).ready(function(){
 
 // This is to prevent any jQuery code from running before the document is finished loading (is ready).
 // It is good practice to wait for the document to be fully loaded and ready before working with it. 
+```
 
 JQuery features 
-DOM Manipulation
-​DOM Traversing 
-​AJAX
-Event Handling 
-​Animation
+- DOM Manipulation
+- DOMM Traversing 
+- AJAXX
+- Event Handling 
+- Animationn
 
 jQuery Chaining
+```javascript
 $(document).ready(function(){
   $("button").click(function(){
     $("#p1").css("color", "red").slideUp(2000).slideDown(2000);
   });
 });
+```
 
 DOM Manipulation
-https://www.w3schools.com/jquery/jquery_ref_html.asp
 
 Adding Elements 
 .after()
