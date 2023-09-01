@@ -2,7 +2,7 @@
 ---
 
 
-<!-- Headings --> 
+Headings 
 # Heading 1
 ## Heading 2
 ### Heading 3
@@ -10,20 +10,20 @@
 ##### Heading 5
 
 
-<!-- Italics -->
+Italics
 *This text is italic*
 
 
-<!-- Bold -->
+Bold
 **This text is bold**
 ---
 
-<!-- Strikethrough -->
+Strikethrough
 ~This text is strikethrough~
 
 
 
-<!-- Unordered List -->
+Unordered List
 - Item 1
 - Item 2
 - Item 3
@@ -32,43 +32,43 @@
   - Nested Item 2
 
 
-<!-- Ordered List -->
+Ordered List
 1. Item 1
 2. Item 2
 3. Item 3
 
 
-<!-- Horizontal Rule -->
+Horizontal Rule
 ---
 -
 
 
-<!-- Blockquote -->
+Blockquote
 > This is a quote
 
 
-<!-- Links -->
+Links
 [Link Text](URL)
 
 [Github](https://github.com/)
 
 
-<!-- Images -->
+Images
 ![Alt Text](URL)
 
 
-<!-- Inline Code -->
+Inline Code 
 `const div = document.querySelector("div")`
 
 
-<!-- Code Block -->
+Code Block
 ```python
-def greet():
+def hello():
     print("Hello, World!")
 ```
 
 
-<!-- Tables -->
+Table
 | Name     | Age      |
 | -------- | -------- |
 | John     | 43       |
@@ -76,7 +76,10 @@ def greet():
 
 
 
-<!-- Task List -->
+Task List
 * [x] Task 1
 * [x] Task 2
 * [ ] Task 3
+
+
+<!-- This is a comment -->
