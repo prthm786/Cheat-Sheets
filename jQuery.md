@@ -190,7 +190,7 @@ $("button").ready(function(){
 
 
 ## 2. DOM Traversing
---
+---
 
 - **.children()**
 - **.parent()** ->  parent 
@@ -271,8 +271,11 @@ $("p").eq(1).css("color", "yellow");
 ---
 
 - **​$.ajax()** -> runs an async AJAX request
+
 url: "" 
+
 type  //  ( GET | POST)
+
 success(result,status,xhx) // function to run when req succeeds
 
 error(xhr,status,error)	 // function to run if req fails.
@@ -467,7 +470,7 @@ $(document).ready(function(){
 ```
 
 - **.on()** -> Attaches event handlers to elements
-```javascriot
+```javascript
 $(document).ready(function(){
   $("p").on("click", function(){
     alert("The paragraph was clicked.");
