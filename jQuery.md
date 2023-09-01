@@ -32,11 +32,11 @@ $(document).ready(function() {
 
 **JQuery features**
 ---
-- DOM Manipulation
-- DOM Traversing 
-- AJAX
-- Event Handling 
-- Animation
+1. DOM Manipulation
+2. DOM Traversing 
+3. AJAX
+4. Event Handling 
+5. Animation
 
 
 **jQuery Chaining**
@@ -50,7 +50,7 @@ $(document).ready(function(){
 ---
 
 
-## DOM Manipulation
+## 1. DOM Manipulation
 ---
 
 ### Adding Elements 
@@ -126,32 +126,39 @@ $(selector).text(function(index, currentcontent))
 - **.position()** -> returns the position (relative to the parent element) of an element
 
 
-Replacing Elements
-.replaceAll()
-.replaceWith()
+### Replacing Elements
+- **.replaceAll()**
+- **.replaceWithith()**
 
-​.clone()
+
+**​.clone()**
 $(selector).clone(true|false)
 
 
-###  Elements 
-​.remove()** // Removes the selected  (including data and events)
-​.detach() // Removes selected elements (keeps data and events)
-​.empty() // Removes all child nodes and content from selected elements
+### Elements 
+- **​.remove()** -> Removes the selected  elements (including data and events)
+​- **.detach()** ->  Removes selected elements (keeps data and events)
+- **​.empty()** -> Removes all child nodes and content from selected elements
 
-Wraping 
-​.wrap() // Wraps HTML element(s) around each selected element
+
+### Wraping 
+- **​.wrap()** -> Wraps HTML element(s) around each selected element
+```javascript 
 $(document).ready(function(){
   $("button").click(function(){
     $("p").wrap("<div></div>");
   });
 });
-​.wrapAll() // Wraps HTML element(s) around all selected elements at once 
-​.wrapInner() // Wraps HTML element(s) around the content of each selected element
+```
+
+- **​.wrapAll()** -> Wraps HTML element(s) around all selected elements at once 
+
+- ​**.wrapInner()** -> Wraps HTML element(s) around the content of each selected element
 $("button").click(function(){
   $("p").wrapInner("<b></b>");
 });
-.unwrap() // Removes the parent element of the selected elements
+
+- **.unwrap()** -> Removes the parent element of the selected elements
 $(document).ready(function(){
   $("button").click(function(){
     $("p").unwrap();
@@ -159,7 +166,9 @@ $(document).ready(function(){
 });
 
 
-DOM Traversing 
+## 2. DOM Traversing
+--
+
 .children()
 .parent() // direct parent 
 .parents() // all ancestors 
@@ -213,7 +222,10 @@ $("p").eq(1).css("color", "yellow");
 .lt()
 .gt()
 
-AJAX
+
+## 3. AJAX
+---
+
 ​$.ajax() // runs an async AJAX request
 url: "" 
 type  //  ( GET | POST)
@@ -311,7 +323,9 @@ $("button").click(function(){
   }
 
 
-Events Handling
+## 4. Events Handling
+---
+
 Can attach events to all the elements returned by the jQuery selector unlike the vanilla javascript querySelectorAll() which require the event to be attached to elements individually.
 
 .click()
@@ -378,14 +392,18 @@ event.preventDefault()
 event.isDefaultPrevented()
 
 
-Animation 
-.animate()
-$(selector).animate( {styles} , speed , easing , callback)
+## 5. Animation
+---
+ 
+- **.animate()**
+`$(selector).animate( {styles} , speed , easing , callback)
 Speed 
 milliseconds (like 100, 1000, 5000, etc)
 "slow"
 "fast"
+`
 
+```javascript
 $(document).ready(function(){
   $("button").click(function(){
     var div = $("div");
@@ -397,9 +415,12 @@ $(document).ready(function(){
     $("span").text(div.queue());   
   });
 });
+```
 
-.delay()
-$(selector).delay(speed,queueName)
+- **.delay()**
+`$(selector).delay(speed,queueName)`
+
+```javascript
 $(document).ready(function(){
   $("button").click(function(){
     $("#div1").delay("slow").fadeIn();
@@ -408,8 +429,10 @@ $(document).ready(function(){
     $("#div5").delay(4000).fadeIn();
   });
 });
+```
 
-.fadeIn()  & .fadeout()
+- **.fadeIn()** & **.fadeout()**
+```javascript
  $(document).ready(function(){
   $(".btn1").click(function(){
     $("p").fadeOut();
@@ -418,9 +441,12 @@ $(document).ready(function(){
     $("p").fadeIn();
   });
 });
+```
 
-.fadeToggle() // Toggles b/w the fadeIn() and fadeOut() 
-$(selector).fadeToggle(speed,easing,callback)
+- **fadeToggle()** -> Toggles b/w the fadeIn() and fadeOut() 
+`$(selector).fadeToggle(speed, easing, 
+callback)`
+```javascript
 $(document).ready(function(){
   $("button").click(function(){
     $("#div1").fadeToggle();
@@ -428,8 +454,11 @@ $(document).ready(function(){
     $("#div3").fadeToggle(3000);
   });
 });
+```
 
-.hide() & .show()
+- .hide() & .show()
+
+```javascript
 $(document).ready(function(){
   $(".btn1").click(function(){
     $("p").hide();
@@ -438,16 +467,22 @@ $(document).ready(function(){
     $("p").show();
   });
 });
+```
 
-.toggle() // Toggles b/w the hide() and show() methods
-$(selector).toggle(speed,easing,callback)
+- **.toggle()** -> Toggles b/w the hide() and show() methods
+`$(selector).toggle(speed, easing, 
+callback)`
+
+```javascript
 $(document).ready(function(){
   $("button").click(function(){
     $("p").toggle();
   });
 });
+```
 
-.slideUp()	// slides-up (hides) the selected elements
+- **.slideUp()** -> (hides) the selected elements
+```javascript
 $(document).ready(function(){
   $(".btn1").click(function(){
     $("p").slideUp();
@@ -456,7 +491,8 @@ $(document).ready(function(){
     $("p").slideDown();
   });
 });
+``` 
 
-.slideDown()	// slides-down (shows) the selected elements
+<!-- - **.slideToggle-down (shows) the selected elements -->
 
-.slideToggle()	// toggles b/w  the slideUp() and slideDo
+<!-- .slideToggle()	// toggles b/w the slideUp() and slideDo -->
