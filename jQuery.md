@@ -165,23 +165,29 @@ $(document).ready(function(){
   });
 });
 
+---
+---
+
+<br>
+<br>
+
 
 ## 2. DOM Traversing
 --
 
-.children()
-.parent() // direct parent 
-.parents() // all ancestors 
-​.closest() // Returns the first ancestor of the selected element
-​.contents() // Returns all direct children of the selected element (including text and comment nodes)
-.prev() // previous sibling
-​.next() // next sibling 
-.prevAll() // all previous siblings
-​.nextAll() // all next siblings
-.siblings() // all siblings
-​.first() // return first element of the selected elements
-​.last() // Returns the last element of the selected elements
-​.find() // Returns descendant elements of the selected element
+- **.children()**
+- **.parent()** ->  parent 
+- **.parents()** -> all ancestors 
+- ​**.closest()** -> Returns the first ancestor of the selected element
+- **​.contents()** -> Returns all direct children of the selected element (including text and comment nodes)
+- **.prev()** -> previous sibling
+- **​.next()** -> next sibling 
+- **.prevAll()** ->  previous siblings
+- **​.nextAll()** -> all next siblings
+- **.siblings()** -> all siblings
+- **​.first()** -> Returns the first element of the selected elements
+​- **.last()** -> Returns the last element of the selected elements
+- **​.find()** -> Returns descendant elements of the selected element
 
 .is() // return true if at least one of these elements matches the given arguments
 $(document).ready(function(){
@@ -221,6 +227,12 @@ $("button").click(function(){
 $("p").eq(1).css("color", "yellow");
 .lt()
 .gt()
+
+---
+---
+
+<br>
+<br>
 
 
 ## 3. AJAX
@@ -321,20 +333,25 @@ $("button").click(function(){
   for (i = 0; i < x.length; i++) {
     alert(x[i].innerHTML);
   }
+---
+---
 
+<br>
+<br>
 
 ## 4. Events Handling
 ---
 
 Can attach events to all the elements returned by the jQuery selector unlike the vanilla javascript querySelectorAll() which require the event to be attached to elements individually.
 
-.click()
+- **.click()**
+```javascript
 $(document).ready(function(){
   $("p").click(function(){
     alert("The paragraph was clicked.");
   });
 });
-            OR 
+//            OR 
 $(document).ready(function(){ 
   $("p").each(function(){     
      $(this).click(function(){
@@ -342,24 +359,29 @@ $(document).ready(function(){
      })
   })
 });
+```
 
-.dblclick()
+- **.dblclick()**
 $(document).ready(function(){
   $("p").dblclick(function(){
     alert("The paragraph was double-clicked.");
   });
 });
 
-.keydown()
-.scroll()
-var x = 0;
+- **.keydown()**
+
+- **.scroll()**
+``` javascript
+let x = 0;
 $(document).ready(function(){
   $("div").scroll(function(){
     $("span").text( x+= 1);
   });
 });
+```
 
-.focus() & .blur()
+- **.focus()** & **.blur()**
+```javascript
 $(document).ready(function(){
   $("input").focus(function(){
     $(this).css("background-color", "yellow");
@@ -368,28 +390,37 @@ $(document).ready(function(){
     $(this).css("background-color", "green");
   });
 });
+```
 
-.on() // Attaches event handlers to elements
+- **.on()** -> Attaches event handlers to elements
+```javascriot
 $(document).ready(function(){
   $("p").on("click", function(){
     alert("The paragraph was clicked.");
   });
 });
+```
 
-event.type
-​event.target 
-event.target === this
-event.currentTarget
+`event.type`
+`​event.target`
+`event.target === this`
+`event.currentTarget`
 
-event.stopImmediatePropagation()
-​event.isImmediatePropagationStopped()
+`event.stopImmediatePropagation()`
+`​event.isImmediatePropagationStopped()`
 
-​event.isPropagationStopped()
-event.stopPropagation()
+`​event.isPropagationStopped()`
+`event.stopPropagation()`
+
 The event.stopPropagation() method stops the bubbling of an event to parent elements, preventing any parent event handlers from being executed.
 
-event.preventDefault()
-event.isDefaultPrevented()
+`event.preventDefault()`
+`event.isDefaultPrevented()`
+---
+---
+
+<br>
+<br>
 
 
 ## 5. Animation
@@ -402,7 +433,6 @@ milliseconds (like 100, 1000, 5000, etc)
 "slow"
 "fast"
 `
-
 ```javascript
 $(document).ready(function(){
   $("button").click(function(){
@@ -419,7 +449,6 @@ $(document).ready(function(){
 
 - **.delay()**
 `$(selector).delay(speed,queueName)`
-
 ```javascript
 $(document).ready(function(){
   $("button").click(function(){
@@ -456,8 +485,7 @@ $(document).ready(function(){
 });
 ```
 
-- .hide() & .show()
-
+- **.hide()** & **.show()**
 ```javascript
 $(document).ready(function(){
   $(".btn1").click(function(){
@@ -472,7 +500,6 @@ $(document).ready(function(){
 - **.toggle()** -> Toggles b/w the hide() and show() methods
 `$(selector).toggle(speed, easing, 
 callback)`
-
 ```javascript
 $(document).ready(function(){
   $("button").click(function(){
@@ -492,6 +519,8 @@ $(document).ready(function(){
   });
 });
 ``` 
+---
+---
 
 <!-- - **.slideToggle-down (shows) the selected elements -->
 
