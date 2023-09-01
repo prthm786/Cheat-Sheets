@@ -90,20 +90,26 @@ $("button").click(function(){
 });
 ```
 
+<br>
+
 ### Attributes
 - **.attr()** -> Sets or returns attributes/values of selected elements
-- $(selector).attr(attr) -> Return value of attribute
-- $(selector).attr(attr,value) -> Set the attribute value
-- $(selector).attr(attr, function(index,currentVal) -> Set attribute value using a function
+`$(selector).attr(attr)` -> Return value of attribute
+
+`$(selector).attr(attr,value)` -> Set the attribute value
+
+`$(selector).attr(attr, function(index,currentVal)` -> Set attribute value using a function
 
 - **.removeAttr()**
 
+<br>
 
 ### Properties
-- .prop() -> Sets or returns properties/values of selected elements
+- **.prop()** -> Sets or returns properties/values of selected elements
 .removeProp()
-- .css() ->  add css 
+- **.css()** ->  add css 
 
+<br>
 
 ### Class 
 - **.hasClassss()**
@@ -111,35 +117,42 @@ $("button").click(function(){
 - **.toggleclass()**
 - **.removeClass()**
 
+<br>
 
 ### Get Content 
 - **.html()** -> sets or returns the content of selected elements
 
 - **.text()** -> sets or returns the text content of selected elements
-$(selector).text() // Return text content
-$(selector).text(content) // Set text content
-$(selector).text(function(index, currentcontent)) 
-// Set text content using a function.
+`$(selector).text()` -> returns text
+
+`$(selector).text(content) -> Set text content
+
+`$(selector).text(function(index, currentcontent))` -> Set text content using a function.
 
 - **.val()** -> sets or returns the value attribute of the selected elements (for form elements)
 
 - **.position()** -> returns the position (relative to the parent element) of an element
 
+<br>
 
 ### Replacing Elements
 - **.replaceAll()**
+
 - **.replaceWithith()**
 
 
 **​.clone()**
-$(selector).clone(true|false)
+`$(selector).clone(true|false)`
 
 
 ### Elements 
 - **​.remove()** -> Removes the selected  elements (including data and events)
+
 ​- **.detach()** ->  Removes selected elements (keeps data and events)
+
 - **​.empty()** -> Removes all child nodes and content from selected elements
 
+<br>
 
 ### Wraping 
 - **​.wrap()** -> Wraps HTML element(s) around each selected element
@@ -154,16 +167,20 @@ $(document).ready(function(){
 - **​.wrapAll()** -> Wraps HTML element(s) around all selected elements at once 
 
 - ​**.wrapInner()** -> Wraps HTML element(s) around the content of each selected element
+```javascript
 $("button").click(function(){
   $("p").wrapInner("<b></b>");
 });
+```
 
 - **.unwrap()** -> Removes the parent element of the selected elements
-$(document).ready(function(){
+```javascript
+$("button").ready(function(){
   $("button").click(function(){
     $("p").unwrap();
   });
 });
+```
 
 ---
 ---
@@ -235,6 +252,7 @@ $("button").click(function(){
 ```
 
 - **.eq()** -> Returns an element with a specific index number of the selected elements
+
 ```javascript
 $("p").eq(1).css("color", "yellow");
 ```
@@ -256,15 +274,25 @@ $("p").eq(1).css("color", "yellow");
 url: "" 
 type  //  ( GET | POST)
 success(result,status,xhx) // function to run when req succeeds
+
 error(xhr,status,error)	 // function to run if req fails.
+
 dataType	// data type expected of the server 
+
 contentType // type used for sending data to the server. Default is: "application/x-www-form-urlencoded"
+
 complete(xhr,status)	//  run when the req is finished (after success , error functions)
+
 beforeSend(xhr)	 // function to run before the req is sent
+
 Async // true | false 
+
 ​data	// data to be sent to the server
-​username // HTTP access authentication req 
+
+​username // username for authentication 
+
 ​password // HTTP access authentication req
+
 ​xhr	// func used for creating the XMLHttpRequest
 
 ```javascript
@@ -353,13 +381,15 @@ $(document).ready(function(){
 ```
 
 - **.ajaxError()**
+
 `$(document).ajaxError( function( event , xhr , options , exc) )`
 
-- **.ajaxStart()** -> .ajaxStartn to run when the first AJAX request begins
-$(document).ajaxStart(function() {})
+- **.ajaxStart()** -> .ajaxStart to run when the first AJAX request begins
+
+`$(document).ajaxStart(function() {})`
 
 - **.ajaxStop()** -> Specifies a function to run when all AJAX requests have completed
-$(document).ajaxStop(function() {})
+$(document).ajaxStop(function(){})
 
 - **.ajaxComplete()** -> Specifies a function to run when the AJAX request completes
 `$(document).ajaxComplete(function( event, xhr ,options ))`
@@ -472,6 +502,7 @@ The `event.stopPropagation()` method stops the bubbling of an event to parent el
 ---
  
 - **.animate()**
+
 `$(selector).animate( {styles} , speed , easing , callback)
 Speed 
 milliseconds (like 100, 1000, 5000, etc)
