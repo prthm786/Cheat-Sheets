@@ -15,11 +15,11 @@
 
 
 <!-- Bold -->
-**This text** is bold
+**This text is bold**
 ---
 
 <!-- Strikethrough -->
-~This text~ is strikethrough
+~This text is strikethrough~
 
 
 
