@@ -4,10 +4,12 @@ jQuery is a JavaScript library designed to simplify HTML
 DOM tree traversal and manipulation, and event handling, 
 CSS animation, and Ajax.
 
+
 jQuery's syntax is designed to make it easier to navigate
 a document, select DOM elements, create animations, handle events, 
 and develop Ajax applications. jQuery also provides capabilities for 
 developers to create plug-ins on top of the JavaScript library. 
+
 
 ```javascript
 $(document).ready(function(){
@@ -18,23 +20,26 @@ $(document).ready(function(){
 ```
 
 ```javascript 
-$(document).ready(function(){
+$(document).ready(function() {
   // code...
 });
 // Similar to DOMContentLoaded 
 
 // This is to prevent any jQuery code from running before the document is finished loading (is ready).
+
 // It is good practice to wait for the document to be fully loaded and ready before working with it. 
 ```
 
-JQuery features 
+**JQuery features**
+---
 - DOM Manipulation
-- DOMM Traversing 
-- AJAXX
+- DOM Traversing 
+- AJAX
 - Event Handling 
-- Animationn
+- Animation
 
-jQuery Chaining
+
+**jQuery Chaining**
 ```javascript
 $(document).ready(function(){
   $("button").click(function(){
@@ -42,11 +47,16 @@ $(document).ready(function(){
   });
 });
 ```
+---
 
-DOM Manipulation
 
-Adding Elements 
-.after()
+## DOM Manipulation
+---
+
+### Adding Elements 
+
+- **.after()**
+```javascript
 $("button").click(function(){
   $("p").after("<p>Hello world!</p>");
 });
@@ -57,49 +67,64 @@ $(document).ready(function(){
     });
   });
 });
-.before()
-$(selector).before(content,function(index))
-.insertAfter()
-.insertBefore()
-.append()
-.prepend()
-​.appendTo()
-​prependTo()
+```
+
+- **.before()**
+`$(selector).before(content, 
+function(index))`
+
+- **.insertAfter()**
+
+- **.insertBefore()**
+
+- **.append()**
+
+- **.prepend()**
+
+- **​.appendTo()**
+
+- **.prependTo()**
+```javascript
 $("button").click(function(){
   $("<span>Hello!</span>").prependTo("p");
 });
+```
 
-Attributes
-.attr() // Sets or returns attributes/values of selected elements
-$(selector).attr(attr) // Return value of attribute
-$(selector).attr(attr,value) // Set the attribute value
-$(selector).attr(attr,function(index,currentVal) // Set attribute value using a function
-.removeAttr()
+### Attributes
+- **.attr()** -> Sets or returns attributes/values of selected elements
+- $(selector).attr(attr) -> Return value of attribute
+- $(selector).attr(attr,value) -> Set the attribute value
+- $(selector).attr(attr, function(index,currentVal) -> Set attribute value using a function
 
-Properties
-.prop() // Sets or returns properties/values of selected elements
+- **.removeAttr()**
+
+
+### Properties
+- .prop() -> Sets or returns properties/values of selected elements
 .removeProp()
-.css() // add css 
+- .css() ->  add css 
 
-Class 
-.hasClass()
-.addClass()
-.removeClass()
-.toggleClass()
 
-Get Content 
-.html() // Sets or returns the content of selected elements
+### Class 
+- **.hasClassss()**
+- **.addClass()**
+- **.toggleclass()**
+- **.removeClass()**
 
-.text() // Sets or returns the text content of selected elements
+
+### Get Content 
+- **.html()** -> sets or returns the content of selected elements
+
+- **.text()** -> sets or returns the text content of selected elements
 $(selector).text() // Return text content
 $(selector).text(content) // Set text content
-$(selector).text(function(index,currentcontent)) 
+$(selector).text(function(index, currentcontent)) 
 // Set text content using a function.
 
-.val() // Sets or returns the value attribute of the selected elements (for form elements)
+- **.val()** -> sets or returns the value attribute of the selected elements (for form elements)
 
+- **.position()** -> returns the position (relative to the parent element) of an element
 
-.position() // 	Returns the position (relative to the parent element) of an element
 
 Replacing Elements
 .replaceAll()
@@ -108,8 +133,9 @@ Replacing Elements
 ​.clone()
 $(selector).clone(true|false)
 
-Removing Elements 
-​.remove() // Removes the selected elements (including data and events)
+
+###  Elements 
+​.remove()** // Removes the selected  (including data and events)
 ​.detach() // Removes selected elements (keeps data and events)
 ​.empty() // Removes all child nodes and content from selected elements
 
