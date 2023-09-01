@@ -9,7 +9,8 @@ various languages, tools and frameworks
 - [Docker Cheatsheet](Docker.txt)
 - [Sublime Text Shortcuts](Sublime-Text.md)
 - [VS Code Shortcuts](VSCode.md)
-- [Git](Git.txt)
+- [Git Cheatsheet](Git.txt)
+- [Markdown Cheatsheet](Markdown.md)
 
 I'll be updating this repo frequently.
 
