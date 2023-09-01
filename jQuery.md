@@ -189,26 +189,36 @@ $(document).ready(function(){
 ​- **.last()** -> Returns the last element of the selected elements
 - **​.find()** -> Returns descendant elements of the selected element
 
-.is() // return true if at least one of these elements matches the given arguments
+- **.is()** -> return true if at least one of these elements matches the given arguments
+```javascript
 $(document).ready(function(){
   $("p").click(function(){
     if ($(this).is("p")) {
       alert("Parent of p is div"); 
     }
   });
+```
 
-.has() // all elements with one or more elements inside of them
+- **.has()** -> all elements with one or more elements inside of them
+```javascript
 $(document).ready(function(){
   $("p").has("span").css("color", "yellow");
 });
+```
 
-.not() // Returns elements that do not match  certain criteria
-​.filter() // Reduce the set of matched elements to those that match the selector or pass the function's test
+- **.not()** -> Returns elements that do not match  certain criteria
+
+- **​.filter()** -> Reduce the set of matched elements to those that match the selector or pass the function's test
+
+```javascript
 $(document).ready(function(){
-  $("p").filter(":not(.intro)").css("color", "yellow");
+  $("p").filter( ":not(.intro)").css("color", "yellow" );
 });
+```
 
-.each() // runs a function for each matched element
+- **.each()** -> runs a function for each matched element
+
+```javascript
 $(document).ready(function(){
   $("button").click(function(){
     $("ul").children().each(function(){
@@ -222,11 +232,15 @@ $("button").click(function(){
     alert($(this).text())
   });
 });
+```
 
-.eq() // Returns an element with a specific index number of the selected elements
+- **.eq()** -> Returns an element with a specific index number of the selected elements
+```javascript
 $("p").eq(1).css("color", "yellow");
-.lt()
-.gt()
+```
+
+- **.lt()**
+- **.gt()**
 
 ---
 ---
@@ -238,7 +252,7 @@ $("p").eq(1).css("color", "yellow");
 ## 3. AJAX
 ---
 
-​$.ajax() // runs an async AJAX request
+- **​$.ajax()** -> runs an async AJAX request
 url: "" 
 type  //  ( GET | POST)
 success(result,status,xhx) // function to run when req succeeds
@@ -251,8 +265,9 @@ Async // true | false
 ​data	// data to be sent to the server
 ​username // HTTP access authentication req 
 ​password // HTTP access authentication req
-​xhr	// func used for creating the XMLHttpRequ
+​xhr	// func used for creating the XMLHttpRequest
 
+```javascript
 $(document).ready(function(){
   $("button").click(function(){
     $.ajax({url: "test.txt", success: function(result){
@@ -260,39 +275,59 @@ $(document).ready(function(){
     }});
   });
 });
+```
 
-$.get() // Loads data from a server using an AJAX HTTP GET request
-$.get(URL , data , function(data,status,xhr) , dataType)
+- **$.get()** -> Loads data from a  using an AJAX HTTP GET request
+
+`$.get(URL , data , function(data,status,xhr) , dataType)`
+
+```javascript
 $("button").click(function(){
   $.get("test.asp", function(data, status){
     alert("Data: " + data + "\nStatus: " + status);
   });
 });
+```
 
-$.post() // Loads data from a server using an AJAX HTTP POST request
-$(selector).post( URL , data , function(data , status , xhr) , dataType)
+- **$.post()** -> Loads data from a server using an AJAX HTTP POST request
+
+`$(selector).post( URL , data , function(data , status , xhr) , dataType)`
+
+```javascript
 $("button").click(function(){
   $.post("test.asp", function(data, status){
     alert("Data: " + data + "\nStatus: " + status);
   });
 });
+```
 
-.load() // Loads data from a server and puts the returned data into the selected element
-$(selector).load( url , data , function(response , status , xhr)
+- **.load()** -> Loads data from a server and puts the returned data into the selected element
+
+`$(selector).load( url , data , function(response , status , xhr)`
+
+```javascript
 $("button").click(function(){
   $("#div1").load("test.txt");
 });
+```
  
-$.getScript() // Loads (and executes) a JavaScript from a server using an AJAX HTTP GET request
-$(selector).getScript( url, success(response , status))
+- **$.getScript()** -> Loads (and executes) a JavaScript from a server using an AJAX HTTP GET request
+
+`$(selector).getScript( url, success(response , status))`
+
+```javascript
 $(document).ready(function(){
   $("button").click(function(){
     $.getScript("ajax_script.js");
   });
 });
+```
 
-$.getJSON() // Loads JSON-encoded data from a server using a HTTP GET request
-$(selector).getJSON(url , data , success(data , status , xhr) )
+- **$.getJSON()** -> Loads JSON-encoded data from a server using a HTTP GET request
+
+`$(selector).getJSON(url , data , success(data , status , xhr) )`
+
+```javascript
 $("button").click(function(){
   $.getJSON("ajax_json.js", function(res){
     $.each(res, function(i, field){
@@ -300,9 +335,13 @@ $("button").click(function(){
     });
   });
 });
+```
 
-.ajaxSuccess() // Specifies a function to run when an AJAX request completes successfully
-$(document).ajaxSuccess( function( event , xhr , options))
+- **.ajaxSuccess()** -> Specifies a function to run when an AJAX request completes successfully
+
+`$(document).ajaxSuccess( function( event , xhr , options))`
+
+```javascript
 $(document).ready(function(){
   $(document).ajaxSuccess(function(){
     alert("AJAX request successfully completed");
@@ -311,28 +350,31 @@ $(document).ready(function(){
     $("div").load("ajax_load.txt");
   });
 });
+```
 
-.ajaxError()
-$(document).ajaxError( function( event , xhr , options , exc) )
+- **.ajaxError()**
+`$(document).ajaxError( function( event , xhr , options , exc) )`
 
-.ajaxStart() // Specifies a function to run when the first AJAX request begins
+- **.ajaxStart()** -> .ajaxStartn to run when the first AJAX request begins
 $(document).ajaxStart(function() {})
 
-.ajaxStop() // Specifies a function to run when all AJAX requests have completed
+- **.ajaxStop()** -> Specifies a function to run when all AJAX requests have completed
 $(document).ajaxStop(function() {})
 
-.ajaxComplete() // Specifies a function to run when the AJAX request completes
-$(document).ajaxComplete(function( event , xhr , options))
+- **.ajaxComplete()** -> Specifies a function to run when the AJAX request completes
+`$(document).ajaxComplete(function( event, xhr ,options ))`
 
-.ajaxSend() // Specifies a function to run before the AJAX request is sent
+- **.ajaxSend()** -> run before the AJAX request is sent
 
 
-.toArray() 
+- **.toArray()**
+```javascript
 $("button").click(function(){
   var x = $("li").toArray()
   for (i = 0; i < x.length; i++) {
     alert(x[i].innerHTML);
   }
+```
 ---
 ---
 
@@ -362,11 +404,13 @@ $(document).ready(function(){
 ```
 
 - **.dblclick()**
+```javascript
 $(document).ready(function(){
   $("p").dblclick(function(){
     alert("The paragraph was double-clicked.");
   });
 });
+```
 
 - **.keydown()**
 
@@ -412,10 +456,11 @@ $(document).ready(function(){
 `​event.isPropagationStopped()`
 `event.stopPropagation()`
 
-The event.stopPropagation() method stops the bubbling of an event to parent elements, preventing any parent event handlers from being executed.
+The `event.stopPropagation()` method stops the bubbling of an event to parent elements, preventing any parent event handlers from being executed.
 
 `event.preventDefault()`
 `event.isDefaultPrevented()`
+
 ---
 ---
 
