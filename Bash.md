@@ -8,11 +8,11 @@
 
 > [Loops (For, While and Until loop)](#Loops)
 
-> [Array Handling](#Array Handling)
+> [Arrays](#Arrays)
  
 > [Functions](#Functions)
 
-> [String Handling](#String Handling)
+> [Strings](#Strings)
 ---
 
 
@@ -44,6 +44,7 @@ echo "Random Number: $randNo"
 randNo=$((RANDOM % 10))
 # Random No between 0 to 9
 echo "Random No between 0 to 9: $randNo"
+
 ```
 ---
 ---
@@ -126,6 +127,7 @@ File Test Operator
 > -s operator
 
 > -f operator
+
 ---
 ---
 
@@ -167,6 +169,7 @@ case $Var in
         Echo “Invalid”
         ;;
 esac
+
 ```
 ---
 ---
@@ -238,12 +241,13 @@ do
     echo -n “$C“
     ((C++))  # incrementing count var
 done
+
 ```
 ---
 ---
 
 
-### Array Handling
+### Arrays
 ---
 
 Array Creation 
@@ -285,6 +289,7 @@ letters=({a..z})
 
 # Print the array
 echo "${letters[@]}"
+
 ```
 ---
 ---
@@ -313,13 +318,12 @@ func_with_arg() {
 
 func_with_arg 12 23 
 
-
 ```
 ---
 ---
 
 
-### String Handling 
+### Strings
 ---
 
 ```bash
