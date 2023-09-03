@@ -25,7 +25,7 @@ $ az vm create --resource-group <group_name> \
   --image <Publisher:Offer:Sku:Version> \
   --admin-username <username> \ 
   --admin-password <password> \
-  [--nsg <NSG>]
+  [--nsg <NSG>] \
   [--nics <NIC>]
 
 Creating a Ubuntu VM
@@ -38,14 +38,18 @@ $ az vm create --resource-group <group_name> \
   --verbose 
 
 # Getting vm info 
-$ az vm show --name <vm_name> --resource-group <group_name>
+$ az vm show --name <vm_name> \
+  --resource-group <group_name>
 
 $ az vm list --query "[].name" 
 
 # Starting, Restarting and Stopping a VM 
-$ az vm start --resource-group <group_name> --name <vm_name>
-$ az vm stop --resource-group <group_name> --name <vm_name>
-$ az vm restart --resource-group <group_name> --name <vm_name>
+$ az vm start --resource-group <group_name> \
+  --name <vm_name>
+$ az vm stop --resource-group <group_name> \
+  --name <vm_name>
+$ az vm restart --resource-group <group_name> \
+  --name <vm_name>
 
 # Deleting a VM
 $ az vm delete --name <vm_name> --resource-group <group_name> --yes 
@@ -83,21 +87,132 @@ $ az network vnet list
 $ az network vnet list --resource-group <group_name>
 
 # Deleting Virtual Network 
-$ az network vnet delete --resource-group <group_name> --name <vnet_name> 
+$ az network vnet delete --resource-group <group_name> \
+   --name <vnet_name> \
+   [--yes>]
 
 # Adding a subnet to a Virtual Network 
-$ az network vnet subnet create --name                             <subnet_name> --resource-group  <group_name> --vnet-name <vnet_name> --address-prefixes <10.0.0.1/24> [--network-security-group <NSG>]
+$ az network vnet subnet create --name                             <subnet_name> \
+   --resource-group <group_name> \
+   --vnet-name <vnet_name> \
+   --address-prefixes <10.0.0.1/24> \
+   [--network-security-group <NSG>]
  
 
 # Deleting a Subnet from Virtual Network 
-$ az network vnet subnet delete --name <subent_name> --resource-group  <group_name> --vnet-name <vnet_name> 
+$ az network vnet subnet delete --name <subent_name> \
+    --resource-group <group_name> \
+    --vnet-name <vnet_name> \
+    [--yes] 
 
-$ az network vnet subnet list --resource-group  <group_name> --vnet-name <vnet_name>                    
+$ az network vnet subnet list --resource-group <group_name> \
+   --vnet-name <vnet_name> 
+                   
 ---------------------------------------
 
 
 
+########## Azure Storage #########
+
+1.) Storage Account
+
+# Creating a Storage Account
+$ az storage account create --name <storage_account_name> \
+  --resource-group <group_name> \
+  --location <location> \
+  --sku \
+  <{Premium_LRS, Premium_ZRS, Standard_GRS, Standard_GZRS, Standard_LRS, Standard_RAGRS, Standard_RAGZRS, Standard_ZRS} Default: Standard_RAGRS> \
+  --kind <{BlobStorage, BlockBlobStorage, FileStorage, Storage, StorageV2}] Default:StorageV2>
 
 
+# Listing of Storage Accounts 
+$ az storage account list [--resource-group] 
 
+
+# Show details about Storage Account 
+$ az storage account show --name <storage_account_name> \
+  --resource-group <group_name> 
+
+
+# Deleting A Storage Account 
+$ az storage account delete --name <storage_account_name> \
+  --resource-group <group_name> \
+  [--yes] 
+
+
+2.) Storage Container
+
+# Creating a Storage Container 
+$ az storage container create --name <container_name> \
+  [--account-name <storage_account_name>] \
+  [--resource-group <group_name> ] \
+  [--fail-on-exist] \
+  [--public-access {blob, container, off}]
+
+
+# Checking if Container already exists
+$ az storage container exists --name <container_name> \
+  [--account-name <storage_account_name>] 
+
+
+# Listing Containers in a Storage Account
+$ az storage container list [--account-name <storage_account_name> ] \
+  [--include-deleted {false, true}]
+
+
+# Show all details about the container 
+$ az storage container show --name container_name> \
+  [--account-name <storage_account_name>]
+
+
+# Show permission for a Container 
+$ az storage container show-permission --name container_name> \
+  [--account-name <storage_account_name>] 
+
+
+# Delete a Container 
+$ az storage container delete --name container_name> \
+  [--account-name <storage_account_name>] \
+  [fail-not-exist]
+
+
+3.) Storage 
+
+# Upload a File to a Container
+$ az storage blob upload --account-name <storage_account_name> \
+  --container-name -c <container_name> \
+  --file -f <path_to_file> \
+  [--name -n <blob_name> ] \
+  [--data <canbeanydate> ]  
+
+
+# Uploading multiple files to Container 
+$ az storage blob upload-batch --destination -d <container_name> \
+  --source -s <source_path> \
+  [--pattern <pattern>] \
+  [--destination-path] \
+  [--dryrun] \
+  --account-name <storage_account_name> 
+
+
+# List all the blobs in a container
+$ az storage blob list  --container-name <container_name> \
+  [--account-name <storage_account_name>] \
+  [--prefix]
+
+
+# Download a blob 
+$ az storage blob download                       --container-name <container_name> \
+  [--account-name <storage_account_name>] \
+  [--file -f <path>] \
+  --name -n <nameofblob> 
+
+# Download multiple files from Container
+$ az storage blob download-batch --destination -d <destination_path> \
+  --source -s <container_name> \
+  [--pattern <pattern>] \
+  [--dryrun] \
+  --account-name <storage_account_name>
+
+--------------------------------------- 
 
