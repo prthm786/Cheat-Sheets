@@ -2,17 +2,18 @@
 
 > [Variables](#Variables)
 
-> Operators
+> [Operators](#Operators)
 
-> Conditionals (If-Else and Case)
+> [Conditionals (If-Else and Case)](#Conditionals)
 
-> Loops (For, While and Until loop)
+> [Loops (For, While and Until loop)](#Loops)
 
-> Array Handling
+> [Array Handling](#Array Handling)
  
-> Functions 
+> [Functions](#Functions)
 
-> String Handling 
+> [String Handling](#String Handling)
+---
 
 
 ### Variables
