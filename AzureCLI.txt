@@ -6,15 +6,21 @@ $ az account list
 
 
 ######### Resource Group ###########
+
 $ az group create -n <group_name> -l <location>
 $ az group delete -n <group_name> -y 
-$ az group list 
+$ az group list --query "[].name"
+
 ---------------------------------------
 
 
 ########## Virtual Machines #########
 
-$ az vm image list --all --location --offer <offer_name> --publisher <publisher_name> --sku <sku_name>
+$ az vm image list --all \
+  --location <location> \
+  --offer <offer_name> \
+  --publisher <publisher_name> \
+  --sku <sku_name>
 
 
 $ az vm image list-publishers --location <location>
@@ -26,7 +32,10 @@ $ az vm create --resource-group <group_name> \
   --admin-username <username> \ 
   --admin-password <password> \
   [--nsg <NSG>] \
-  [--nics <NIC>]
+  [--nics <NIC>] \ 
+  [--vnet-name <vnet_name>] \
+  [--subnet <subnet_name>] 
+  
 
 Creating a Ubuntu VM
 $ az vm create --resource-group <group_name> \
@@ -37,11 +46,23 @@ $ az vm create --resource-group <group_name> \
   --output json \
   --verbose 
 
+
+Creating a Windows VM
+$ az vm create --resource-group <group_name> \
+  --name <vm_name> \
+  --image MicrosoftWindowsDesktop:Windows-10:win10-21h2-pro-g2:latest \
+  --admin-username <username> \
+  --admin-password <password> \
+  --output json \
+  --verbose 
+
+
 # Getting vm info 
 $ az vm show --name <vm_name> \
   --resource-group <group_name>
 
 $ az vm list --query "[].name" 
+
 
 # Starting, Restarting and Stopping a VM 
 $ az vm start --resource-group <group_name> \
@@ -51,8 +72,10 @@ $ az vm stop --resource-group <group_name> \
 $ az vm restart --resource-group <group_name> \
   --name <vm_name>
 
+
 # Deleting a VM
 $ az vm delete --name <vm_name> --resource-group <group_name> --yes 
+
 
 
 az vm list-ip-addresses --name <vm_name> --resource-group <group_name> 
@@ -81,17 +104,20 @@ $ az vm create --resource-group <group_name> \
   --output json \
   --verbose 
 
+
 # Lists all Virtual Networks in your Az Subscription 
 $ az network vnet list 
 # Lists all Virtual Networks with a resource group
 $ az network vnet list --resource-group <group_name>
+
 
 # Deleting Virtual Network 
 $ az network vnet delete --resource-group <group_name> \
    --name <vnet_name> \
    [--yes>]
 
-# Adding a subnet to a Virtual Network 
+
+# Adding a Subnet to a Virtual Network 
 $ az network vnet subnet create --name                             <subnet_name> \
    --resource-group <group_name> \
    --vnet-name <vnet_name> \
@@ -111,7 +137,6 @@ $ az network vnet subnet list --resource-group <group_name> \
 ---------------------------------------
 
 
-
 ########## Azure Storage #########
 
 1.) Storage Account
@@ -120,8 +145,7 @@ $ az network vnet subnet list --resource-group <group_name> \
 $ az storage account create --name <storage_account_name> \
   --resource-group <group_name> \
   --location <location> \
-  --sku \
-  <{Premium_LRS, Premium_ZRS, Standard_GRS, Standard_GZRS, Standard_LRS, Standard_RAGRS, Standard_RAGZRS, Standard_ZRS} Default: Standard_RAGRS> \
+  --sku <{Premium_LRS, Premium_ZRS, Standard_GRS, Standard_GZRS, Standard_LRS, Standard_RAGRS, Standard_RAGZRS, Standard_ZRS} Default: Standard_RAGRS> \
   --kind <{BlobStorage, BlockBlobStorage, FileStorage, Storage, StorageV2}] Default:StorageV2>
 
 
@@ -161,7 +185,7 @@ $ az storage container list [--account-name <storage_account_name> ] \
 
 
 # Show all details about the container 
-$ az storage container show --name container_name> \
+$ az storage container show --name <container_name> \
   [--account-name <storage_account_name>]
 
 
@@ -171,7 +195,7 @@ $ az storage container show-permission --name container_name> \
 
 
 # Delete a Container 
-$ az storage container delete --name container_name> \
+$ az storage container delete --name <container_name> \
   [--account-name <storage_account_name>] \
   [fail-not-exist]
 
@@ -216,3 +240,26 @@ $ az storage blob download-batch --destination -d <destination_path> \
 
 --------------------------------------- 
 
+
+########## Azure Containers ##########
+
+1.) Container Instances 
+
+# Creating a Container Instances 
+$ az container create --resource-group <group_name> \
+  --name <container_instance_name> \
+  --image <container_image> \
+  [--os-type {Linux, Windows}] \
+  [--cpu <cpu_no default:1>] \
+  [--memory <memory_in_GB default:1.5>] \
+  [--dns-name-label <label_name>] \
+  [--registry-login-server <acr_registry>.acr.io] \
+  [--command-line <command_to_run>] \
+  [--registry-password <reg_password>] \
+  [--registry-username <reg_username> ] \
+  [--assign-identity [system] <Id>] \
+  [--role <role_name>] \
+  [--scope <scope>] \
+  [--vnet <VNet_name>] \
+  [--subnet <subnet_name>] \
+  [--sku]
