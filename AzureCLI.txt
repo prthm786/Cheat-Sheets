@@ -14,11 +14,19 @@ $ az group list
 
 ########## Virtual Machines #########
 
+$ az vm image list --all --location --offer <offer_name> --publisher <publisher_name> --sku <sku_name>
+
+
+$ az vm image list-publishers --location <location>
+
+
 $ az vm create --resource-group <group_name> \
   --name <vm_name> \
   --image <Publisher:Offer:Sku:Version> \
   --admin-username <username> \ 
-  --admin-psssword <password>
+  --admin-password <password> \
+  [--nsg <NSG>]
+  [--nics <NIC>]
 
 Creating a Ubuntu VM
 $ az vm create --resource-group <group_name> \
@@ -34,20 +42,28 @@ $ az vm show --name <vm_name> --resource-group <group_name>
 
 $ az vm list --query "[].name" 
 
-# Starting and Stopping a VM 
-$ az vm start 
- <group_name> --name <vm_name>
+# Starting, Restarting and Stopping a VM 
+$ az vm start --resource-group <group_name> --name <vm_name>
 $ az vm stop --resource-group <group_name> --name <vm_name>
+$ az vm restart --resource-group <group_name> --name <vm_name>
+
+# Deleting a VM
+$ az vm delete --name <vm_name> --resource-group <group_name> --yes 
+
+
+az vm list-ip-addresses --name <vm_name> --resource-group <group_name> 
+            
 ---------------------------------------
 
 
 ########## Virtual Networks #########
 
-$ az network vnet create -g <group_name> \
-  -n <vnet_name> \
-  --address-prefix 10.0.0.0/16 \
-  --subnet-name MySubnet \
-  --subnet-prefix 10.0.0.0/24
+# Creating a Virtual Network 
+$ az network vnet create --resource-group <group_name> \
+  --name <vnet_name> \
+  --address-prefixes <10.0.0.0/16> \
+  --subnet-name <subnet_name> \
+  --subnet-prefix <10.0.0.0/24>
 
 
 # Creating a VM in a VNet and specific subnet 
@@ -63,6 +79,20 @@ $ az vm create --resource-group <group_name> \
 
 # Lists all Virtual Networks in your Az Subscription 
 $ az network vnet list 
+# Lists all Virtual Networks with a resource group
+$ az network vnet list --resource-group <group_name>
+
+# Deleting Virtual Network 
+$ az network vnet delete --resource-group <group_name> --name <vnet_name> 
+
+# Adding a subnet to a Virtual Network 
+$ az network vnet subnet create --name                             <subnet_name> --resource-group  <group_name> --vnet-name <vnet_name> --address-prefixes <10.0.0.1/24> [--network-security-group <NSG>]
+ 
+
+# Deleting a Subnet from Virtual Network 
+$ az network vnet subnet delete --name <subent_name> --resource-group  <group_name> --vnet-name <vnet_name> 
+
+$ az network vnet subnet list --resource-group  <group_name> --vnet-name <vnet_name>                    
 ---------------------------------------
 
 
