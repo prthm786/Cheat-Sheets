@@ -1,0 +1,32 @@
+          Azure CLI Commands
+
+$ az login
+$ az account list 
+
+######### Resource Group ###########
+$ az group create --name <group_name> --location <location>
+$ az group delete --name <group_name> --yes 
+$ az group list 
+-----------------------------------
+
+
+########## Virtual Machines #########
+$ az vm create --resource-group <group_name> --name <vm_name> --image <image_name> --admin-username <username> --admin-password <password>
+
+Creating a Ubuntu VM
+$ az vm create --resource-group <group_name> \
+  --name <vm_name> \
+  --image UbuntuLTS \
+  --admin-username <username> \
+  --generate-ssh-keys \
+  --output json \
+  --verbose 
+
+# Getting vm info 
+$ az vm show --name <vm_name> --resource-group <group_name>
+
+$ az vm list --resource-group <group_name> 
+
+# Starting and Stopping a VM 
+$ az vm start --resource-group <group_name> --name <vm_name>
+$ az vm stop --resource-group <group_name> --name <vm_name>
