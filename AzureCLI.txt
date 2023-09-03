@@ -1,17 +1,24 @@
           Azure CLI Commands
 
-$ az login
+$ az login # login to azure account using Azure CLI
+$ az --help 
 $ az account list 
 
+
 ######### Resource Group ###########
-$ az group create --name <group_name> --location <location>
-$ az group delete --name <group_name> --yes 
+$ az group create -n <group_name> -l <location>
+$ az group delete -n <group_name> -y 
 $ az group list 
------------------------------------
+---------------------------------------
 
 
 ########## Virtual Machines #########
-$ az vm create --resource-group <group_name> --name <vm_name> --image <image_name> --admin-username <username> --admin-password <password>
+
+$ az vm create --resource-group <group_name> \
+  --name <vm_name> \
+  --image <Publisher:Offer:Sku:Version> \
+  --admin-username <username> \ 
+  --admin-psssword <password>
 
 Creating a Ubuntu VM
 $ az vm create --resource-group <group_name> \
@@ -25,8 +32,42 @@ $ az vm create --resource-group <group_name> \
 # Getting vm info 
 $ az vm show --name <vm_name> --resource-group <group_name>
 
-$ az vm list --resource-group <group_name> 
+$ az vm list --query "[].name" 
 
 # Starting and Stopping a VM 
-$ az vm start --resource-group <group_name> --name <vm_name>
+$ az vm start 
+ <group_name> --name <vm_name>
 $ az vm stop --resource-group <group_name> --name <vm_name>
+---------------------------------------
+
+
+########## Virtual Networks #########
+
+$ az network vnet create -g <group_name> \
+  -n <vnet_name> \
+  --address-prefix 10.0.0.0/16 \
+  --subnet-name MySubnet \
+  --subnet-prefix 10.0.0.0/24
+
+
+# Creating a VM in a VNet and specific subnet 
+$ az vm create --resource-group <group_name> \
+  --name <vm_name> \
+  --image UbuntuLTS \
+  --admin-username <username> \
+  --vnet-name <vnet_name> \
+  --subnet <subnet_name> \
+  --generate-ssh-keys \
+  --output json \
+  --verbose 
+
+# Lists all Virtual Networks in your Az Subscription 
+$ az network vnet list 
+---------------------------------------
+
+
+
+
+
+
+
