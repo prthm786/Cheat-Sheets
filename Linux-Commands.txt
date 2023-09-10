@@ -59,7 +59,9 @@ $ lscpu
 
 $ sudo lshw  # provide all the hardware related info
 $ sudo lshw -html >> report.html # export all the info in html file 
-$ sudo lshw -short  
+$ sudo lshw -short
+
+$ aplay -l   
 ______________________________________
 
 
@@ -159,8 +161,8 @@ $ sudo find / -iname "<name>"
 $ chmod <file_permissions> <file>   # changes file mod 
 $ tree                     # Lists the contents of a directory recursively
 
-$ ln <file_link> <source> $ creates a hard link 
-$ ln -s <file_link> <source> # creates a soft link
+$ ln <source> <file_link> $ creates a hard link 
+$ ln -s <source> <file_link> # creates a soft link
 ______________________________________
 
 
@@ -361,7 +363,8 @@ $ sudo apt update  # update apt repo sources
 $ sudo apt upgrade # upgrade all package, install new versions 
 $ sudo apt dist-upgrade <package>
 $ sudo apt list –installed # shows all installed packages
-$ sudo apt list --installed | wc -l # list no of packages installed 
+$ sudo apt list --installed | wc -l 
+# list no of packages installed 
 
 $ sudo apt list --upgradable
 $ sudo apt show <package> # give details about the package
@@ -397,8 +400,8 @@ $ sudo systemctl status <servicename>
 $ sudo systemctl start <servicename>
 $ sudo systemctl stop <servicename>
 $ sudo systemctl restart <servicename>
-$ sudo systemctl enable <servicename>
-$ sudo systemctl disable <servicename>
+$ sudo systemctl enable/disable <servicename>
+$ sudo systemctl reload <servicename>
 $ sudo systemctl is-active <servicename>
 $ sudo systemctl is-enabled <servicename>
 $ sudo systemctl list-units --all 
@@ -418,10 +421,10 @@ $ sudo systemctl status/enable ufw
 $ sudo ufw status 
 $ sudo ufw status numbered 
 $ sudo ufw delete <number>
-$ sudo ufw enable/disable
-$ sudo ufw reset
+$ sudo ufw enable/disable
 $ sudo ufw allow/deny http/tcp or 80
 $ sudo ufw allow/deny ssh/https/ftp
+
 $ sudo ufw allow/deny from <ipaddress>
 $ sudo ufw allow from <ipaddress> to any port <portno>
 $ sudo ufw allow from <ipaddress> to any port <portno> proto <protocol>
@@ -497,11 +500,21 @@ $ tar file.tar   # list the contents of tar
 ______________________________________
 
 
-###### Logs ######
 
-$ ls -al /var/logs # logs are stored
+########## Logs ##########
 
-$ tail -5 /var/logs/auth.log 
+/var/log/
+/var/log/auth.log 
+/var/log/apt/ 
+
+$ ls -al /var/log # logs are stored
+
+$ sudo tail -f /var/log/auth.log
+$sudo tail -f /var/log/syslog
+
+______________________________________
+
+
 
 
 $ nano -l ~/.bashrc  # edit the bashrc file 
