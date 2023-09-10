@@ -17,6 +17,10 @@ $ time <command> # returns the time the command took to run
 $ ls /bin | grep <search>  # check for command binaries 
 
 
+$ echo $?  # check if the last command was successful
+$ !!  # runs the last command 
+
+
 $ echo "<some_text>" # displays text on the screen
 $ echo -e "<some_text>" # this option enable interpretation of escape sequences  
 
@@ -111,6 +115,9 @@ $ cd -    # cd into the previous directory
 $ cd ~    # cd into the current user's home directory
 $ cd /    # cd into the root directory
 $ pwd     # print current directory
+
+$ pushd <directory>
+$ popd 
 
 $ touch <file>      # creating empty file
 $ touch <file1> <file2> 
@@ -296,26 +303,34 @@ $ cat /etc/group      # contains group info for all accounts
 $ cat /etc/gshadow 
 
 $ sudo adduser <usermame>  # create a new user 
+$ sudo useradd <username> # lazy way of creating user 
+$ sudo useradd <username> -m # createa new user and adds home directory for the user 
+
+
 $ sudo passwd <user>  # change password for <user>
+$ sudo passwd  # change password for current user 
+
 $ su - <user>   # switches to <user>
 $ su -          # switches to root, require root credentials 
 
 
-$ sudo usermod -l <username> <newusername>  
-# change <username> of the <user>
+$ sudo usermod -l <username> <newusername>  # change <username> of the <user>
 $ sudo usermod <username> --shell /bin/bash 
+
 
-$ sudo useradd <username>
+$ sudo groupadd <group_name> # Removes a group from the system
 
-$ sudo groupadd <group_name>    # Removes a group from the system
-$ sudo usermod -aG <group> <user>
+$ sudo usermod -aG <group> <user> # add user to the group 
+$ sudo usermod -aG sudo <user> 
 
 $ groups 
 $ groups <username>
 
-$ sudo userdel <user>    # Deletes a user account and related file
+$ sudo userdel <user> # Deletes a user account and related file
 
 $ gpasswd -d <username> <groupname>
+
+$ sudo visudo 
 ______________________________________
 
 
@@ -326,7 +341,9 @@ $ ps
 $ top 
 $ ps -aux 
 $ kill -l 
-$ kill <processid>
+$ kill <processid> 
+$ kill <processname>
+$ killall <processname>
 
 # Use ctrl + Z to make a process a background job 
 
@@ -359,8 +376,10 @@ $ sudo apt autoremove
 
 $ sudo apt purge <package> # delete conf files as well
 $ sudo apt install –only-upgrade <package>
+
 $ sudo apt update  # update apt repo sources 
 $ sudo apt upgrade # upgrade all package, install new versions 
+
 $ sudo apt dist-upgrade <package>
 $ sudo apt list –installed # shows all installed packages
 $ sudo apt list --installed | wc -l 
@@ -377,14 +396,19 @@ $ sudo apt-add-repository <repository>
 
 
 Snap Package Manager
+/snap/bin
+
 $ sudo apt install snapd # install the snap package manager 
+
 $ sudo snap install <package> # installs package 
 $ sudo snap find <package> # searches for package
 $ sudo snap info <package> # gives details about the package
 $ sudo snap refresh # updates all the package 
 $ sudo snap refresh <package> # only updates a single package 
 $ sudo snap list # list of packages install using snap 
+$ sudo snap enable/disable <package>
 $ sudo snap remove <package> # removed the package from the system 
+$ sudo snap remove <package> --purge
 ______________________________________
 
 
@@ -421,7 +445,7 @@ $ sudo systemctl status/enable ufw
 $ sudo ufw status 
 $ sudo ufw status numbered 
 $ sudo ufw delete <number>
-$ sudo ufw enable/disable
+$ sudo ufw enable/disable/reload 
 $ sudo ufw allow/deny http/tcp or 80
 $ sudo ufw allow/deny ssh/https/ftp
 
@@ -540,13 +564,13 @@ $ unalias <alias_name>
 
 ###### Environment Variables ########
 
-USER   #  The currently logged-in user name
+USER   # The currently logged-in user name
 HOME   # The path to the current user’s home directory
 SHELL  # The pathname of the current user’s shell
 PATH   # A list of directories that the shell searches for executable files
 PWD    # The path to your current working directory
 UID    # The current user’s unique identifier
-HOME   # path of current user's home directory 
+RANDOM # prints a random number 
 
 $ echo $<variable_name>  # display value of variables
 
