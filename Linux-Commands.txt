@@ -2,6 +2,8 @@
 
 ####### Terminal Shortcuts #######
 
+Ctrl + Shift + C -> copy text 
+Ctrl + Shift + V -> paste text 
 Ctrl + L -> Clears the terminal 
 Ctrl + A -> Move to start of line 
 Ctrl + E -> Move to end of line 
@@ -35,6 +37,7 @@ $ ls /bin | grep <search>  # check for command binaries
 
 $ echo $?  # check if the last command was successful
 $ !!  # runs the last command 
+$ !<no> # runs the <no> command from history 
 
 $ echo "<some_text>" # displays text on the screen
 $ echo -e "<some_text>" # this option enable interpretation of escape sequences  
@@ -107,7 +110,7 @@ tree
 chmod 
 cat 
 nano
-vim
+diff 
 ln
 unlink
 
@@ -134,17 +137,17 @@ $ pwd     # print current directory
 $ pushd <directory>
 $ popd 
 
-$ touch <file>      # creating empty file
+$ touch <file>   # creating empty file
 $ touch <file1> <file2> 
 $ touch file{1..10} # creating 10 files
 
 $ echo "<content>" > filename.txt   # creating a file with content 
 $ echo "<content>" >> filename.txt  # appending to a file 
 
-$ mkdir <dir_name>       # creating directory 
+$ mkdir <dir_name> # creating directory 
 
 $ cp <file> <destination>/<file> # copies file into the destination
-
+$ cp -i <file> <destination> # interactive copy 
 $ cp -r <source_path> <destination> # copies the entire folder or multiple files recursively 
 
 $ mv <file> <destination> 
@@ -157,12 +160,10 @@ $ head -n <file>   # first n lines of file
 
 $ cat <file>     # list all content of a file
 $ cat > <file>   # places standard input to a file until Ctrl + C is pressed 
-
 $ cat << EOF > <file>    # places all the input  until 'EOF' is received
-
 $ cat -n <file>   # show line numbers 
-
 $ cat <file1> <file2> > <newfile> # create a new file with content of both files <file1> and <file2> 
+$ cat ./*.txt > merge.txt  # combines the contents of all the text files into one file 
 
 $ nano || sudo apt install nano # check for nano and install if it is not found 
 
@@ -173,11 +174,10 @@ $ rmdir <directory>       # removing a <directory>
 $ rm <file>               # removes a file 
 $ rm -rf <dir>            # removes contents of directories recursively
 $ rm --dir <emptydir>     # removes empty directory
+$ rm ./*.txt  # removes all text files 
 
-$ rm *.txt                # removes all text files 
 
-
-$ file <file>             # determine type of file 
+$ file <file> # determine type of file 
 
 $ find <dir> -name <pattern> -exec <command> {} +
 
@@ -187,7 +187,9 @@ $ sudo find / -name "<name>"
 $ sudo find / -iname "<name>"
 $ find ~/Desktop -type f -name "*.txt" -exec cat {} \;
 $ find /var/log -type f -name "*.log"
-
+$ find ~/test -type f -name "*.txt" -delete # delete all the text files using find command 
+$ find . -mtime +10 # find all the files that was not modified for more than 10 days 
+$ find . -type f -size +1M # find files which are greater than 1 Megabyte 
 
 $ chmod <file_permissions> <file>   # changes file mod 
 $ tree                     # Lists the contents of a directory recursively
@@ -196,6 +198,11 @@ $ ln <source> <file_link> $ creates a hard link
 $ ln -s <source> <file_link> # creates a soft link
 
 $ truncate -s 0 <file>
+
+$ diff <file1> <file2>
+$ diff -u <file1> <file2>
+$ diff -q <file1> <file2>
+$ diff -r <dir1>/ <dir2>/
 ______________________________________
 
 
@@ -282,6 +289,7 @@ $ ping -f <host>   # ping flood
 $ nslookup <host>
 
 
+$ sudo apt install curl # installs curl 
 $ curl <url>           # display the content of the URL on the terminal
 $ curl -# -O <url>
 
@@ -473,7 +481,7 @@ ______________________________________
 ufw 
 /etc/default/ufw
 
-$ sudo apt install ufw  # installs ufw on the system 
+$ sudo apt install ufw # installs ufw on the system 
 $ sudo systemctl status/enable ufw
 
 $ sudo ufw status 
