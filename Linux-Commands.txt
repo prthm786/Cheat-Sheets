@@ -130,6 +130,8 @@ $ mkdir <dir_name>       # creating directory
 
 $ cp <file> <destination>/<file> # copies file into the destination
 
+$ cp -r <source_path> <destination> # copies the entire folder or multiple files recursively 
+
 $ mv <file> <destination> 
  
 $ mv <filename> <newfilename> # renames file 
@@ -468,14 +470,18 @@ ______________________________________
 ####### Compression/Decompression ######
 
 tar 
-gzip -> gzip command compresses files
-unzip
+gzip -> gzip command compresses file 
+gunzip
+zip and unzip 
 
+Gzip and Gunzip
 
-$ gzip <file>   # create a compressed file named <file>.gz 
-$ gzip -k <file>   # by default gzip deletes original file but -k keeps the original file as well 
+$ gzip <file>  # create a compressed file named <file>.gz 
+$ gzip -k <file>  # by default gzip deletes original file but -k keeps the original file as well 
 $ gzip -1 <file>  # sets compression level between 1-9, -1 -> least compression  and -9 -> max compression
 $ gzip -d <file>.gz  # Decompression
+
+$ gunzip <file>.gz # decompresses
 
 
 .tar - archive files are usually not compressed.
@@ -501,14 +507,21 @@ Tar <options> <source> <destination>
 $ tar -cvf file.tar <multiple_files>  
 # creating a tar Archive
 $ tar -cvf file.tar <folder>  
-# creating a tar Archive using folder
+# creating a tar Archive from folder
+
+$ tar -tvf file.tar # list the contents of archive 
+$ tar -tvf file.tar | wc -l # printing the no of files in tar archive 
+
 $ tar -xvf file.tar 
 # Extracting files from Archive
 
 
-$ tar -czvf file.tar.gz <folder>   
+$ tar -czvf <file>.tar.gz <folder>   
 # gzip compression on the tar Archive
-$ tar -xvzf file.tar.gz  
+
+$ tar -tvf <file>.tar.gz # listing the contents of tar.gz file
+
+$ tar -xvzf <file>.tar.gz  
 # Extracting a gzip tar Archive *.tar.gz 
 
 
@@ -517,10 +530,16 @@ $ tar -rvf existing-archive-name.tar <folder>
  
 
 $ tar -czf file.tar | wc -c  # checking size of tar 
-$ $ tar -czf file1.tar.gz | wc -c   # checking size of tar.gz
+$ tar -czf file1.tar.gz | wc -c  # checking size of tar.gz
 
 
-$ tar file.tar   # list the contents of tar 
+Zip and Unzip 
+
+$ zip <file>.zip <files_to_be_zipped>
+$ zip <file>.zip <folder>
+
+$ unzip <file>.zip
+$ unzip <file>.zip -d <destination_path>
 ______________________________________
 
 
@@ -533,15 +552,28 @@ ______________________________________
 
 $ ls -al /var/log # logs are stored
 
-$ sudo tail -f /var/log/auth.log
-$sudo tail -f /var/log/syslog
+$ sudo tail -f /var/log/auth.log 
+$ sudo cat /var/log/auth.log | grep "<pattern>"
 
+$ sudo tail -f /var/log/syslog
+
+$ man last 
+$ last # used to see the contents of /var/log/wtmp which contains info about last logged in users 
+$ last -aF 
+
+$ man lastb 
+$ lastb # used to see the contents of /var/log/btmp which contains info about bad log in attempts
+$ lastb -aF 
+
+$ man lastlog
+$ lastlog # used to see the last login of a user /var/log/lastlog
+$ lastlog -u <user>
 ______________________________________
 
 
 
 
-$ nano -l ~/.bashrc  # edit the bashrc file 
+$ nano -l ~/.bashrc  # edit the bashrc file var/log/auth.log
 
 if [ -f ~/.bash_aliases ]; then
  . ~/.bash_aliases
