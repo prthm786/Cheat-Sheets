@@ -1,5 +1,21 @@
                 Linux Commands 
 
+####### Terminal Shortcuts #######
+
+Ctrl + L -> Clears the terminal 
+Ctrl + A -> Move to start of line 
+Ctrl + E -> Move to end of line 
+Ctrl + U -> deletes everything before the cursor 
+Ctrl + K -> deletes everything after the cursor 
+Ctrl + Shift + + -> Increase font size 
+Ctrl + - -> Decrease font size 
+Ctrl + R -> search
+F11 -> Full screen mode 
+Ctrl + C -> stops the execution of process
+Ctrl + Z -> Backgrounds the process 
+______________________________________
+
+
 $ man <command>  # show manual page for <command>
 $ <command> --help 
 $ which <command>
@@ -19,7 +35,6 @@ $ ls /bin | grep <search>  # check for command binaries
 
 $ echo $?  # check if the last command was successful
 $ !!  # runs the last command 
-
 
 $ echo "<some_text>" # displays text on the screen
 $ echo -e "<some_text>" # this option enable interpretation of escape sequences  
@@ -137,6 +152,7 @@ $ mv <file> <destination>
 $ mv <filename> <newfilename> # renames file 
 
 $ tail -n <file>   # last n lines of file 
+$ tail -f <file>   # follows the file for updates 
 $ head -n <file>   # first n lines of file 
 
 $ cat <file>     # list all content of a file
@@ -172,6 +188,8 @@ $ tree                     # Lists the contents of a directory recursively
 
 $ ln <source> <file_link> $ creates a hard link 
 $ ln -s <source> <file_link> # creates a soft link
+
+$ truncate -s 0 <file>
 ______________________________________
 
 
@@ -337,7 +355,7 @@ ______________________________________
 
 
 
-######### Process Handling ##########
+######### Process Handling #########
 
 $ ps   
 $ top 
@@ -364,7 +382,7 @@ ______________________________________
 
 
 
-####### Package Management #########
+####### Package Management ########
 
 APT Package Manager
 $ sudo apt update && sudo apt upgrade
@@ -415,7 +433,7 @@ ______________________________________
 
 
 
-######### Service Handling ##########
+######### Service Handling #########
 
 $ cat /etc/services 
 
@@ -436,7 +454,7 @@ ______________________________________
 
 
 
-####### Firewall ###########
+########### Firewall ###########
 
 ufw 
 /etc/default/ufw
@@ -467,7 +485,7 @@ ______________________________________
 
 
 
-####### Compression/Decompression ######
+###### Compression/Decompression ######
 
 tar 
 gzip -> gzip command compresses file 
@@ -594,7 +612,7 @@ $ unalias <alias_name>
 
 
 
-###### Environment Variables ########
+######## Environment Variables ########
 
 USER   # The currently logged-in user name
 HOME   # The path to the current user’s home directory
