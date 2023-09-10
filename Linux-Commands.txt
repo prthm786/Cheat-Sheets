@@ -110,9 +110,9 @@ $ cd ~    # cd into the current user's home directory
 $ cd /    # cd into the root directory
 $ pwd     # print current directory
 
-$ touch <file>  # creating empty file
-
-$ touch file{1..10}   # creating 10 files 
+$ touch <file>      # creating empty file
+$ touch <file1> <file2> 
+$ touch file{1..10} # creating 10 files
 
 $ echo "<content>" > filename.txt   # creating a file with content 
 $ echo "<content>" >> filename.txt  # appending to a file 
@@ -153,13 +153,14 @@ $ file <file>             # determine type of file
 $ find . -type f -empty   # finding empty files in current directory
 $ find . -type d   # find directories
 $ sudo find / -name "<name>" 
+$ sudo find / -iname "<name>"
 
 
 $ chmod <file_permissions> <file>   # changes file mod 
 $ tree                     # Lists the contents of a directory recursively
 
 $ ln <file_link> <source> $ creates a hard link 
-$ ln -s <file_link> <source>  # create a soft link
+$ ln -s <file_link> <source> # creates a soft link
 ______________________________________
 
 
@@ -272,30 +273,30 @@ ______________________________________
 ########## User Management ########## 
 
 adduser 
-useradd – lazy
-deluser / userdel
+useradd  # lazy way of creating user 
+deluser/userdel
 passwd 
-addgroup / groupadd
+addgroup/groupadd
 usermod 
 groups 
 groups –current user
 gpasswd
 groupadd
-visudo – for changing group permissions 
-delgroup / groupdel
+visudo # for changing group permissions 
+delgroup/groupdel
 groupmod
-Users
-Sudo
+users
+sudo
 
 $ cat /etc/passwd     # this file has username and password 
 $ cat /etc/shadow     # holds encrypted password of user accounts
 $ cat /etc/group      # contains group info for all accounts
 $ cat /etc/gshadow 
 
-$ sudo adduser <usermame>     # create a new user 
-$ sudo passwd <user>          # change password for <user>
-$ su - <user>      # switches to <user>
-$ su -             # switches to root, require root credentials 
+$ sudo adduser <usermame>  # create a new user 
+$ sudo passwd <user>  # change password for <user>
+$ su - <user>   # switches to <user>
+$ su -          # switches to root, require root credentials 
 
 
 $ sudo usermod -l <username> <newusername>  
@@ -335,6 +336,9 @@ $ fg <n>    # Brings job <n> to the foreground
 $ bg    # List stopped or background jobs,resume a stopped job in the background
 
 $ jobs       # Lists all processes that are running in the background
+
+$ htop || sudo apt install htop && htop
+# checks if htop is installed if not installs and runs it 
 ______________________________________
 
 
@@ -357,8 +361,10 @@ $ sudo apt update  # update apt repo sources
 $ sudo apt upgrade # upgrade all package, install new versions 
 $ sudo apt dist-upgrade <package>
 $ sudo apt list –installed # shows all installed packages
+$ sudo apt list --installed | wc -l # list no of packages installed 
+
 $ sudo apt list --upgradable
-$ sudo apt show <package> # gives details about the package
+$ sudo apt show <package> # give details about the package
 
 $ sudo apt search <string> 
 $ sudo apt search –full <string>
@@ -368,12 +374,14 @@ $ sudo apt-add-repository <repository>
 
 
 Snap Package Manager
+$ sudo apt install snapd # install the snap package manager 
 $ sudo snap install <package> # installs package 
 $ sudo snap find <package> # searches for package
 $ sudo snap info <package> # gives details about the package
 $ sudo snap refresh # updates all the package 
 $ sudo snap refresh <package> # only updates a single package 
 $ sudo snap list # list of packages install using snap 
+$ sudo snap remove <package> # removed the package from the system 
 ______________________________________
 
 
@@ -385,14 +393,16 @@ $ cat /etc/services
 lib/systemd     # systemctl
 etc/init.d      # service
 
-$ systemctl status <servicename>
-$ systemctl start <servicename>
-$ systemctl stop <servicename>
-$ systemctl restart <servicename>
-$ systemctl enable <servicename>
-$ systemctl disable <servicename>
-$ systemctl is-active <servicename>
-$ systemctl is-enabled <servicename>
+$ sudo systemctl status <servicename>
+$ sudo systemctl start <servicename>
+$ sudo systemctl stop <servicename>
+$ sudo systemctl restart <servicename>
+$ sudo systemctl enable <servicename>
+$ sudo systemctl disable <servicename>
+$ sudo systemctl is-active <servicename>
+$ sudo systemctl is-enabled <servicename>
+$ sudo systemctl list-units --all 
+$ sudo systemctl list-units --type=service 
 ______________________________________
 
 
@@ -402,24 +412,28 @@ ______________________________________
 ufw 
 /etc/default/ufw
 
-$ sudo apt install ufw
-$ systemctl status/enable ufw
+$ sudo apt install ufw  # installs ufw on the system 
+$ sudo systemctl status/enable ufw
 
-$ ufw status 
-$ ufw status numbered 
-$ ufw delete <number>
-$ ufw enable/disable
-$ ufw reset
-$ ufw allow/deny http/tcp or 80
-$ ufw allow/deny ssh/https/ftp
-$ ufw allow/deny from <ipaddress>
-$ ufw allow from <ipaddress> to any port <portno>
-$ ufw allow from <ipaddress> to any port <portno> proto <protocol>
-$ ufw allow from <ipaddress> to any port 22 proto tcp
-$ ufw default allow outgoing
-$ ufw default deny incoming
+$ sudo ufw status 
+$ sudo ufw status numbered 
+$ sudo ufw delete <number>
+$ sudo ufw enable/disable
+$ sudo ufw reset
+$ sudo ufw allow/deny http/tcp or 80
+$ sudo ufw allow/deny ssh/https/ftp
+$ sudo ufw allow/deny from <ipaddress>
+$ sudo ufw allow from <ipaddress> to any port <portno>
+$ sudo ufw allow from <ipaddress> to any port <portno> proto <protocol>
+$ sudo ufw allow from <ipaddress> to any port 22 proto tcp
+
+$ sudo ufw default allow outgoing
+$ sudo ufw default deny incoming
 $ sudo ufw delete <Action> <To>
 $ sudo ufw delete allow 80
+
+$ sudo ufw app list
+$ sudo ufw reset  # resets all the rules in ufw 
 ______________________________________
 
 
@@ -505,7 +519,8 @@ $ alias <aliasname>="<alias_content>"
 Eg:- alias i="sudo apt install"
      alias upg=”sudo apt update && sudo apt upgrade “
 
-$ unalias <alias_name>    # delete aliases 
+$ unalias <alias_name>   
+# delete aliases 
 
 
 
