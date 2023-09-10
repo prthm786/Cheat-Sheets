@@ -164,6 +164,8 @@ $ cat -n <file>   # show line numbers
 
 $ cat <file1> <file2> > <newfile> # create a new file with content of both files <file1> and <file2> 
 
+$ nano || sudo apt install nano # check for nano and install if it is not found 
+
 $ nano <file>        # edit contents of a file
 $ nano -l <file>     # display line number in file 
  
@@ -177,10 +179,14 @@ $ rm *.txt                # removes all text files
 
 $ file <file>             # determine type of file 
 
+$ find <dir> -name <pattern> -exec <command> {} +
+
 $ find . -type f -empty   # finding empty files in current directory
 $ find . -type d   # find directories
 $ sudo find / -name "<name>" 
 $ sudo find / -iname "<name>"
+$ find ~/Desktop -type f -name "*.txt" -exec cat {} \;
+$ find /var/log -type f -name "*.log"
 
 
 $ chmod <file_permissions> <file>   # changes file mod 
@@ -202,6 +208,14 @@ more
 less 
 head 
 tail
+sed 
+tr
+wc
+cut 
+
+$ ls -al | wc -l # prints no of files in current directory 
+
+$ cat /var/log/auth.log | less
 
 awk ‘{action}’ <file>
 awk ‘/regex pattern/{action}’ <file>
@@ -481,6 +495,7 @@ $ sudo ufw delete allow 80
 
 $ sudo ufw app list
 $ sudo ufw reset  # resets all the rules in ufw 
+$ sudo ufw allow/deny <app> # allow or deny an application through ufw 
 ______________________________________
 
 
