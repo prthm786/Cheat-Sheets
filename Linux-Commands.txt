@@ -10,6 +10,9 @@ $ date
 $ who 
 $ history 
 $ history -c     # clears history 
+$ watch <command>
+$ time <command> # returns the time the command took to run 
+
 
 $ echo "<some_text>" # displays text on the screen
 $ echo -e "<some_text>" # this option enable interpretation of escape sequences  
@@ -49,6 +52,15 @@ $ uptime | awk '{print $3}'
 $ lsblk # list block devices 
 
 $ lspci # list peripheral devices linke sound cards, graphic cards etc 
+
+$ lsusb 
+$ lscpu
+
+$ sudo lshw  # provide all the hardware related info
+
+$ sudo lshw -html >> report.html # export all the info in html file 
+
+$ sudo lshw -short  
 ______________________________________
 
 
@@ -287,7 +299,7 @@ $ sudo usermod -l <username> <newusername>
 # change <username> of the <user>
 $ sudo usermod <username> --shell /bin/bash 
 
-$ sudo useradd 
+$ sudo useradd <username>
 
 $ sudo groupadd <group_name>    # Removes a group from the system
 $ sudo usermod -aG <group> <user>
@@ -312,6 +324,7 @@ $ kill <processid>
 
 # Use ctrl + Z to make a process a background job 
 
+$ <command> &   #  runs the command in background 
 
 $ fg       # Brings the most recent job to foreground
 $ fg <n>   # Brings job <n> to the foreground
@@ -337,8 +350,8 @@ $ sudo apt autoremove
 
 $ sudo apt purge <package> # delete conf files as well
 $ sudo apt install –only-upgrade <package>
-$ sudo apt update      # update apt repo sources 
-$ sudo apt upgrade     # upgrade all package, install new versions 
+$ sudo apt update  # update apt repo sources 
+$ sudo apt upgrade # upgrade all package, install new versions 
 $ sudo apt dist-upgrade <package>
 $ sudo apt list –installed # shows all installed packages
 $ sudo apt list --upgradable
@@ -355,7 +368,8 @@ Snap Package Manager
 $ sudo snap install <package> # installs package 
 $ sudo snap find <package> # searches for package
 $ sudo snap info <package> # gives details about the package
-$ sudo snap refresh # updates the package 
+$ sudo snap refresh # updates all the package 
+$ sudo snap refresh <package> # only updates a single package 
 $ sudo snap list # list of packages install using snap 
 ______________________________________
 
@@ -365,7 +379,7 @@ ______________________________________
 
 $ cat /etc/services 
 
-lib/systemd.    # systemctl
+lib/systemd     # systemctl
 etc/init.d      # service
 
 $ systemctl status <servicename>
@@ -462,8 +476,7 @@ $ tar -czf file.tar | wc -c  # checking size of tar
 $ $ tar -czf file1.tar.gz | wc -c   # checking size of tar.gz
 
 
-$ tar 
- file.tar   # list the contents of tar 
+$ tar file.tar   # list the contents of tar 
 ______________________________________
 
 
@@ -481,7 +494,7 @@ $ source ~/.bashrc   # reloading .bashrc file
 
 $ alias <aliasname>="<alias_content>"
 Eg:- alias i="sudo apt install"
-     alias u=”sudo apt update && sudo apt upgrade “
+     alias upg=”sudo apt update && sudo apt upgrade “
 
 $ unalias <alias_name>    # delete aliases 
 
