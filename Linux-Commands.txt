@@ -12,13 +12,14 @@ $ history
 $ history -c     # clears history 
 $ watch <command>
 $ time <command> # returns the time the command took to run 
+# reset 
+
+$ ls /bin | grep <search>  # check for command binaries 
 
 
 $ echo "<some_text>" # displays text on the screen
 $ echo -e "<some_text>" # this option enable interpretation of escape sequences  
 
-
-$ ls -al /var/logs # logs are stored 
 
 
 Running Multiple Commands 
@@ -57,9 +58,7 @@ $ lsusb
 $ lscpu
 
 $ sudo lshw  # provide all the hardware related info
-
 $ sudo lshw -html >> report.html # export all the info in html file 
-
 $ sudo lshw -short  
 ______________________________________
 
@@ -105,8 +104,11 @@ Eg:-  find /etc -type f 1> ~/results.txt 2> ~/errors.txt
 $ ls            # list files in directory 
 $ ls -al        # list all files 
 $ cd <directory>
-$ cd .. 
-$ pwd           # print current directory
+$ cd ..   # cd into the parent directory 
+$ cd -    # cd into the previous directory 
+$ cd ~    # cd into the current user's home directory
+$ cd /    # cd into the root directory
+$ pwd     # print current directory
 
 $ touch <file>  # creating empty file
 
@@ -117,11 +119,14 @@ $ echo "<content>" >> filename.txt  # appending to a file
 
 $ mkdir <dir_name>       # creating directory 
 
-$ mv <file> <destination>  
-$ mv <filename> <newfilename>  # renames file 
+$ cp <file> <destination>/<file> # copies file into the destination
 
-$ tail -n <file>      # last n lines of file 
-$ head -n <file>      # first n lines of file 
+$ mv <file> <destination> 
+ 
+$ mv <filename> <newfilename> # renames file 
+
+$ tail -n <file>   # last n lines of file 
+$ head -n <file>   # first n lines of file 
 
 $ cat <file>     # list all content of a file
 $ cat > <file>   # places standard input to a file until Ctrl + C is pressed 
@@ -146,16 +151,15 @@ $ rm *.txt                # removes all text files
 $ file <file>             # determine type of file 
 
 $ find . -type f -empty   # finding empty files in current directory
-
-$ find . -type d          # find directories 
-
+$ find . -type d   # find directories
 $ sudo find / -name "<name>" 
 
 
 $ chmod <file_permissions> <file>   # changes file mod 
 $ tree                     # Lists the contents of a directory recursively
 
-$ ln -s <file_link> <source>     # create a link
+$ ln <file_link> <source> $ creates a hard link 
+$ ln -s <file_link> <source>  # create a soft link
 ______________________________________
 
 
@@ -185,8 +189,7 @@ $ awk ‘/^O/’ <file>
 $ awk ‘!/0$/’ <file> 
 $ awk ‘ /io/{print $0}’ <file>   # prints lines with 'io' 
 
-
-
+
 grep <pattern> <file>
 
 
@@ -324,10 +327,10 @@ $ kill <processid>
 
 # Use ctrl + Z to make a process a background job 
 
-$ <command> &   #  runs the command in background 
+$ <command> &   # runs the command in background 
 
-$ fg       # Brings the most recent job to foreground
-$ fg <n>   # Brings job <n> to the foreground
+$ fg        # Brings the most recent job to foreground
+$ fg <n>    # Brings job <n> to the foreground
 
 $ bg    # List stopped or background jobs,resume a stopped job in the background
 
@@ -480,17 +483,23 @@ $ tar file.tar   # list the contents of tar
 ______________________________________
 
 
+###### Logs ######
+
+$ ls -al /var/logs # logs are stored
+
+$ tail -5 /var/logs/auth.log 
 
 
-$ nano -l ~/.bashrc
+$ nano -l ~/.bashrc  # edit the bashrc file 
+
 if [ -f ~/.bash_aliases ]; then
  . ~/.bash_aliases
 fi
-$ source ~/.bashrc   # reloading .bashrc file 
+$ source ~/.bashrc  # reloading .bashrc file 
 
 
 
-#### Aliases #####
+##### Aliases #####
 
 $ alias <aliasname>="<alias_content>"
 Eg:- alias i="sudo apt install"
@@ -507,9 +516,9 @@ USER   #  The currently logged-in user name
 HOME   # The path to the current user’s home directory
 SHELL  # The pathname of the current user’s shell
 PATH   # A list of directories that the shell searches for executable files
-PWD    # The path to your current working directory (PWD stands for “Print Working Directory”)
+PWD    # The path to your current working directory
 UID    # The current user’s unique identifier
-
+HOME   # path of current user's home directory 
 
 $ echo $<variable_name>  # display value of variables
 
