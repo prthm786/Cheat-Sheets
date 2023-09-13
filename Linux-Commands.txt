@@ -31,6 +31,8 @@ $ history -c     # clears history
 $ watch <command>
 $ time <command> # returns the time the command took to run 
 # reset 
+$ reboot # restarts the system 
+$ shutdown
 
 $ ls /bin | grep <search>  # check for command binaries 
 
@@ -121,8 +123,7 @@ Redirection/Data Streams
 >>
 2>        # redirecting stderr 
 
-Eg:-  find /etc -type f 1> ~/results.txt 2> ~/errors.txt
-
+Eg:- find /etc -type f 1> ~/results.txt 2> ~/errors.txt
 
 
 $ ls            # list files in directory 
@@ -199,7 +200,7 @@ $ ln -s <source> <file_link> # creates a soft link
 
 $ truncate -s 0 <file>
 
-$ diff <file1> <file2>
+$ diff <file1> <file2> # shows the difference between 2 files 
 $ diff -u <file1> <file2>
 $ diff -q <file1> <file2>
 $ diff -r <dir1>/ <dir2>/
@@ -517,10 +518,17 @@ zip and unzip
 
 Gzip and Gunzip
 
+# Gzip only works on a file, it fails to work on directory 
+# To compress a directory we use zip or combine gzip with tar 
+
+$ gzip --version || sudo apt install gzip && gzip --version # check if gzip is installed and if not installs it 
+$ man gzip
+
 $ gzip <file>  # create a compressed file named <file>.gz 
 $ gzip -k <file>  # by default gzip deletes original file but -k keeps the original file as well 
 $ gzip -1 <file>  # sets compression level between 1-9, -1 -> least compression  and -9 -> max compression
 $ gzip -d <file>.gz  # Decompression
+$ gzip -l <file>.gz 
 
 $ gunzip <file>.gz # decompresses
 
@@ -539,7 +547,7 @@ Tar <options> <source> <destination>
 -x	Extract from a compressed file.
 -A	Append tar files to an existing archive.
 -d	Show differences between an archive and a local filesystem.
--delete	Delete from the archive.
+-delete 	Delete from the archive.
 -r	Append files to the end of an archive.
 -t	List the contents of an archive.
 -u	Append but don’t overwrite the current archive.
@@ -575,6 +583,9 @@ $ tar -czf file1.tar.gz | wc -c  # checking size of tar.gz
 
 
 Zip and Unzip 
+
+$ zip --version || sudo apt install zip && zip --version
+$ man zip
 
 $ zip <file>.zip <files_to_be_zipped>
 $ zip <file>.zip <folder>
@@ -629,8 +640,7 @@ $ alias <aliasname>="<alias_content>"
 Eg:- alias i="sudo apt install"
      alias upg=”sudo apt update && sudo apt upgrade “
 
-$ unalias <alias_name>   
-# delete aliases 
+$ unalias <alias_name> # delete aliases 
 
 
 
