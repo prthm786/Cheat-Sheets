@@ -270,7 +270,7 @@ Deleting a Database
 <br>
 
 
-## Aliases Using 'AS'  
+### Aliases Using 'AS'  
 ```mysql
 
 $ SELECT column_name AS alias_name
@@ -280,19 +280,24 @@ $ SELECT column_names
 FROM table_name AS alias_name;
 ```
 
+<br>
+
+
 ## Datatypes
 
-|    Numeric   |   String   |   Date  |
-| ------------ | ---------- | ------- |
-|    INT(s)    | VARCHAR(s) |   DATE  | 
-|  SMALLINT(s) |   TEXT(s)  |   YEAR  |
-| MEDIUMINT(s) | MEDIUMTEXT | TIME(f) | 
-|   BIGINT(s)  |  TINYTEXT  | 
-|   BOOLEAN    |  LONGTEXT  |
-|  FLOAT(s,d)  |   BLOB(s)  |
-|  DOUBLE(s,d) | MEDIUMBLOB |
-| DECIMAL(s,d) |  TINYBLOB  |
-|  TINYINT(s)  |  LONGBLOB  |
+|   Numeric  |  String   |    Date    |
+| ---------- | --------- | ---------- |
+|   INT(s)   | VARCHAR(s)|    DATE    | 
+| SMALLINT(s)|  TEXT(s)  |    YEAR    |
+|MEDIUMINT(s)| MEDIUMTEXT|   TIME(f)  | 
+|  BIGINT(s) | TINYTEXT  |TIMESTAMP(f)|
+|  BOOLEAN   | LONGTEXT  | DATETIME(f)|
+| FLOAT(s,d) |  BLOB(s)  |
+| DOUBLE(s,d)| MEDIUMBLOB|
+|DECIMAL(s,d)| TINYBLOB  |
+| TINYINT(s) | LONGBLOB  |
+
+
 
 
 
