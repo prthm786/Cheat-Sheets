@@ -7,7 +7,7 @@ Listing Databases
 
 **Creating a Database**
 ```mysql
-  $ CREATE DATABASE db_name
+  $ CREATE DATABASE db_name;
 ```
 
 Using Database 
@@ -19,7 +19,7 @@ Using Database
 
 **Creating a Table** 
 ```mysql
-  $ CREATE TABLE <table_name> (
+  $ CREATE TABLE table_name (
     column_name datatype,
     column_name datatype
     );
@@ -36,7 +36,7 @@ Displaying the structure of the Table
 
 Inserting Values into the Table
 ```mysql
-  $ INSERT INTO table_name>
+  $ INSERT INTO table_name
     VALUES (value1, value2, ...);
 ```
 <br>
@@ -45,10 +45,10 @@ Inserting Values into the Table
 Creating an Example Table of students and inserting into the table 
 ```mysql
   $ CREATE TABLE student_table (
-     roll_no int,
+     roll_no int(2),
      name varchar(255),
      subject varchar(255),
-     marks int        
+     marks int(2)       
     );
 
   $ INSERT INTO student_table VALUES (21, "Henry", "Maths", 86), (15, "Jeff", "English", 58), (29, "Brad", "Science", 56), (15, "Brie", "History", 90);
@@ -68,7 +68,7 @@ Creating an Example Table of students and inserting into the table
 
 Adding a Column to Table
 ```mysql
-  $ ALTER TABLE <table_name> 
+  $ ALTER TABLE table_name 
     ADD column_name datatype;
 ```
 <br>
@@ -89,9 +89,9 @@ Updating Records
     SET column_name = column_values;
 
   -- Updating Particular Records
-  $  UPDATE table_name
-     SET column_name = column_values
-     WHERE condition;
+  $ UPDATE table_name
+    SET column_name = column_values
+    WHERE condition;
 ```
 <br>
 
@@ -130,7 +130,7 @@ Select name column from our student_table
 Using WHERE Clause with SELECT Statement
 ```mysql
   $ SELECT column_names
-    FROM <table_name> 
+    FROM table_name
     WHERE condition;
 ```
 <br>
@@ -148,17 +148,17 @@ Using AND, OR, NOT and LIKE Operators with WHERE Clause
 ```mysql
   $ SELECT column_names
     FROM table_name
-    WHERE condition1 AND condition2    
+    WHERE condn1 AND condn2    
     AND ...;
 
   $ SELECT column_names
     FROM table_name
-    WHERE condition1 OR condition2 
+    WHERE condn1 OR condn2 
     OR ...;
 
   $ SELECT column_names
     FROM table_name
-    WHERE NOT condition;
+    WHERE NOT condn;
 
   $ SELECT column1, column2, ...
     FROM table_name
@@ -268,3 +268,32 @@ Deleting a Database
   $ DROP DATABASE db_name;
 ```
 <br>
+
+
+## Aliases Using 'AS'  
+```mysql
+
+$ SELECT column_name AS alias_name
+FROM table_name;
+
+$ SELECT column_names
+FROM table_name AS alias_name;
+```
+
+## Datatypes
+
+|    Numeric   |   String   |   Date  |
+| ------------ | ---------- | ------- |
+|    INT(s)    | VARCHAR(s) |   DATE  | 
+|  SMALLINT(s) |   TEXT(s)  |   YEAR  |
+| MEDIUMINT(s) | MEDIUMTEXT | TIME(f) | 
+|   BIGINT(s)  |  TINYTEXT  | 
+|   BOOLEAN    |  LONGTEXT  |
+|  FLOAT(s,d)  |   BLOB(s)  |
+|  DOUBLE(s,d) | MEDIUMBLOB |
+| DECIMAL(s,d) |  TINYBLOB  |
+|  TINYINT(s)  |  LONGBLOB  |
+
+
+
+ 
