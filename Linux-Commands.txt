@@ -150,8 +150,11 @@ $ mkdir <dir_name> # creating directory
 $ cp <file> <destination>/<file> # copies file into the destination
 $ cp -i <file> <destination> # interactive copy 
 $ cp -r <source_path> <destination> # copies the entire folder or multiple files recursively 
+$ cp -v <file> <destination> # verbose copy 
 
 $ mv <file> <destination> 
+$ mv -v <file> <destination> 
+$ mv -i <file> <destination>  
  
 $ mv <filename> <newfilename> # renames file 
 
@@ -161,7 +164,7 @@ $ head -n <file>   # first n lines of file
 
 $ cat <file>     # list all content of a file
 $ cat > <file>   # places standard input to a file until Ctrl + C is pressed 
-$ cat << EOF > <file>    # places all the input  until 'EOF' is received
+$ cat << EOF > <file>   # places all the input  until 'EOF' is received
 $ cat -n <file>   # show line numbers 
 $ cat <file1> <file2> > <newfile> # create a new file with content of both files <file1> and <file2> 
 $ cat ./*.txt > merge.txt  # combines the contents of all the text files into one file 
@@ -179,6 +182,13 @@ $ rm ./*.txt  # removes all text files
 
 
 $ file <file> # determine type of file 
+$ stat <file>
+$ wc <file> # display no of lines, words and bytes in a file
+
+
+$ grep -i "<word>" <file> # find word within a file 
+$ cat <file> | grep <word> 
+
 
 $ find <dir> -name <pattern> -exec <command> {} +
 
@@ -244,6 +254,16 @@ $ awk ‘ /io/{print $0}’ <file>   # prints lines with 'io'
 
 grep <pattern> <file>
 
+$ grep -i "<word>" <file> # case insentive 
+$ grep -v "<word>" <file> # show lines that does not contain the word 
+$ grep -n "<word>" <file> # display line numbers that contain the <word>
+$ grep -c "<word>" <file> # count no of matching lines or count no of occurrences 
+$ grep -r "<pattern>" <directory> # search tha pattern within multiple files recursively 
+$ grep -l "<pattern>" <directory> # print files with the match 
+$ grep -L "<pattern>" <directory> # print files without the match 
+
+$ grep -l <pattern> * # check in all the files in the directory 
+
 
 sed ‘ s/[ regex ]/[ replacement ]/[flags]'. <filename>
 
@@ -302,6 +322,7 @@ $ curl -u <username>:<password> -T <file_to_upload> <ftp_url>      # upload a fi
 $ curl --data "param1=&param2=" <url>
 $ curl -X "POST" -d "param1=John&param2=Doe" <url>
 
+
 $ wget <url>
 $ wget -O <file> <url>
 
@@ -318,6 +339,24 @@ $ arp -a/-e
 
 $ cat /etc/resolv.conf
 $ cat /etc/hosts 
+
+
+SSH
+$ sudo apt install openssh-client # installs ssh client o n the system
+
+$ ssh <user>@<ipaddress> # login to a remote server using IP address 
+$ $ ssh -p <port> <user>@<ipaddress> # specify a different port to connect to SSH server 
+
+SCP
+$ scp <username>@<ipaddress>:<filepath> <local_path> # copy file from remote server locally 
+
+$ scp -r <username>@<ipaddress>:<dir_path> <local_dir_path> # copy entire entire directory recursively from remote server locally 
+
+$ scp <file> <username>@<ipaddress>:<path> # copy file to the remote server 
+
+
+SFTP
+$ sftp <username>@<ipaddress>
 ______________________________________
 
 
@@ -398,6 +437,8 @@ $ fg <n>    # Brings job <n> to the foreground
 $ bg    # List stopped or background jobs,resume a stopped job in the background
 
 $ jobs       # Lists all processes that are running in the background
+
+$ top -u <username> # see the processes for a particular user 
 
 $ htop || sudo apt install htop && htop
 # checks if htop is installed if not installs and runs it 
@@ -655,16 +696,32 @@ PWD    # The path to your current working directory
 UID    # The current user’s unique identifier
 RANDOM # prints a random number 
 
-$ echo $<variable_name>  # display value of variables
+$ echo $<variable_name> # display value of variables
 
 $ echo $SHELL  # display value of SHELL variable 
 $ echo $PATH  # display value of PATH variable
 
-$ env   # prints all environment variables
+$ env  # prints all environment variables
+
 
+# Creating a Environment Variable
 $ export <var_name>=<var_value>
-$ printenv $<variable_name>
 
-$ source <file>
+$ printenv $<variable_name> # printing it's value 
+
+# To make a environment variable persistent Add a variable definition to the .bashrc file 
+
+$ nano -l ~/.bashrc
+ export <var_name>=<var_value>
+
+$ source ~/.bashrc # reloads the bashrc file 
+
+
+$ To make a variable accessible system wide add it to /etc/environment file
+
+$ sudo nano -l /etc/environment
+ export <var_name>=<var_value>
+
+$ source /etc/environment
 ______________________________________
 
