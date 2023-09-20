@@ -235,6 +235,7 @@ $ ls -al | wc -l # prints no of files in current directory
 
 $ cat /var/log/auth.log | less
 
+
 awk ‘{action}’ <file>
 awk ‘/regex pattern/{action}’ <file>
 
@@ -346,13 +347,23 @@ $ sudo apt install openssh-client # installs ssh client o n the system
 
 $ ssh <user>@<ipaddress> # login to a remote server using IP address 
 $ $ ssh -p <port> <user>@<ipaddress> # specify a different port to connect to SSH server 
+$ ssh <user>@<ipaddress> <command> # uses ssh to run a single command 
+$ ssh -i <private_key_file> <user>@<ipaddress> # connecting to a server using a private key 
+
+$ ssh-keygen -t rsa -b 4096 # creating a key pair 
+
 
 SCP
 $ scp <username>@<ipaddress>:<filepath> <local_path> # copy file from remote server locally 
 
-$ scp -r <username>@<ipaddress>:<dir_path> <local_dir_path> # copy entire entire directory recursively from remote server locally 
+$ scp -r <username>@<ipaddress>:<dir_path> <local_dir_path> # copy entire directory recursively from remote server locally 
+
+
+$ SCP -P <port> <file> <username>@<ipaddress>:<path> # uses different port than 22 to connect to the server and transfer files 
 
 $ scp <file> <username>@<ipaddress>:<path> # copy file to the remote server 
+
+$ scp -r <local_dir_path> <username>@<ipaddress>:<dir_path> # copy entire directory recursively to remote server
 
 
 SFTP
@@ -383,6 +394,8 @@ $ cat /etc/passwd     # this file has username and password
 $ cat /etc/shadow     # holds encrypted password of user accounts
 $ cat /etc/group      # contains group info for all accounts
 $ cat /etc/gshadow 
+
+$ cat /etc/passwd | awk -F':' '{print $1}' 
 
 $ sudo adduser <usermame>  # create a new user 
 $ sudo useradd <username> # lazy way of creating user 
@@ -530,18 +543,23 @@ $ sudo ufw status
 $ sudo ufw status numbered 
 $ sudo ufw delete <number>
 $ sudo ufw enable/disable/reload 
-$ sudo ufw allow/deny http/tcp or 80
-$ sudo ufw allow/deny ssh/https/ftp
+$ sudo ufw allow/deny/reject http/tcp or 80
+$ sudo ufw allow/deny/reject ssh/https/ftp
 
 $ sudo ufw allow/deny from <ipaddress>
 $ sudo ufw allow from <ipaddress> to any port <portno>
 $ sudo ufw allow from <ipaddress> to any port <portno> proto <protocol>
 $ sudo ufw allow from <ipaddress> to any port 22 proto tcp
+$ sudo ufw allow/deny from <subnet>
 
 $ sudo ufw default allow outgoing
 $ sudo ufw default deny incoming
-$ sudo ufw delete <Action> <To>
+
+$ sudo ufw delete <action> <to>
 $ sudo ufw delete allow 80
+
+$ sudo ufw deny/allow out <port>/tcp # deny or allow traffic for outgoing via <port>
+$ sudo ufw limit <port>/tcp
 
 $ sudo ufw app list
 $ sudo ufw reset  # resets all the rules in ufw 
@@ -679,7 +697,7 @@ $ source ~/.bashrc  # reloading .bashrc file
 
 $ alias <aliasname>="<alias_content>"
 Eg:- alias i="sudo apt install"
-     alias upg=”sudo apt update && sudo apt upgrade “
+     alias upg=”sudo apt update && sudo apt upgrade“
 
 $ unalias <alias_name> # delete aliases 
 
