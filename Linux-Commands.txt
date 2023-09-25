@@ -238,20 +238,21 @@ $ cat /var/log/auth.log | less
 
 awk ‘{action}’ <file>
 awk ‘/regex pattern/{action}’ <file>
-
-
-$ awk ‘{print $0}’ <file>     # print all the contents of a file
-$ awk ‘{print NR,$0}’ <file>  # line-number count
-$ awk ‘{print $1}’ <file>     # print specific column
+
+$ awk ‘{print $0}’ <file>  # print all the contents of a file similar to cat 
+$ awk ‘{print NR,$0}’ <file> # line number count with the line 
+$ awk ‘{print $1}’ <file>    # print specific column
 $ awk ‘{print $1, $4}’ <file> # print 2 columns
-$ awk ‘{print $NF}’ <file>    # print last column
+$ awk ‘{print $NF}’ <file> # print last column
+$ awk -F "<delimiter>" "{print $0}" <file>
+$ awk 'length($0) > 10' <file> # print if length of line is greater than 10 
 
-$ awk ‘{print $1}’ <file> | head -1 
-# print specific line of a column
 $ awk ‘/^O/’ <file> 
 $ awk ‘!/0$/’ <file> 
-$ awk ‘ /io/{print $0}’ <file>   # prints lines with 'io' 
+$ awk ‘ /io/{print $0}’ <file> # prints lines with 'io' 
 
+$ awk '{if($NF == "<something>") print $0} # prints the whole line if last column is equal to something 
+$ awk 'END {print NR}' <file> # prints no of files in a file 
 
 grep <pattern> <file>
 
@@ -266,10 +267,10 @@ $ grep -L "<pattern>" <directory> # print files without the match
 $ grep -l <pattern> * # check in all the files in the directory 
 
 
-sed ‘ s/[ regex ]/[ replacement ]/[flags]'. <filename>
+sed ‘s/[regex]/[replacement]/[flags]'  <filename>
 
 
-$ sed ‘s/cat/concatenate/g’ <file>   # replaces every word 'cat' with 'concatenate' 
+$ sed ‘s/cat/concatenate/g’ <file>  # replaces every word 'cat' with 'concatenate' 
 
 $ sed ‘2,3s/cat/concatenate/’ <file>   # replace 2nd and 3rd 'cat' with 'concatenate' 
 
@@ -352,6 +353,8 @@ $ ssh -i <private_key_file> <user>@<ipaddress> # connecting to a server using a 
 
 $ ssh-keygen -t rsa -b 4096 # creating a key pair 
 
+$ ssh-copy-id -i <public_key> <user>@<ipaddress> # copies the public key file to the server 
+
 
 SCP
 $ scp <username>@<ipaddress>:<filepath> <local_path> # copy file from remote server locally 
@@ -395,7 +398,7 @@ $ cat /etc/shadow     # holds encrypted password of user accounts
 $ cat /etc/group      # contains group info for all accounts
 $ cat /etc/gshadow 
 
-$ cat /etc/passwd | awk -F':' '{print $1}' 
+$ cat /etc/passwd | awk -F ':' '{print $1}' # prints all the users on the system 
 
 $ sudo adduser <usermame>  # create a new user 
 $ sudo useradd <username> # lazy way of creating user 
