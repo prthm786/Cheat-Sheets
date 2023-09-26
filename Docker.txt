@@ -17,6 +17,8 @@ Search image on docker hub
 $ docker search <search_term> --no-trunc
 $ docker search <search_term> --limit <no> 
 $ docker search <search_term> --filter stars=<no>
+$ docker search --filter is-official=true <search_term>
+$ docker search --filter is-official=true --filter stars=<no> <search_term>
 
 
 # Pull an image from docker hub 
@@ -27,13 +29,10 @@ $ docker ps --no-trunc
 # List of all containers both stopped and running 
 $ docker ps -a 
 $ docker ps --size 
-
-
-# Create and run a container 
-$ docker run --name <container> <image>   
- 
-# Create a container to run it as a daemon(in background) [Detached Mode]
-$ docker run -dt --name <container> <image>    
+$ docker ps --filter "name=<container_name>"
+$ docker ps --filter status=running
+$ docker ps --filter volume=<volume_name>
+$ docker ps --filter ancestor=<image>
 
 
 # Interact with the container, run cmds inside a container 
@@ -51,7 +50,7 @@ $ docker container attach <container>
 
 
 # Run a container and publishing a port 
-$ docker run -td -p <host_port>:<container_port> <image> 
+$ docker run -td -p <host_port>:<container_port> --name <container> <image> 
 
 # Run a container interactively and remove after exiting 
 $ docker container run --rm -it <image> 
@@ -75,6 +74,7 @@ $ docker logs -n <no> <container> # no of lines to show from the end
 $ docker start <container>
 $ docker stop <container>
 $ docker restart <container>
+
 
 # Create an new image(custom image) from the container 
 $ docker commit <container_hash> <img_name>:<version>
@@ -104,7 +104,8 @@ $ docker rename <container_name> <new_container_name>
 $ docker container prune 
 
 $ docker stats --no-trunc 
-$ docker stats -a --no-trunc
+$ docker stats -a 
+
 
 
 ############ Images ############
@@ -142,6 +143,8 @@ $ docker load < <file>.tar.gz
 
 # Get information about an image 
 $ docker image inspect <image_name>
+
+$ docker image push <image_repo>:<image_tag>
 __________________________________
 
 
@@ -155,22 +158,37 @@ __________________________________
 ## IPvlan
 ## None 
 
+## Docker creates docker0 bridge for the default network  
+
 $ docker network --help 
 
 # List of network 
-$ docker network ls     
+$ docker network ls    
+$ docker network ls --filter driver=bridge
+$ docker network ls --filter type=custom
+
+
+# Inspecting the default bridge network 
+$ docker network inspect bridge 
 
 # Create a new user defined Bridge network  
-$ docker network create <networkname>     
+$ docker network create <networkname> 
+$ docker network create --driver=bridge --subnet=<subnet> <networkname>
+## New virtual bridge is created      
+## We get container-container dns in user defined bridge network only not in the default bridge 
 
 # Removes network 
-$ docker network rm <networkname>
+$ docker network rm <networkname> -f 
+
+# Deletes all the custom made networks 
+$ docker network rm `docker network ls --filter type=custom -q`
 
 # Removes unused networks 
-$ docker network prune 
+$ docker network prune -f 
 
 # Inspecting network 
-$ docker inspect <networkname> 
+$ docker network inspect <networkname> 
+$ docker network inspect <networkname> -v 
 
 # Attaching a container to a network 
 $ docker network connect <network> <container>
@@ -185,12 +203,12 @@ $ docker run -itd --rm --network <network> --name <container> <image>
 
 # Creating a container in host network 
 $ docker run -itd --rm --network host --name <container> nginx   
-
+## No exporting of port required in host network, it is running as an applications on the host itself not as an container 
 
 # Creating a Macvlan network 
 $ docker network create -d macvlan --subnet <your_subnet> --gatwway <your_gateway> -o parent=<your_host_interface> <networkname>
 
-# Creating a container in macvlan network 
+# Creating a container in Macvlan network 
 $ docker run -itd --rm --network <macvlan_network> --ip <ip_address>--name <container> <image>   
 
 
@@ -223,6 +241,8 @@ $ docker volume create <vol_name>
 
 # Listing of Volumes
 $ docker volume ls
+$ docker volume ls -f driver=local
+$ docker volume ls -f name=<volume_name>
 
 # Get information about a volume 
 $ docker volume inspect <vol_name>
@@ -273,4 +293,4 @@ $ curl localhost:9000
 # Loging in to docker hub 
 $ docker login 
 
-$ docker image push <image_repo>:<image_tag>
+
