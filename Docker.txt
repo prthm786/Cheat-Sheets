@@ -13,24 +13,34 @@ $ docker info
 $ docker system prune 
 
 
+Search image on docker hub 
+$ docker search <search_term> --no-trunc
+$ docker search <search_term> --limit <no> 
+$ docker search <search_term> --filter stars=<no>
+
+
 # Pull an image from docker hub 
 $ docker pull <image_name>   
 
 # List running containers 
-$ docker ps 
+$ docker ps --no-trunc
 # List of all containers both stopped and running 
-$ docker ps -a
+$ docker ps -a 
+$ docker ps --size 
 
-# Create a container 
+
+# Create and run a container 
 $ docker run --name <container> <image>   
  
-# Create a container to run it as a daemon(in background)
+# Create a container to run it as a daemon(in background) [Detached Mode]
 $ docker run -dt --name <container> <image>    
+
 
 # Interact with the container, run cmds inside a container 
 $ docker exec -it <container> <command> <arg>
 $ docker exec -it --privileged <container> <command> 
 
+$ docker exec -it -w <working_dir> <container> <command> <arg>
 
 # Get a bash shell of the container 
 $ docker exec -it <container> bash 
@@ -60,21 +70,21 @@ $ docker port <container>
 $ docker logs <container>
 $ docker logs --details <container>
 $ docker logs -f <container>  # follow logs 
-$ docker logs -n <no> <container> # no of lines   to show 
+$ docker logs -n <no> <container> # no of lines to show from the end 
 
 $ docker start <container>
 $ docker stop <container>
 $ docker restart <container>
 
 # Create an new image(custom image) from the container 
-$ docker commit <container> <img_name>:<version>
+$ docker commit <container_hash> <img_name>:<version>
 
 
 # Copy Files from container to local machine 
-$ docker cp <container_hash>:<source> <target>
+$ docker cp <container_hash>:<source> <local_path_dest>
 
 # Copy Files to container from local machine
-$ docker cp <source> <container_hash>:<target>
+$ docker cp <local_path_src> <container_hash>:<target>
 
 
 # Removes Stopped Container
@@ -83,16 +93,21 @@ $ docker rm <container>
 # Remove running container 
 $ docker rm -f <container>  
 
-# All removes anonymous volumes  
+# Removes all anonymous volumes with the container 
 $ docker rm -v <container>
+
+
+# Renames container 
+$ docker rename <container_name> <new_container_name>
 
 # Removes all stopped containers 
 $ docker container prune 
 
-$ docker stats 
+$ docker stats --no-trunc 
+$ docker stats -a --no-trunc
 
 
-############ Images #############
+############ Images ############
 
 # Downloads an image from remote registry 
 $ docker pull <image>
@@ -101,22 +116,29 @@ $ docker pull <image>
 $ docker images or docker image ls 
 
 # Removes image 
-$ docker image rm <image_name>
+$ docker image rm <image_name> -f
 or 
-$ docker rmi <image>
+$ docker rmi <image> -f 
 
 # Removes all unused images 
 $ docker image prune 
+$ docker image prune -f 
 
 # Saves image into a tar archive 
-$ docker image save <image_name> -o <file>
+$ docker image save <image_name> -o <file>.tar 
 or
-$ docker save <image_name> -o <file>
+$ docker save <image_name> -o <file>.tar
 
-# Loads images from tar archive 
-$ docker image load -i <file>
+Compress the image tar using gzip
+$ docker save <image_name> | gzip > <file>.tar.gz
+
+# Loads image from tar archive 
+$ docker image load -i <file>.tar
 or 
-$ docker load -i <file> 
+$ docker load -i <file>.tar
+
+Load the image from the compressed tar archive 
+$ docker load < <file>.tar.gz
 
 # Get information about an image 
 $ docker image inspect <image_name>
@@ -124,7 +146,7 @@ __________________________________
 
 
 
-############## NETWORKING ###############
+############## NETWORKING ##############
 # Network Types
 ## Bridge 
 ## User defined Bridge 
@@ -206,10 +228,10 @@ $ docker volume ls
 $ docker volume inspect <vol_name>
 
 # Remove a volume 
-$ docker volume rm <vol_name>
+$ docker volume rm <vol_name> -f 
 
 # remove all unused volumes 
-$ docker volume prune 
+$ docker volume prune -f 
 
 $ docker run -d \
   --name devtest \
@@ -219,7 +241,7 @@ __________________________________
 
 
 
-############### Dockerfile ####################
+############### Dockerfile ###############
 $ touch index.html
 <html>
  <body>
