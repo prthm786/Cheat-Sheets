@@ -158,7 +158,10 @@ __________________________________
 ## IPvlan
 ## None 
 
-## Docker creates docker0 bridge for the default network  
+## Docker creates docker0 virtual bridge to use with the default network  
+
+## Containers on the same network are discoverable (able to ping each other) and are isolated from other containers from different networks 
+## Containers on user defined bridge network can not only comunicate using ip but also with hostname 
 
 $ docker network --help 
 
@@ -171,11 +174,12 @@ $ docker network ls --filter type=custom
 # Inspecting the default bridge network 
 $ docker network inspect bridge 
 
+
 # Create a new user defined Bridge network  
 $ docker network create <networkname> 
 $ docker network create --driver=bridge --subnet=<subnet> <networkname>
 ## New virtual bridge is created      
-## We get container-container dns in user defined bridge network only not in the default bridge 
+## We get container-container dns in user defined bridge network only but not in the default bridge network
 
 # Removes network 
 $ docker network rm <networkname> -f 
@@ -205,26 +209,32 @@ $ docker run -itd --rm --network <network> --name <container> <image>
 $ docker run -itd --rm --network host --name <container> nginx   
 ## No exporting of port required in host network, it is running as an applications on the host itself not as an container 
 
+
 # Creating a Macvlan network 
 $ docker network create -d macvlan --subnet <your_subnet> --gatwway <your_gateway> -o parent=<your_host_interface> <networkname>
 
 # Creating a container in Macvlan network 
-$ docker run -itd --rm --network <macvlan_network> --ip <ip_address>--name <container> <image>   
+$ docker run -itd --rm --network <macvlan_network> --ip <ip_address> --name <container> <image>   
 
 
 # Creating a IPvlan network 
 $ docker network create -d ipvlan --subnet <your_subnet> --gatwway <your_gateway> -o parent=<your_host_interface> <networkname>
 
 # Creating a container in ipvlan network 
-$ docker run -itd --rm --network <ipvlan_network> --ip <ip_address>--name <container> <image>
+$ docker run -itd --rm --network <ipvlan_network> --ip <ip_address> --name <container> <image>
 
 
 Creating a container in none network 
 $ docker run -itd --rm --network none --name <container> <image> 
+## To disable any type of networking in the container use 'none' network
 
 
 # Remove a container from a network
+$ docker network disconnect <network> <container>
+
+# Removing container from the bridge network 
 $ docker network disconnect bridge <container>
+
 __________________________________
 
 
@@ -253,10 +263,10 @@ $ docker volume rm <vol_name> -f
 # remove all unused volumes 
 $ docker volume prune -f 
 
-$ docker run -d \
-  --name devtest \
-  -v myvol2:/app \
-  nginx:latest
+$ docker run -d --name <container> -v <volume_name>:<container_path> <image>
+OR
+$ docker run -d --name <container> -v <local_path>:<container_path> <image>
+
 __________________________________
 
 
