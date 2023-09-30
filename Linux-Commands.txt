@@ -240,16 +240,19 @@ awk ‘{action}’ <file>
 awk ‘/regex pattern/{action}’ <file>
 
 $ awk ‘{print $0}’ <file>  # print all the contents of a file similar to cat 
-$ awk ‘{print NR,$0}’ <file> # line number count with the line 
-$ awk ‘{print $1}’ <file>    # print specific column
+$ awk ‘{print NR,$0}’ <file>  # line number count with the line 
+$ awk ‘{print $1}’ <file>     # print specific column
 $ awk ‘{print $1, $4}’ <file> # print 2 columns
 $ awk ‘{print $NF}’ <file> # print last column
 $ awk -F "<delimiter>" "{print $0}" <file>
 $ awk 'length($0) > 10' <file> # print if length of line is greater than 10 
+$ awk 'NR==3, NR==6 {print NR,$0}' <file> # prints the line between  line 3 and 6 
+$ awk '{print NR " - " $1 }' <file>
 
-$ awk ‘/^O/’ <file> 
+$ awk ‘/^O/’ <file>
 $ awk ‘!/0$/’ <file> 
-$ awk ‘ /io/{print $0}’ <file> # prints lines with 'io' 
+$ awk ‘/<pattern>/ {print $0}’ <file> # prints lines with <pattern>
+$ awk '/alias/ {print}' .bashrc # prints lines that contains 'alias' 
 
 $ awk '{if($NF == "<something>") print $0} # prints the whole line if last column is equal to something 
 $ awk 'END {print NR}' <file> # prints no of files in a file 
@@ -275,6 +278,7 @@ $ sed ‘s/cat/concatenate/g’ <file>  # replaces every word 'cat' with 'concat
 $ sed ‘2,3s/cat/concatenate/’ <file>   # replace 2nd and 3rd 'cat' with 'concatenate' 
 
 $ sed ‘3d’ <file>   # delete 3rd line 
+
 ______________________________________
 
 
@@ -400,13 +404,21 @@ $ cat /etc/gshadow
 
 $ cat /etc/passwd | awk -F ':' '{print $1}' # prints all the users on the system 
 
-$ sudo adduser <usermame>  # create a new user 
+$ sudo adduser <usermame> # create a new user 
 $ sudo useradd <username> # lazy way of creating user 
 $ sudo useradd <username> -m # createa new user and adds home directory for the user 
 
 
-$ sudo passwd <user>  # change password for <user>
+$ sudo passwd <user> # change password for <user>
 $ sudo passwd  # change password for current user 
+$ sudo passwd -l <user> # lock user out 
+$ sudo passwd -u <user> # unlocks the user 
+$ sudo passwd -x <days> <user> # days for which password will be valid 
+$ sudo passwd -n <days> <user> # minimum days for user cannot change it's password 
+$ sudo passwd -d <user> # to delete password for the user 
+
+$ echo "username:new_password" | sudo chpasswd # change user password 
+
 
 $ su - <user>   # switches to <user>
 $ su -          # switches to root, require root credentials 
@@ -429,6 +441,7 @@ $ sudo userdel <user> # Deletes a user account and related file
 $ gpasswd -d <username> <groupname>
 
 $ sudo visudo 
+
 ______________________________________
 
 
@@ -437,7 +450,7 @@ ______________________________________
 
 $ ps   
 $ top 
-$ ps -aux 
+$ ps -aux or ps aux 
 $ kill -l 
 $ kill <processid> 
 $ kill <processname>
@@ -458,6 +471,7 @@ $ top -u <username> # see the processes for a particular user
 
 $ htop || sudo apt install htop && htop
 # checks if htop is installed if not installs and runs it 
+
 ______________________________________
 
 
@@ -509,6 +523,7 @@ $ sudo snap list # list of packages install using snap
 $ sudo snap enable/disable <package>
 $ sudo snap remove <package> # removed the package from the system 
 $ sudo snap remove <package> --purge
+
 ______________________________________
 
 
@@ -517,8 +532,8 @@ ______________________________________
 
 $ cat /etc/services 
 
-lib/systemd     # systemctl
-etc/init.d      # service
+/lib/systemd     # systemctl
+/etc/init.d      # service
 
 $ sudo systemctl status <servicename>
 $ sudo systemctl start <servicename>
@@ -530,6 +545,7 @@ $ sudo systemctl is-active <servicename>
 $ sudo systemctl is-enabled <servicename>
 $ sudo systemctl list-units --all 
 $ sudo systemctl list-units --type=service 
+
 ______________________________________
 
 
@@ -567,6 +583,7 @@ $ sudo ufw limit <port>/tcp
 $ sudo ufw app list
 $ sudo ufw reset  # resets all the rules in ufw 
 $ sudo ufw allow/deny <app> # allow or deny an application through ufw 
+
 ______________________________________
 
 
@@ -651,9 +668,15 @@ $ man zip
 
 $ zip <file>.zip <files_to_be_zipped>
 $ zip <file>.zip <folder>
+$ zip -v <file>.zip <folder>
+$ zip -r <file>.zip <directory> # creates a zip file recursively 
+$ zip <file>.zip <folder> -x <file_to_exclude>
+$ zip -d <file>.zip <files_to_delete> # deletes a file from within the archive 
+$ zip -u <file>.zip <files_to_add> 
 
 $ unzip <file>.zip
 $ unzip <file>.zip -d <destination_path>
+
 ______________________________________
 
 
@@ -682,6 +705,7 @@ $ lastb -aF
 $ man lastlog
 $ lastlog # used to see the last login of a user /var/log/lastlog
 $ lastlog -u <user>
+
 ______________________________________
 
 
@@ -744,5 +768,6 @@ $ sudo nano -l /etc/environment
  export <var_name>=<var_value>
 
 $ source /etc/environment
+
 ______________________________________
 
