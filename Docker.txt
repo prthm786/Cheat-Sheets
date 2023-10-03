@@ -35,6 +35,35 @@ $ docker ps --filter volume=<volume_name>
 $ docker ps --filter ancestor=<image>
 
 
+Creating and running a Container in foreground 
+$ docker run --name <container> <image> 
+
+Creating and running a Container in detached mode (background)
+$ docker run -d --name <container> <image>
+
+# Run a container and publish a port 
+$ docker run -dtp <host_port>:<container_port> --name <container> <image> 
+$ docker run -dp 127.0.0.1:<host_port>:<container_port> --name <container> <image> 
+
+# Run a container interactively and remove after quiting the container 
+$ docker run --rm -it <image>
+ 
+# Running a container with a specific ip address 
+$ docker run -d --ip <ip_address> --name <container> <image> 
+
+$ docker run -it --privileged --name <container> <image> 
+
+# Running a container with a restart policy always 
+$ docker run --restart=always --name <container> <image> 
+
+# Running a container and adding hosts to container /etc/hosts file 
+$ docker run -it --rm --add-host=<host_name>:<ip_address> <image>
+
+# Running container with a external devices to the container like usb sticks etc 
+$ docker run -it --rm --device=<device_path>:<device_path_in_container> <image> 
+$ docker run -it --rm --device=/dev/sda:/dev/xvdc ubuntu 
+
+
 # Interact with the container, run cmds inside a container 
 $ docker exec -it <container> <command> <arg>
 $ docker exec -it --privileged <container> <command> 
@@ -48,12 +77,6 @@ $ docker attach <container>
 or 
 $ docker container attach <container>
 
-
-# Run a container and publishing a port 
-$ docker run -td -p <host_port>:<container_port> --name <container> <image> 
-
-# Run a container interactively and remove after exiting 
-$ docker container run --rm -it <image> 
 
 
 # Get information about the container
@@ -145,6 +168,7 @@ $ docker load < <file>.tar.gz
 $ docker image inspect <image_name>
 
 $ docker image push <image_repo>:<image_tag>
+
 __________________________________
 
 
@@ -165,7 +189,7 @@ __________________________________
 
 $ docker network --help 
 
-# List of network 
+# List networks 
 $ docker network ls    
 $ docker network ls --filter driver=bridge
 $ docker network ls --filter type=custom
@@ -180,6 +204,11 @@ $ docker network create <networkname>
 $ docker network create --driver=bridge --subnet=<subnet> <networkname>
 ## New virtual bridge is created      
 ## We get container-container dns in user defined bridge network only but not in the default bridge network
+
+
+# Creating a user defined network with a subnet and attaching a container to this network with a specific ip address 
+$ docker network create --subnet 192.12.12.0/24 newnet
+$ docker run -itd --network=newnet --ip=192.12.12.69 ubuntu
 
 # Removes network 
 $ docker network rm <networkname> -f 
@@ -202,11 +231,11 @@ $ docker network disconnect <network> <container>
 
 
 # Create a new container with a specified user defined bridge network 
-$ docker run -itd --rm --network <network> --name <container> <image>    
+$ docker run -it --rm --network <network> --name <container> <image>    
 
 
 # Creating a container in host network 
-$ docker run -itd --rm --network host --name <container> nginx   
+$ docker run -it --rm --network host --name <container> nginx   
 ## No exporting of port required in host network, it is running as an applications on the host itself not as an container 
 
 
@@ -214,18 +243,18 @@ $ docker run -itd --rm --network host --name <container> nginx
 $ docker network create -d macvlan --subnet <your_subnet> --gatwway <your_gateway> -o parent=<your_host_interface> <networkname>
 
 # Creating a container in Macvlan network 
-$ docker run -itd --rm --network <macvlan_network> --ip <ip_address> --name <container> <image>   
+$ docker run -it --rm --network <macvlan_network> --ip <ip_address> --name <container> <image>   
 
 
 # Creating a IPvlan network 
 $ docker network create -d ipvlan --subnet <your_subnet> --gatwway <your_gateway> -o parent=<your_host_interface> <networkname>
 
 # Creating a container in ipvlan network 
-$ docker run -itd --rm --network <ipvlan_network> --ip <ip_address> --name <container> <image>
+$ docker run -it --rm --network <ipvlan_network> --ip <ip_address> --name <container> <image>
 
 
 Creating a container in none network 
-$ docker run -itd --rm --network none --name <container> <image> 
+$ docker run -it --rm --network none --name <container> <image> 
 ## To disable any type of networking in the container use 'none' network
 
 
@@ -239,9 +268,16 @@ __________________________________
 
 
 
-############ Volumes ##############
+######### Persistent Storage #########
 
-For persistent storage
+Volumes
+Bind Mounts 
+
+## With bind mounts -> a file or directory on the host machine is mounted into a container. The file or directory is referenced by its absolute path on the host machine. Bind mount depends on the directory structure. 
+
+## With Volumes -> a new directory is created within Docker's storage directory on the host machine, and Docker manages that directory's contents.
+
+For persistent storage flushing volumes 
 /var/lib/docker/volumes
 
 $ docker volume --help
@@ -249,10 +285,10 @@ $ docker volume --help
 # Creating a volume 
 $ docker volume create <vol_name>
 
-# Listing of Volumes
+# Listing Volumes
 $ docker volume ls
-$ docker volume ls -f driver=local
-$ docker volume ls -f name=<volume_name>
+$ docker volume ls --filter driver=local
+$ docker volume ls --filter name=<volume_name>
 
 # Get information about a volume 
 $ docker volume inspect <vol_name>
@@ -263,9 +299,15 @@ $ docker volume rm <vol_name> -f
 # remove all unused volumes 
 $ docker volume prune -f 
 
+Using volumes
 $ docker run -d --name <container> -v <volume_name>:<container_path> <image>
 OR
-$ docker run -d --name <container> -v <local_path>:<container_path> <image>
+$ docker run -d  --name <container> --mount 'type=volume,source=<volume_name>,target=<container_path>' <image>
+
+Using bind mounts
+$ docker run -d --name <container> --mount 'type=bind,source=<host_path>,target=<container_path>' <image>
+OR
+$ docker run -d --name <container> -v <host_path>:<container_path> <image>
 
 __________________________________
 
