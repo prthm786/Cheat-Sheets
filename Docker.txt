@@ -22,7 +22,12 @@ $ docker search --filter is-official=true --filter stars=<no> <search_term>
 
 
 # Pull an image from docker hub 
-$ docker pull <image_name>   
+$ docker pull <image_name>
+$ docker pull <image_name>:<version>
+$ docker pull ubuntu
+$ docker pull alpine
+$ docker pull nginx
+
 
 # List running containers 
 $ docker ps --no-trunc
@@ -35,21 +40,28 @@ $ docker ps --filter volume=<volume_name>
 $ docker ps --filter ancestor=<image>
 
 
-Creating and running a Container in foreground 
-$ docker run --name <container> <image> 
+# Running a container and executing a command 
+$ docker run <image> <command> 
+$ docker run ubuntu ls 
 
-Creating and running a Container in detached mode (background)
-$ docker run -d --name <container> <image>
+# Creating and running a container in foreground 
+$ docker run -it --name <container> <image> 
+
+# Creating and running a Container in detached mode (background)
+$ docker run -dt --name <container> <image>
+
+# Creating a Ubuntu container 
+$ docker run -dt --name ubuntucont ubuntu
 
 # Run a container and publish a port 
 $ docker run -dtp <host_port>:<container_port> --name <container> <image> 
 $ docker run -dp 127.0.0.1:<host_port>:<container_port> --name <container> <image> 
 
 # Run a container interactively and remove after quiting the container 
-$ docker run --rm -it <image>
+$ docker run -it --rm <image>
  
 # Running a container with a specific ip address 
-$ docker run -d --ip <ip_address> --name <container> <image> 
+$ docker run -dt --ip <ip_address> --name <container> <image> 
 
 $ docker run -it --privileged --name <container> <image> 
 
@@ -78,15 +90,19 @@ or
 $ docker container attach <container>
 
 
-
 # Get information about the container
+$ docker inspect <container>
+$ docker inspect --size <container>
 $ docker container inspect <container>
+
 
 # Show running processes inside container 
 $ docker top <container>
 
+
 # Show port mapping of a container 
 $ docker port <container>
+
 
 # Checks logs of container 
 $ docker logs <container>
@@ -94,6 +110,8 @@ $ docker logs --details <container>
 $ docker logs -f <container>  # follow logs 
 $ docker logs -n <no> <container> # no of lines to show from the end 
 
+
+# Starting, stopping or restarting a container 
 $ docker start <container>
 $ docker stop <container>
 $ docker restart <container>
@@ -110,6 +128,10 @@ $ docker cp <container_hash>:<source> <local_path_dest>
 $ docker cp <local_path_src> <container_hash>:<target>
 
 
+# Renames container 
+$ docker rename <container_name> <new_container_name>
+
+
 # Removes Stopped Container
 $ docker rm <container>
 
@@ -119,16 +141,15 @@ $ docker rm -f <container>
 # Removes all anonymous volumes with the container 
 $ docker rm -v <container>
 
-
-# Renames container 
-$ docker rename <container_name> <new_container_name>
-
 # Removes all stopped containers 
 $ docker container prune 
+
+$ docker kill <container>
 
 $ docker stats --no-trunc 
 $ docker stats -a 
 
+$ docker diff <container>
 
 
 ############ Images ############
@@ -172,10 +193,9 @@ $ docker image push <image_repo>:<image_tag>
 __________________________________
 
 
-
 ############## NETWORKING ##############
 # Network Types
-## Bridge 
+## Default Bridge 
 ## User defined Bridge 
 ## Host 
 ## Macvlan
@@ -206,18 +226,13 @@ $ docker network create --driver=bridge --subnet=<subnet> <networkname>
 ## We get container-container dns in user defined bridge network only but not in the default bridge network
 
 
+# Create a new container with a specified user defined bridge network 
+$ docker run -td --rm --network <network> --name <container> <image>
+
+
 # Creating a user defined network with a subnet and attaching a container to this network with a specific ip address 
 $ docker network create --subnet 192.12.12.0/24 newnet
 $ docker run -itd --network=newnet --ip=192.12.12.69 ubuntu
-
-# Removes network 
-$ docker network rm <networkname> -f 
-
-# Deletes all the custom made networks 
-$ docker network rm `docker network ls --filter type=custom -q`
-
-# Removes unused networks 
-$ docker network prune -f 
 
 # Inspecting network 
 $ docker network inspect <networkname> 
@@ -229,13 +244,13 @@ $ docker network connect <network> <container>
 # Removing a container from a network 
 $ docker network disconnect <network> <container>
 
-
-# Create a new container with a specified user defined bridge network 
-$ docker run -it --rm --network <network> --name <container> <image>    
+# Removing container from the default bridge network 
+$ docker network disconnect bridge <container> 
 
 
 # Creating a container in host network 
-$ docker run -it --rm --network host --name <container> nginx   
+$ docker run -td --rm --network host --name <container> <image>
+$ docker run -d --rm --network host nginx   
 ## No exporting of port required in host network, it is running as an applications on the host itself not as an container 
 
 
@@ -243,26 +258,29 @@ $ docker run -it --rm --network host --name <container> nginx
 $ docker network create -d macvlan --subnet <your_subnet> --gatwway <your_gateway> -o parent=<your_host_interface> <networkname>
 
 # Creating a container in Macvlan network 
-$ docker run -it --rm --network <macvlan_network> --ip <ip_address> --name <container> <image>   
+$ docker run -td --rm --network <macvlan_network> --ip <ip_address> --name <container> <image>   
 
 
 # Creating a IPvlan network 
 $ docker network create -d ipvlan --subnet <your_subnet> --gatwway <your_gateway> -o parent=<your_host_interface> <networkname>
 
 # Creating a container in ipvlan network 
-$ docker run -it --rm --network <ipvlan_network> --ip <ip_address> --name <container> <image>
+$ docker run -td --rm --network <ipvlan_network> --ip <ip_address> --name <container> <image>
 
 
 Creating a container in none network 
-$ docker run -it --rm --network none --name <container> <image> 
+$ docker run -td --rm --network none --name <container> <image> 
 ## To disable any type of networking in the container use 'none' network
 
 
-# Remove a container from a network
-$ docker network disconnect <network> <container>
+# Removes network 
+$ docker network rm <networkname> -f 
 
-# Removing container from the bridge network 
-$ docker network disconnect bridge <container>
+# Deletes all the custom made networks 
+$ docker network rm `docker network ls --filter type=custom -q`
+
+# Removes unused networks 
+$ docker network prune -f 
 
 __________________________________
 
@@ -341,8 +359,7 @@ $ curl localhost:9000
 
 
 
-
-# Loging in to docker hub 
+# Login to docker hub 
 $ docker login 
 
-
+$ docker logout 
