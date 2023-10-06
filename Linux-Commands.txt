@@ -15,6 +15,7 @@ Ctrl + R -> search
 F11 -> Full screen mode 
 Ctrl + C -> stops the execution of process
 Ctrl + Z -> Backgrounds the process 
+
 ______________________________________
 
 
@@ -33,6 +34,7 @@ $ time <command> # returns the time the command took to run
 # reset 
 $ reboot # restarts the system 
 $ shutdown
+$ sleep <seconds> 
 
 $ ls /bin | grep <search>  # check for command binaries 
 
@@ -48,7 +50,7 @@ $ echo -e "<some_text>" # this option enable interpretation of escape sequences
 
 Running Multiple Commands 
 
-$ <command1> ; <command2>
+$ <command1> ; <command2> # always runs both commands irrespective of the result of first command 
 $ <command1> && <command2> # runs second command only if first command is successful 
 $ <command1> || <command2> # runs second command if first command fails
 
@@ -58,20 +60,31 @@ $ Eg:- bat <file> || sudo apt install bat && bat <file> # using logical opersto
 
 ############# System Info #############
 $ hostname 
-$ uname -a   show kernel info 
+
+$ uname 
+$ uname -m 
+$ uname -a  # show kernel info 
 
 $ cat /etc/os-release 
 $ cat /proc/cpuinfo  # Cpu information
 $ cat proc/meminfo   # Memory information
-$ free    # Show memory and swap usage
+
+$ man free 
+$ free  # Show memory and swap usage
 $ free -h 
 
-$ df      # Show the disk usage 
+$ man df 
+$ df --help
+$ df  # Show the disk usage 
 $ df -h 
 
-$ du      # Show directory space usage
+$ man du 
+$ du --help
+$ du  # Show directory space usage
 $ du -h 
-$ uptime 
+
+$ man uptime 
+$ uptime # shows the time since last boot 
 $ uptime | awk '{print $3}'
 
 $ lsblk # list block devices 
@@ -86,6 +99,7 @@ $ sudo lshw -html >> report.html # export all the info in html file
 $ sudo lshw -short
 
 $ aplay -l   
+
 ______________________________________
 
 
@@ -126,8 +140,13 @@ Redirection/Data Streams
 Eg:- find /etc -type f 1> ~/results.txt 2> ~/errors.txt
 
 
+$ man ls 
+$ ls --help
 $ ls            # list files in directory 
 $ ls -al        # list all files 
+
+$ man cd
+$ cd --help 
 $ cd <directory>
 $ cd ..   # cd into the parent directory 
 $ cd -    # cd into the previous directory 
@@ -138,6 +157,8 @@ $ pwd     # print current directory
 $ pushd <directory>
 $ popd 
 
+$ man touch
+$ touch --help
 $ touch <file>   # creating empty file
 $ touch <file1> <file2> 
 $ touch file{1..10} # creating 10 files
@@ -145,25 +166,40 @@ $ touch file{1..10} # creating 10 files
 $ echo "<content>" > filename.txt   # creating a file with content 
 $ echo "<content>" >> filename.txt  # appending to a file 
 
+$ man mkdir 
+$ mkdir --help
 $ mkdir <dir_name> # creating directory 
+$ mkdir dir{1..5} # makes 5 directories of name dir1, dir2,...dir5
 
+$ man cp
+$ cp --help
 $ cp <file> <destination>/<file> # copies file into the destination
 $ cp -i <file> <destination> # interactive copy 
 $ cp -r <source_path> <destination> # copies the entire folder or multiple files recursively 
 $ cp -v <file> <destination> # verbose copy 
 
+$ man mv 
+$ mv --help
 $ mv <file> <destination> 
 $ mv -v <file> <destination> 
-$ mv -i <file> <destination>  
- 
+$ mv -i <file> <destination>   
 $ mv <filename> <newfilename> # renames file 
 
-$ tail -n <file>   # last n lines of file 
-$ tail -f <file>   # follows the file for updates 
-$ head -n <file>   # first n lines of file 
+$ man tail 
+$ tail --help
+$ tail <file> # shows last 5 lines of a file 
+$ tail -n <file> # last n lines of file 
+$ tail -f <file>  # follows the file for updates 
 
-$ cat <file>     # list all content of a file
-$ cat > <file>   # places standard input to a file until Ctrl + C is pressed 
+$ man head 
+$ head --help
+$ head <file> # shows first 5 lines of a file 
+$ head -n <file>  # first n lines of file 
+
+$ man cat 
+$ cat --help
+$ cat <file>  # list all content of a file
+$ cat > <file>  # places standard input to a file until Ctrl + C is pressed 
 $ cat << EOF > <file>   # places all the input  until 'EOF' is received
 $ cat -n <file>   # show line numbers 
 $ cat <file1> <file2> > <newfile> # create a new file with content of both files <file1> and <file2> 
@@ -171,28 +207,30 @@ $ cat ./*.txt > merge.txt  # combines the contents of all the text files into on
 
 $ nano || sudo apt install nano # check for nano and install if it is not found 
 
-$ nano <file>        # edit contents of a file
-$ nano -l <file>     # display line number in file 
- 
-$ rmdir <directory>       # removing a <directory>
-$ rm <file>               # removes a file 
-$ rm -rf <dir>            # removes contents of directories recursively
-$ rm --dir <emptydir>     # removes empty directory
-$ rm ./*.txt  # removes all text files 
+$ man nano
+$ nano --help
+$ nano <file> # edit contents of a file
+$ nano -l <file> # display line number in file 
 
+$ rmdir <directory> # remove an empty directory
+$ man rm 
+$ rm --help
+$ rm <file> # removes a file 
+$ rm -rf <dir> # removes contents of directories recursively
+$ rm --dir <emptydir> # removes empty directory
+$ rm ./*.txt  # removes all text files 
 
 $ file <file> # determine type of file 
 $ stat <file>
 $ wc <file> # display no of lines, words and bytes in a file
 
-
 $ grep -i "<word>" <file> # find word within a file 
 $ cat <file> | grep <word> 
 
-
+$ man find 
+$ find --help
 $ find <dir> -name <pattern> -exec <command> {} +
-
-$ find . -type f -empty   # finding empty files in current directory
+$ find . -type f -empty  # finding empty files in current directory
 $ find . -type d   # find directories
 $ sudo find / -name "<name>" 
 $ sudo find / -iname "<name>"
@@ -210,10 +248,13 @@ $ ln -s <source> <file_link> # creates a soft link
 
 $ truncate -s 0 <file>
 
+$ man diff 
+$ diff --help
 $ diff <file1> <file2> # shows the difference between 2 files 
 $ diff -u <file1> <file2>
 $ diff -q <file1> <file2>
 $ diff -r <dir1>/ <dir2>/
+
 ______________________________________
 
 
@@ -236,6 +277,8 @@ $ ls -al | wc -l # prints no of files in current directory
 $ cat /var/log/auth.log | less
 
 
+$ man awk
+$ awk --help
 awk ‘{action}’ <file>
 awk ‘/regex pattern/{action}’ <file>
 
@@ -256,7 +299,9 @@ $ awk '/alias/ {print}' .bashrc # prints lines that contains 'alias'
 
 $ awk '{if($NF == "<something>") print $0} # prints the whole line if last column is equal to something 
 $ awk 'END {print NR}' <file> # prints no of files in a file 
-
+
+$ man grep
+$ grep --help
 grep <pattern> <file>
 
 $ grep -i "<word>" <file> # case insentive 
@@ -270,6 +315,8 @@ $ grep -L "<pattern>" <directory> # print files without the match
 $ grep -l <pattern> * # check in all the files in the directory 
 
 
+$ man sed 
+$ sed --help
 sed ‘s/[regex]/[replacement]/[flags]'  <filename>
 
 
@@ -296,13 +343,16 @@ wget
 arp
 route 
 
+$ man netstat 
+$ netstat --help
 $ netstat -r       # display routing table 
 $ netstat -l       # all listening ports 
 $ netstat -tln     # display all listening TCP ports 
 $ netstat -uln     # display all listening UDP ports 
 $ netstat -plunt   # display all listening TCP and UDP process with processid 
 
-
+$ man ping 
+$ ping --help
 $ ping <host> 
 $ ping -c <number> <host>    # number of packets to send to the host
 $ ping -s <number> -c <number> <host> 
@@ -313,34 +363,60 @@ $ ping -i <number> <host>   # default ping wait for 1 sec to send next packet ch
 $ ping -f <host>   # ping flood 
 
 
+$ man nslookup
 $ nslookup <host>
 
 
 $ sudo apt install curl # installs curl 
-$ curl <url>           # display the content of the URL on the terminal
-$ curl -# -O <url>
+$ man curl 
+$ curl --help
 
-$ curl -o <output_file> <url>   # download file from the url 
-$ curl -O <url>                 # saves it with the same name as in the <url>
+$ curl <url> # display the content of the URL on the terminal
 
-$ curl -u <username>:<password> -T <file_to_upload> <ftp_url>      # upload a file to the FTP server
+$ curl http://localhost:<port>/ 
+
+$ curl -v <url>  # displays more information 
+$ curl -i <url> # to include response headers
+$ curl -I <url> # to only view response headers 
+
+$ curl -o <output_file> <url> # download file from the url 
+$ curl -O <url>   # saves it with the same name as in the <url>
+$ curl -O <url1> <url2> # downloads multiple files 
+$ curl -# -O <url> # displays progress bar while downloading 
+
+$ curl -X <HTTP_Method> <url> # use specific HTTP request method instead of GET Method 
+$ curl -X PUT <url> # making a PUT request 
+$ curl -X DELETE <url> # making a DELETE request 
+
+$ curl -H '<headers>' <url>  # used to send a request with specific headers 
+
+$ curl -X POST <url> -H 'Content-Type: application/json' -d '{"key1":"val1", "key2":"value2"}' # used for sending json data using POST request 
+OR
+$ curl <url> -H 'Content-Type: application/json' -d '{"key1":"val1", "key2":"value2"}' # used for sending json data using POST request 
+# when -d [or --data] is used the HTTP Method changes to POST automatically 
 
 $ curl --data "param1=&param2=" <url>
-$ curl -X "POST" -d "param1=John&param2=Doe" <url>
+$ curl -X POST -d "param1=John&param2=Doe" <url> # For making a POST request to a server 
+
+$ curl -u <username>:<password> -T <file_to_upload> <ftp_url>  # upload a file to the FTP server
 
 
+$ man wget 
+$ wget --help
 $ wget <url>
 $ wget -O <file> <url>
 
-
+$ man ip
 $ ip -4 addr      # show ipv4 address 
 $ ip -6 addr      # show ipv4 address 
 
 $ ip address 
 $ ip address | grep <interface>
+$ ip addr show 
 $ ip address show <interface>    
 # show the information related to all interfaces available on our system
 
+$ man arp
 $ arp -a/-e
 
 $ cat /etc/resolv.conf
@@ -404,11 +480,14 @@ $ cat /etc/gshadow
 
 $ cat /etc/passwd | awk -F ':' '{print $1}' # prints all the users on the system 
 
+$ adduser --help
 $ sudo adduser <usermame> # create a new user 
+
+$ useradd --help
 $ sudo useradd <username> # lazy way of creating user 
 $ sudo useradd <username> -m # createa new user and adds home directory for the user 
 
-
+$ passwd --help
 $ sudo passwd <user> # change password for <user>
 $ sudo passwd  # change password for current user 
 $ sudo passwd -l <user> # lock user out 
@@ -419,15 +498,14 @@ $ sudo passwd -d <user> # to delete password for the user
 
 $ echo "username:new_password" | sudo chpasswd # change user password 
 
-
 $ su - <user>   # switches to <user>
 $ su -          # switches to root, require root credentials 
 
-
+$ usermod --help
 $ sudo usermod -l <username> <newusername>  # change <username> of the <user>
 $ sudo usermod <username> --shell /bin/bash 
 
-
+$ groupadd --help
 $ sudo groupadd <group_name> # Removes a group from the system
 
 $ sudo usermod -aG <group> <user> # add user to the group 
@@ -436,8 +514,10 @@ $ sudo usermod -aG sudo <user>
 $ groups 
 $ groups <username>
 
+$ userdel --help
 $ sudo userdel <user> # Deletes a user account and related file
 
+$ gpasswd --help
 $ gpasswd -d <username> <groupname>
 
 $ sudo visudo 
@@ -456,18 +536,24 @@ $ kill <processid>
 $ kill <processname>
 $ killall <processname>
 
+$ man ps
+$ ps --help
+
+$ man top
+$ top --help
+$ top -u <username> # see the processes for a particular user 
+
 # Use ctrl + Z to make a process a background job 
 
 $ <command> &   # runs the command in background 
 
-$ fg        # Brings the most recent job to foreground
-$ fg <n>    # Brings job <n> to the foreground
+$ fg  # Brings the most recent job to foreground
+$ fg <n>  # Brings job <n> to the foreground
 
-$ bg    # List stopped or background jobs,resume a stopped job in the background
+$ bg  # List stopped or background jobs,resume a stopped job in the background
 
-$ jobs       # Lists all processes that are running in the background
+$ jobs  # Lists all processes that are running in the background
 
-$ top -u <username> # see the processes for a particular user 
 
 $ htop || sudo apt install htop && htop
 # checks if htop is installed if not installs and runs it 
@@ -479,22 +565,27 @@ ______________________________________
 ####### Package Management ########
 
 APT Package Manager
+$ man apt 
+$ apt --help 
+
 $ sudo apt update && sudo apt upgrade
 # updates the repositories and downloads all the updates 
 
-$ sudo apt edit-resources
-$ sudo apt install <package>
+$ sudo apt edit-resources
+
+$ sudo apt update # update apt repo sources 
+$ sudo apt upgrade # upgrade all package, install new versions 
+
+$ sudo apt dist-upgrade
+
+$ sudo apt install <package> # installs a new package 
 $ sudo apt reinstall <package>
-$ sudo apt remove <package>
+$ sudo apt remove <package> 
 $ sudo apt autoremove
 
 $ sudo apt purge <package> # delete conf files as well
-$ sudo apt install –only-upgrade <package>
+$ sudo apt install –only-upgrade <package> # updates a existing package
 
-$ sudo apt update  # update apt repo sources 
-$ sudo apt upgrade # upgrade all package, install new versions 
-
-$ sudo apt dist-upgrade <package>
 $ sudo apt list –installed # shows all installed packages
 $ sudo apt list --installed | wc -l 
 # list no of packages installed 
@@ -508,11 +599,16 @@ $ sudo apt search –full <string>
 $ sudo apt-cache search <package>
 $ sudo apt-add-repository <repository>
 
+$ dpkg -l
+
 
 Snap Package Manager
 /snap/bin
 
 $ sudo apt install snapd # install the snap package manager 
+
+$ man snap
+$ snap --help
 
 $ sudo snap install <package> # installs package 
 $ sudo snap find <package> # searches for package
@@ -545,6 +641,7 @@ $ sudo systemctl is-active <servicename>
 $ sudo systemctl is-enabled <servicename>
 $ sudo systemctl list-units --all 
 $ sudo systemctl list-units --type=service 
+$ sudo systemctl list-unit-files 
 
 ______________________________________
 
@@ -556,7 +653,11 @@ ufw
 /etc/default/ufw
 
 $ sudo apt install ufw # installs ufw on the system 
+$ man ufw
+$ ufw --help
+
 $ sudo systemctl status/enable ufw
+$ sudo systemctl start ufw 
 
 $ sudo ufw status 
 $ sudo ufw status numbered 
@@ -602,6 +703,7 @@ Gzip and Gunzip
 
 $ gzip --version || sudo apt install gzip && gzip --version # check if gzip is installed and if not installs it 
 $ man gzip
+$ gzip --help
 
 $ gzip <file>  # create a compressed file named <file>.gz 
 $ gzip -k <file>  # by default gzip deletes original file but -k keeps the original file as well 
@@ -631,6 +733,8 @@ Tar <options> <source> <destination>
 -t	List the contents of an archive.
 -u	Append but don’t overwrite the current archive.
 
+$ man tar 
+$ tar --help
 
 $ tar -cvf file.tar <multiple_files>  
 # creating a tar Archive
@@ -665,6 +769,7 @@ Zip and Unzip
 
 $ zip --version || sudo apt install zip && zip --version
 $ man zip
+$ zip --help
 
 $ zip <file>.zip <files_to_be_zipped>
 $ zip <file>.zip <folder>
@@ -674,6 +779,7 @@ $ zip <file>.zip <folder> -x <file_to_exclude>
 $ zip -d <file>.zip <files_to_delete> # deletes a file from within the archive 
 $ zip -u <file>.zip <files_to_add> 
 
+$ unzip --help
 $ unzip <file>.zip
 $ unzip <file>.zip -d <destination_path>
 
@@ -722,6 +828,7 @@ $ source ~/.bashrc  # reloading .bashrc file
 
 ##### Aliases #####
 
+$ alias --help
 $ alias <aliasname>="<alias_content>"
 Eg:- alias i="sudo apt install"
      alias upg=”sudo apt update && sudo apt upgrade“
@@ -752,7 +859,9 @@ $ env  # prints all environment variables
 # Creating a Environment Variable
 $ export <var_name>=<var_value>
 
+$ printenv 
 $ printenv $<variable_name> # printing it's value 
+$ printenv | grep <variable_name> # find a variable 
 
 # To make a environment variable persistent Add a variable definition to the .bashrc file 
 
