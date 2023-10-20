@@ -1,0 +1,137 @@
+                  Kubectl Commands 
+
+$ kubectl config get-clusters
+
+# Getting the list of nodes 
+$ kubectl get nodes
+
+# Showing the information regarding the node 
+$ kubectl describe node <node_name>
+
+# Creates a new namespace 
+$ kubectl create namespace <namespace_name>
+
+$ kubectl top node <node_name>
+$ kubectl top pod <pod_name>
+
+$ kubectl cluster-info
+
+# List all the pods 
+$ kubectl get pods
+$ kubectl get pods -o wide 
+$ kubectl get pod <pod_name>
+$ kubectl get pod <pod_name> --watch
+
+# Show information about a pod 
+$ kubectl describe pod <pod_name>
+
+
+# Creating a deployment via deployment yaml file (Declarative Approach)
+$ kubectl apply -f deployment.yaml
+
+# Creating a deployment 
+$ kubectl create deployment <deployment_name> --image=<image_name>
+$ kubectl create deployment <deployment_name> --image=<image_name> --replicas=<replicas>
+$ kubectl create deployment <deployment_name> --image=<image_name> --port=<port>
+
+# List all the deployments 
+$ kubectl get deployments
+
+$ kubectl get deployment <deployment_name>
+$ kubectl get deployment <deployment_name> -o yaml
+
+# Shows the information about a particular deployment 
+$ kubectl describe deployment <deployment_name>
+
+# Edit an Existing Deployment 
+$ kubectl edit deployment <deployment_name>
+
+
+# Creating a Kubernetes Service 
+$ kubectl apply -f service.yaml
+
+# Creating service
+$ kubectl create service clusterip <service_name> --tcp=<port>:<targetPort>
+$ kubectl create service loadbalancer <service_name> --tcp=<port>:<targetPort>
+$ kubectl create service nodeport <service_name> --tcp=<port>:<targetPort>
+
+# List all the Services 
+$ kubectl get services 
+$ kubectl get service <service_name>
+
+# Shows the information about A Service 
+$ kubectl describe service <service_name>
+
+# Creating a LoadBalancer Service for the deployment 
+$ kubectl expose deployment <deployment_name> --type=LoadBalancer --port=<port> --target-port=<port>
+
+
+# Creating a Persistence Volume 
+$ kubectl apply -f persistence_volume.yaml
+
+# Listing all Persistence Volumes 
+$ kubectl get pv
+
+# Shows information about a Persistence Volume
+$ kubectl describe pv <pv_name>
+
+# Creating a Persistence Volume Claim
+$ kubectl apply -f persistence_volume_claim.yaml
+
+# Listing all Persistence Volume Claims 
+$ kubectl get pvc 
+$ kubectl describe pvc <pvc_name>
+
+
+# Creating a Config Map via declarative approach  
+$ kubectl apply -f config_map.yaml
+
+# Creating a config Map 
+$ kubectl create configmap <configmap_name> --from-file=<file_path>
+$  kubectl create configmap <configmap_name> --from-file=<file1_path> --from-file=<file2_path>
+$ kubectl create configmap <configmap_name> --from-file=<key>=<file_path>
+$ kubectl create configmap <configmap_name> --from-literal=<key>=<value>
+
+# Listing all Config Maps 
+$ kubectl get configmaps
+$ kubectl get configmaps <configmap_name>
+$ kubectl get configmaps <configmap_name> -o yaml
+
+# Shows information about a Configmap
+$ kubectl describe configmaps <configmap_name>
+
+
+# Run a single Pod
+$ kubectl run <deployment_name> --image=<image_name>
+$ kubectl run <deployment_name> --image=<image_name> --port=<port>
+
+
+# Executing a command inside a pod 
+$ kubectl exec <pod_name> -it -- bash
+$ kubectl exec <pod_name> -c <container_name> -it -- bash
+
+$ kubectl attach <pod_name>
+$ kubectl attach <pod_name> -c <container_name>
+
+# Scaling out or in a deployment 
+$ kubectl scale deployment <deployment_name> --replicas=<no>
+
+
+$ kubectl autoscale deployment foo --min=<min_no_of_pods> --max=<max_no_of_pods>
+
+
+# Getting logs from a pod 
+$ kubectl logs <pod_name>
+$ kubectl logs <pod_name> --all-containers=true
+$ kubectl logs <pod_name> -f
+$ kubectl logs <pod_name> -c <container_name>
+
+
+$ kubectl delete pods --all 
+$ kubectl delete pod <pod_name>
+$ kubectl delete service <service_name>
+$ kubectl delete deployment <deployment_name>
+$ kubectl delete pvc <pvc_name>
+$ kubectl delete pv <pv_name>
+$ kubectl delete -f deployment.yaml
+$ kubectl delete -f service.yaml
