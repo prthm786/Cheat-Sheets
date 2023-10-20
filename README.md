@@ -11,7 +11,7 @@ Here you will find list of cheat sheets of various languages, tools and framewor
 - [VS Code Shortcuts](VSCode.md)
 - [Markdown Cheatsheet](Markdown.md)
 - [MySQL Cheatsheet](MySQL.md)
-- [Kubectl Cheatsheet](kubectl.txt)
+- [Kubectl Cheatsheet](Kubectl.txt)
 
 
 I'll be updating this repo frequently.
