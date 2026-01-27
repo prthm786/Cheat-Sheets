@@ -1,7 +1,26 @@
           Windows Command Prompt Cmds 
 
+F7 # shortcut to search the history of command 
+type cmd in win file explorer path 
+drag and drop file/folder on command prompt to copy file path 
+
+
+## command concatenation 
+$ <command1> & <command2>   # runs both command irrespective of the result of <command1>
+$ <command1> && <command2>  # runs <command2> only if <command1> successfully runs 
+$ <command1> | <command2>   # sends the output of <command1> to <command2>  
+
+$ (echo Hello & echo World) > test.txt 
+
+$ cmd /?
+$ cmd /k <cmd>
+$ cmd /c <cmd>
+
+$ cmd.exe /k shutdown /r /fw /t 1  # restart to bios menu 
+
 $ help 
 $ help <command>
+$ <command> /? 
 
 $ cls    # clears the screen 
 
@@ -9,20 +28,15 @@ $ echo "<msg>"
 $ echo %<var_name>%
 Eg:- echo %PATH%
 
-
 $ pause   # pauses screen
-
 
 $ set <variable>=<value> # creating q environment variable for current session only 
 $ set /p <variable>=<promptString>.  # create a environment variable and prompt the user for input
 $ set /a <variable>=<expression>  # for creating a variable with numerical value 
 
-
 # Creates or modifies environment variables in the user or system environment
 $ setx <variable> <value>  # create a environment variable in local environment.
-
-$ setx <variable> <value> /m. # create a environment variable in system environment. 
-
+$ setx <variable> <value> /m # create a environment variable in system environment. 
 
 $ timeout <seconds>
 
@@ -108,19 +122,19 @@ $ subst /d <drive_letter>:   # deleting the virtual drive
 $ where /r <dir> <file>   # recursive search
 $ where /r <dir> <pattern> # recursive search and can use Regex in <pattern>
 $ where /t <file>  # display file size, modified time and date 
-_______________________________________
 
 
 #### Command Prompt Customisation ####
 
 $ title <title>
 
+$ prompt /?
 $ prompt $G
 $ prompt $D$B$P$G
+$ prompt $T $B $P$G
 
 $ color <bg_color><fg_color>
 Eg:- color 0b 
-
 
 
 $ doskey /history     # history of commands ran in the current session 
@@ -128,8 +142,7 @@ $ doskey /history     # history of commands ran in the current session
 $ doskey /MACROS
 $ doskey /MACROS:ALL
 
-$ doskey <command_name>=<command_value>
-
+$ doskey <command_name>=<command_value>   # creating aliases 
 
 
 ########### Networking ############
@@ -177,6 +190,7 @@ $ netsh interface ip show tcpconnections
 $ netsh interface ip show address | findstr "IP Address" 
 $ netsh interface ip show interface 
 
+$ netsh wlan show wlanreport 
 
 $ tracert -d <host>  # do not resolve hostnames 
 $ tracert -h <max_hops> <host>
@@ -188,8 +202,6 @@ $ tracert -4|-6 <host>
 $ route print 
 
 $ arp -a  # display ARP table 
-_______________________________________
-
 
 
 ########## System Info #############
@@ -197,6 +209,7 @@ _______________________________________
 $ getmac /v 
 $ systeminfo
 
+$ powercfg /? 
 $ powercfg /energy 
 $ powercfg /batteryreport
 
@@ -205,7 +218,7 @@ $ whoami /user
 $ whoami /priv    # privileged assigned to current user 
 $ whoami /groups 
 
-$ net users # all users of the system 
+$ net users  # all users of the system 
 $ net user <username>   # info about the given user 
 $ net localgroup
 $ net localgroup <groupname>
@@ -213,8 +226,12 @@ $ net localgroup <groupname>
 $ sc query windefend
 
 $ netsh firewall show state  # state of windows firewall 
-_______________________________________
 
+$ sfc /scannow   # check all windows files 
+$ DISM /Online /Cleanup-Image /RestoreHealth 
+
+$ chkdsk <drive> /r  
+$ chkdsk C: /r 
 
 
 ######## User Management ########
@@ -222,9 +239,7 @@ _______________________________________
 $ net users   # show all users 
 $ net user <username>   # info about specific user 
 
-
-$ net user <username> <password> /add <options>
-# create a new user 
+$ net user <username> <password> /add <options> # create a new user 
 
 options
 passwordreq:yes | no
@@ -233,16 +248,11 @@ fullname:"<Name>"
 /expires: <MM/DD/YYYY> | <DD/MM/YYYY> | <mmm,dd,YYYY> | never 
 /times: <day>-<day>, <time>-<time> | all 
 
-
 $ net user jayj Cyk4^g3B /add /passwordreq:yes /times:monday-friday,8am-5pm /fullname:"Jay Jamison"
-
 
 $ net user <username> /delete      # deleting user from the system 
 
-
 $ net user <username> <options>    # updates user 
-_______________________________________
-
 
 
 
@@ -255,7 +265,6 @@ $ find /i <string> <file>   # ignore case
 $ find /v <string> <file>   # displays lines that don't contain the <string>
 
 $ find /c /i <string> <file>
-
 
 
 $ findstr <strings> <files>
@@ -272,9 +281,7 @@ $ findstr /x # display lines that matches exactly
 $ findstr /i <string> <files>      # ignore case 
 $ findstr /s <string> <dir> # searches recursively
 
-
 $ findstr /s /i /m  <word> *.*       # display names of all files that contain the <word> in current directory and all subdirectories 
-
 
 
 $ fc <file1> <file2>    # display the differences between 2 files or set of files 
@@ -283,8 +290,6 @@ $ fc /C <file1> <file2> # ignore case of characters
 
 $ fc /B <file1> <file2>    # binary comparison
 $ fc /N <file1> <file2>    # display line no.
-
-
 
 
 $ more <file>   # display content of a file 1 screen at a time 
@@ -297,3 +302,26 @@ $ more +<n> <file1> +<n> <file2>
 
 $ <command> | more 
 $ type <file> | more 
+
+$ <command> | clip 
+ 
+$ time && <command> && time 
+
+$ <command> > NUL # suppressing output of a command 
+$ <command> 2> NUL # suppressing errors of a command 
+$ <command> 2> file.txt # sending errors of a file.txt 
+
+$ edit   # new terminal text editor 
+
+
+$ tasklist /?
+$ tasklist /f /t /im <process_name>
+$ tasklist /f /t /pid <process_id>
+
+$ cipher
+
+$ for
+$ if 
+
+
+
