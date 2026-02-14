@@ -15,6 +15,8 @@ Ctrl + R -> search
 F11 -> Full screen mode 
 Ctrl + C -> stops the execution of process
 Ctrl + Z -> Backgrounds the process 
+Alt Del -> Delete word by word
+Alt Arrow Keys -> move word by word
 
 ______________________________________
 
@@ -25,6 +27,7 @@ $ which <command>
 $ whoami
 $ whereis <command>
 $ whatis <command>
+$ type <command> 
 $ date 
 $ who 
 $ history 
@@ -55,7 +58,8 @@ $ <command1> && <command2> # runs second command only if first command is succes
 $ <command1> || <command2> # runs second command if first command fails
 
 
-$ Eg:- bat <file> || sudo apt install bat && bat <file> # using logical operstors to run command on conditions 
+$ Eg:- bat <file> || sudo apt install bat && bat <file>
+ # using logical operstors to run command on conditions 
 
 
 ############# System Info #############
@@ -281,7 +285,8 @@ $ man awk
 $ awk --help
 awk ‘{action}’ <file>
 awk ‘/regex pattern/{action}’ <file>
-
+
+
 $ awk ‘{print $0}’ <file>  # print all the contents of a file similar to cat 
 $ awk ‘{print NR,$0}’ <file>  # line number count with the line 
 $ awk ‘{print $1}’ <file>     # print specific column
@@ -320,7 +325,8 @@ $ sed --help
 sed ‘s/[regex]/[replacement]/[flags]'  <filename>
 
 
-$ sed ‘s/cat/concatenate/g’ <file>  # replaces every word 'cat' with 'concatenate' 
+$ sed ‘s/cat/concatenate/g’ <file>  # replaces every word 'cat' with 'concatenate' 
+
 
 $ sed ‘2,3s/cat/concatenate/’ <file>   # replace 2nd and 3rd 'cat' with 'concatenate' 
 
@@ -371,7 +377,8 @@ $ sudo apt install curl # installs curl
 $ man curl 
 $ curl --help
 
-$ curl <url> # display the content of the URL on the terminal
+$ curl <url> # display the content of the URL on the terminal
+
 
 $ curl http://localhost:<port>/ 
 
@@ -504,7 +511,8 @@ $ su -          # switches to root, require root credentials
 $ usermod --help
 $ sudo usermod -l <username> <newusername>  # change <username> of the <user>
 $ sudo usermod <username> --shell /bin/bash 
-
+
+
 $ groupadd --help
 $ sudo groupadd <group_name> # Removes a group from the system
 
@@ -570,40 +578,49 @@ $ apt --help
 
 $ sudo apt update && sudo apt upgrade
 # updates the repositories and downloads all the updates 
-
-$ sudo apt edit-resources
+
+
+$ sudo apt edit-resources
+
 
 $ sudo apt update # update apt repo sources 
 $ sudo apt upgrade # upgrade all package, install new versions 
 
 $ sudo apt dist-upgrade
 
-$ sudo apt install <package> # installs a new package 
+$ sudo apt search <string> 
+$ sudo apt search –full <string>
+ 
+$ apt show <package> # shows info about a package 
+
+$ sudo apt install --dry-run <package> # see all packages that wiil be installed without actually installing  
+$ sudo apt install --show-progress <package> # installs a new package 
 $ sudo apt reinstall <package>
 $ sudo apt remove <package> 
+$ sudo apt remove --dry-run <package> 
 $ sudo apt autoremove
 
 $ sudo apt purge <package> # delete conf files as well
-$ sudo apt install –only-upgrade <package> # updates a existing package
+$ sudo apt install –-only-upgrade --show-progress <package> # updates a existing package
 
-$ sudo apt list –installed # shows all installed packages
-$ sudo apt list --installed | wc -l 
-# list no of packages installed 
+$ apt list --manual-installed 
+$ sudo apt list –-installed # shows all installed packages
+$ sudo apt list --installed | wc -l   # list no of packages installed 
 
 $ sudo apt list --upgradable
 $ sudo apt show <package> # give details about the package
 
-$ sudo apt search <string> 
-$ sudo apt search –full <string>
- 
 $ sudo apt-cache search <package>
 $ sudo apt-add-repository <repository>
 
 $ dpkg -l
+$ sudo dpkg -i <deb_file>
 
 
 Snap Package Manager
-/snap/bin
+# /snap/
+# /var/snap/bat
+# ~/snap/
 
 $ sudo apt install snapd # install the snap package manager 
 
@@ -619,6 +636,24 @@ $ sudo snap list # list of packages install using snap
 $ sudo snap enable/disable <package>
 $ sudo snap remove <package> # removed the package from the system 
 $ sudo snap remove <package> --purge
+$ snap log 
+
+
+Flatpack Package Manager
+
+$ flatpak install flathub
+$ flatpak --user install flathub 
+
+$ flatpak info <package> 
+$ flatpak search <package>  # searches for package
+$ flatpak list 
+$ flatpak list --app
+$ flatpak update <package> 
+$ flatpak uninstall <package> 
+$ flatpak uninstall --unused <package> 
+$ flatpak run <package> 
+$ flatpak ps 
+$ flatpak kill 
 
 ______________________________________
 
@@ -835,7 +870,7 @@ Eg:- alias i="sudo apt install"
 
 $ unalias <alias_name> # delete aliases 
 
-
+$ alias | wc -l
 
 
 ######## Environment Variables ########
@@ -854,7 +889,10 @@ $ echo $SHELL  # display value of SHELL variable
 $ echo $PATH  # display value of PATH variable
 
 $ env  # prints all environment variables
-
+
+
+
+
 
 # Creating a Environment Variable
 $ export <var_name>=<var_value>
@@ -879,4 +917,5 @@ $ sudo nano -l /etc/environment
 $ source /etc/environment
 
 ______________________________________
+
 
