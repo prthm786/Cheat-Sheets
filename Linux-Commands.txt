@@ -11,7 +11,7 @@ Ctrl + U -> deletes everything before the cursor
 Ctrl + K -> deletes everything after the cursor 
 Ctrl + Shift + + -> Increase font size 
 Ctrl + - -> Decrease font size 
-Ctrl + R -> search
+Ctrl + R -> search in history 
 F11 -> Full screen mode 
 Ctrl + C -> stops the execution of process
 Ctrl + Z -> Backgrounds the process 
@@ -22,22 +22,32 @@ ______________________________________
 
 
 $ man <command>  # show manual page for <command>
-$ <command> --help 
-$ which <command>
-$ whoami
-$ whereis <command>
+$ <command> --help
 $ whatis <command>
-$ type <command> 
-$ date 
+$ whoami
 $ who 
+$ which <command>    # show binary in only one place
+$ whereis <command>  # show all the places
+$ type <command or alias> 
+$ type -t <command or alias> 
+$ command -v/-p/-V <command>
+$ date 
 $ history 
 $ history -c     # clears history 
+$ history | sort -r | fzf  #  find within history 
 $ watch <command>
 $ time <command> # returns the time the command took to run 
 # reset 
 $ reboot # restarts the system 
-$ shutdown
+$ sudo reboot -f
+$ sudo shutdown
+$ sudo shutdown -h now
+$ sudo shutdown +15  # shutdown after 15 min
+$ sudo shutdown +10 "System will shut down in 10 minutes" 
+$ sudo shutdown -r +5 "System will reboot in 5 minutes" 
+$ poweroff
 $ sleep <seconds> 
+$ clear 
 
 $ ls /bin | grep <search>  # check for command binaries 
 
@@ -64,6 +74,11 @@ $ Eg:- bat <file> || sudo apt install bat && bat <file>
 
 ############# System Info #############
 $ hostname 
+$ cat /etc/hostname 
+
+$ uptime 
+
+$ dmidecode
 
 $ uname 
 $ uname -m 
@@ -101,8 +116,16 @@ $ lscpu
 $ sudo lshw  # provide all the hardware related info
 $ sudo lshw -html >> report.html # export all the info in html file 
 $ sudo lshw -short
+$ sudo lshw -C disk
+$ sudo lshw -C memory
+$ sudo lshw -C cpu
+$ sudo lshw -C network
 
 $ aplay -l   
+
+$ lsof
+lsof -i :<port> 
+$ lsof -i :22
 
 ______________________________________
 
@@ -129,7 +152,6 @@ find
 tree 
 chmod 
 cat 
-nano
 diff 
 ln
 unlink
@@ -148,6 +170,14 @@ $ man ls
 $ ls --help
 $ ls            # list files in directory 
 $ ls -al        # list all files 
+$ ls -alh       # list all files in long format (-l) in human readable form (-h) (file size)
+$ ls -alFh
+$ ls -ashSr1    # sorts all files (-a) by size (-S) in reverse order (-r) and also show size (-s)  
+$ ls -ashtr1    # sorts all files (-a) by time (-t) in reverse order (-r) 
+$ ls -ltu       # sort by the last time a file was accessed
+$ ls -ai        # show inode number for all files
+$ ls -a1        # show all files in each line 
+
 
 $ man cd
 $ cd --help 
@@ -156,10 +186,17 @@ $ cd ..   # cd into the parent directory
 $ cd -    # cd into the previous directory 
 $ cd ~    # cd into the current user's home directory
 $ cd /    # cd into the root directory
+$ cd      # cd into home directory 
 $ pwd     # print current directory
 
-$ pushd <directory>
+$ pushd <directory> 
 $ popd 
+
+$ man mktemp
+$ mktemp # creates a file
+$ mktemp -d # creates a dir 
+$ test=$(mktemp)
+$ rm $(echo $test)
 
 $ man touch
 $ touch --help
@@ -209,6 +246,8 @@ $ cat -n <file>   # show line numbers
 $ cat <file1> <file2> > <newfile> # create a new file with content of both files <file1> and <file2> 
 $ cat ./*.txt > merge.txt  # combines the contents of all the text files into one file 
 
+$ bat <file> || sudo apt install batcat 
+
 $ nano || sudo apt install nano # check for nano and install if it is not found 
 
 $ man nano
@@ -217,12 +256,20 @@ $ nano <file> # edit contents of a file
 $ nano -l <file> # display line number in file 
 
 $ rmdir <directory> # remove an empty directory
+$ rmdir -v <directory>
 $ man rm 
 $ rm --help
 $ rm <file> # removes a file 
 $ rm -rf <dir> # removes contents of directories recursively
+$ rm -rfv <dir> # removes contents of directories recursively with verbose (-v)
+
 $ rm --dir <emptydir> # removes empty directory
 $ rm ./*.txt  # removes all text files 
+
+$ man shred 
+$ shred -vzu # (-z or --zero) added zero in final overwrite to hide shredding, (-u or --remove) remove files, (-v) verbose 
+$ shred -vz
+$ shred -nz <number> # overwrite <number> times (-n or --iterations), (-z) added zero in final overwrite
 
 $ file <file> # determine type of file 
 $ stat <file>
@@ -230,6 +277,10 @@ $ wc <file> # display no of lines, words and bytes in a file
 
 $ grep -i "<word>" <file> # find word within a file 
 $ cat <file> | grep <word> 
+
+$ fzf || sudo apt install fzf 
+$ fzf --preview='batcat --color=always {}'
+$ gedit $(fzf --preview="batcat --color=always {}")
 
 $ man find 
 $ find --help
@@ -243,6 +294,20 @@ $ find /var/log -type f -name "*.log"
 $ find ~/test -type f -name "*.txt" -delete # delete all the text files using find command 
 $ find . -mtime +10 # find all the files that was not modified for more than 10 days 
 $ find . -type f -size +1M # find files which are greater than 1 Megabyte 
+
+$ fdfind || sudo apt install fd-find  # install fd which faster alternative to find
+$ fdfind <pattern> <path> 
+$ fdfind --type f  
+$ fd -t e # or empty # find empty files 
+$ fd --type x # or executable 
+$ fd -t l # or symlink 
+$ fdfind -d 1 -td    # finds all the directories inside the current directory with a depth of 1
+$ fdfind -d 1 -td | fzf 
+$ fdfind -d 1 -tf | fzf 
+$ fd -e pdf # find all pdfs inside the current dir
+$ fd -e txt -E "*test*" # find all txt files test the file with test in it
+$ fd -S +12m -e pdf   # find all pdf files with a size greater than 12MB
+$ fd -S -12m -e docx   # find all docx files with a size less than 12MB
 
 $ chmod <file_permissions> <file>   # changes file mod 
 $ tree                     # Lists the contents of a directory recursively
@@ -310,14 +375,19 @@ $ grep --help
 grep <pattern> <file>
 
 $ grep -i "<word>" <file> # case insentive 
-$ grep -v "<word>" <file> # show lines that does not contain the word 
+$ grep -v "<word>" <file> # show lines that does not contain the word (invert)
 $ grep -n "<word>" <file> # display line numbers that contain the <word>
 $ grep -c "<word>" <file> # count no of matching lines or count no of occurrences 
 $ grep -r "<pattern>" <directory> # search tha pattern within multiple files recursively 
 $ grep -l "<pattern>" <directory> # print files with the match 
 $ grep -L "<pattern>" <directory> # print files without the match 
-
+$ grep -A <num> "<word>" <file> # shows lines after the match
+$ grep -B <num> "<word>" <file> # shows lines before the match
+$ grep -C <num> "<word>" <file> # shows lines before & after the match
 $ grep -l <pattern> * # check in all the files in the directory 
+$ grep -Irl # for not binary and recursive only file names
+
+$ rg || apt install ripgrep # installs ripgrep which is faster and more versatile than grep
 
 
 $ man sed 
@@ -331,6 +401,23 @@ $ sed ‘s/cat/concatenate/g’ <file>  # replaces every word 'cat' with 'concat
 $ sed ‘2,3s/cat/concatenate/’ <file>   # replace 2nd and 3rd 'cat' with 'concatenate' 
 
 $ sed ‘3d’ <file>   # delete 3rd line 
+
+
+$ tr  # translate or transliterate 
+$ echo "Hello World" | tr [a-z] [A-Z]              # HELLO WORLD 
+$ echo "Hello World" | tr [:lower:] [:upper:]      # HELLO WORLD 
+$ echo "Hello World" | tr -d [a-z] # H W           # delete chars
+$ echo "Hello World" | tr -d [A-Z] # ello orld     # delete chars
+$ tr -s # remove duplicate chars 
+$ echo "Helllo Woorlddd" | tr -s "l"               # Helo Worlddd
+$ echo "Hello World123" | tr -d [:alpha:] # 123    # delete all alphabets 
+$ echo "a1b2c3d4" | tr -d '0-9'  # abcd            # remove all numbers 
+$ echo "a1b2c3d4" | tr -d '[:digit:]'
+$ echo "hello     world" | tr -s ' '
+$ echo "aabcd    sdgdgs" | tr -s '[:space:]'
+$ echo "aabcd sdgdgs" | tr -d ' '
+$ echo "aabcd sdgdgs" | tr -d '[space]'
+$ echo "aabcd    sdgdgs1219422522353   %^&*^" | tr -s '[:space:]' | tr -d '[:alnum:]'
 
 ______________________________________
 
@@ -357,21 +444,34 @@ $ netstat -tln     # display all listening TCP ports
 $ netstat -uln     # display all listening UDP ports 
 $ netstat -plunt   # display all listening TCP and UDP process with processid 
 
+$ ss -tulpn
+
 $ man ping 
 $ ping --help
 $ ping <host> 
-$ ping -c <number> <host>    # number of packets to send to the host
-$ ping -s <number> -c <number> <host> 
-# size of packets
+$ ping -vc <number> <host>  # number of packets to send to the host
+$ ping -s <size> -vc <number> <host> # specify size of each packet to sens to the host 
 
 $ ping -c <number> -q <host>   # only get the summary
-$ ping -i <number> <host>   # default ping wait for 1 sec to send next packet change this time by using -i 
+$ ping -i <interval> <host>   # default ping wait for 1 sec to send next packet change this time by using -i 
 $ ping -f <host>   # ping flood 
+$ ping -c 4 -s 128 <url>   
 
+# traceroute
 
 $ man nslookup
 $ nslookup <host>
+$ nslookup -query=mx <host>
+$ nslookup -query=txt <host>
+$ nslookup -query=ns <host>
+$ nslookup <host> <dns_server> 
 
+$ man dig  # DNS lookup utility
+$ dig <host>
+$ dig <host> TXT   # MX / TXT / NS / AAAA / PTR  # query any dns record
+$ dig @<dns_server> <host>
+$ dig -x 127.0.0.1 # reverse lookup
+$ dig +stats <host> 
 
 $ sudo apt install curl # installs curl 
 $ man curl 
@@ -379,8 +479,7 @@ $ curl --help
 
 $ curl <url> # display the content of the URL on the terminal
 
-
-$ curl http://localhost:<port>/ 
+$ curl http://localhost:<port> 
 
 $ curl -v <url>  # displays more information 
 $ curl -i <url> # to include response headers
@@ -420,8 +519,21 @@ $ ip -6 addr      # show ipv4 address
 $ ip address 
 $ ip address | grep <interface>
 $ ip addr show 
-$ ip address show <interface>    
-# show the information related to all interfaces available on our system
+$ ip address show <interface> # show the information related to all interfaces available on our system
+$ ip neigh show
+$ ip neigh flush all
+$ ip neigh flush dev <interface> 
+
+$ nmcli
+$ nmcli device show
+
+$ resolvectl
+$ resolvectl statistics
+$ resolvectl flush-caches
+$ resolvectl query <domain>    # add ip info to local dns
+
+$ sudo dhclient -r <interface>  # release ip address
+$ sudo dhclient <interface>     # renew ip address
 
 $ man arp
 $ arp -a/-e
@@ -429,11 +541,12 @@ $ arp -a/-e
 $ cat /etc/resolv.conf
 $ cat /etc/hosts 
 
-
 SSH
+~/.ssh/config
+
 $ sudo apt install openssh-client # installs ssh client o n the system
 
-$ ssh <user>@<ipaddress> # login to a remote server using IP address 
+$ ssh -vv <user>@<ipaddress> # login to a remote server using IP address 
 $ $ ssh -p <port> <user>@<ipaddress> # specify a different port to connect to SSH server 
 $ ssh <user>@<ipaddress> <command> # uses ssh to run a single command 
 $ ssh -i <private_key_file> <user>@<ipaddress> # connecting to a server using a private key 
@@ -444,25 +557,37 @@ $ ssh-copy-id -i <public_key> <user>@<ipaddress> # copies the public key file to
 
 
 SCP
-$ scp <username>@<ipaddress>:<filepath> <local_path> # copy file from remote server locally 
+$ scp <username>@<ipaddress>:<remote_path> <local_path> # copy file from remote server locally 
 
 $ scp -r <username>@<ipaddress>:<dir_path> <local_dir_path> # copy entire directory recursively from remote server locally 
 
 
 $ SCP -P <port> <file> <username>@<ipaddress>:<path> # uses different port than 22 to connect to the server and transfer files 
 
-$ scp <file> <username>@<ipaddress>:<path> # copy file to the remote server 
+$ scp <local_path> <username>@<ipaddress>:<remote_path> # copy file to the remote server 
 
 $ scp -r <local_dir_path> <username>@<ipaddress>:<dir_path> # copy entire directory recursively to remote server
 
 
 SFTP
 $ sftp <username>@<ipaddress>
+$ sftp -i <private_key_file> <user>@<ipaddress>
+
+Rsync
+
 ______________________________________
 
 
 
 ########## User Management ########## 
+
+$ whoami
+
+# /etc/passwd
+# /etc/group
+# /etc/default/useradd
+# /etc/shadow
+# /etc/sudoers
 
 adduser 
 useradd  # lazy way of creating user 
@@ -479,13 +604,15 @@ delgroup/groupdel
 groupmod
 users
 sudo
+su
 
 $ cat /etc/passwd     # this file has username and password 
 $ cat /etc/shadow     # holds encrypted password of user accounts
 $ cat /etc/group      # contains group info for all accounts
 $ cat /etc/gshadow 
 
-$ cat /etc/passwd | awk -F ':' '{print $1}' # prints all the users on the system 
+$ cat /etc/passwd | cut -d: -f1                  # prints all the users on the system 
+$ cat /etc/passwd | awk -F ':' '{print $1}'      # prints all the users on the system 
 
 $ adduser --help
 $ sudo adduser <usermame> # create a new user 
@@ -502,6 +629,7 @@ $ sudo passwd -u <user> # unlocks the user
 $ sudo passwd -x <days> <user> # days for which password will be valid 
 $ sudo passwd -n <days> <user> # minimum days for user cannot change it's password 
 $ sudo passwd -d <user> # to delete password for the user 
+$ passwd -S/--status 
 
 $ echo "username:new_password" | sudo chpasswd # change user password 
 
@@ -511,7 +639,7 @@ $ su -          # switches to root, require root credentials
 $ usermod --help
 $ sudo usermod -l <username> <newusername>  # change <username> of the <user>
 $ sudo usermod <username> --shell /bin/bash 
-
+$ sudo usermod -aG sudo <user>  # give sudo priviledges  # append user to sudo group  
 
 $ groupadd --help
 $ sudo groupadd <group_name> # Removes a group from the system
@@ -536,12 +664,23 @@ ______________________________________
 
 ######### Process Handling #########
 
-$ ps   
 $ top 
-$ ps -aux or ps aux 
+$ nice 
+$ renice
+$ ps   
+$ ps -aux or ps aux # shows all processes (-a) with user as root (-u) & have a tty (-x)
+$ ps -r 
+$ ps -axo user,pid,ppid,pcpu,pmem,rss,time,stime,comm 
+$ ps -u <username> -o user,pid,ppid,pcpu,pmem,rss,time,stime,comm
+$ ps axo stat,euid,ruid,tty,tpgid,sess,pgrp,ppid,pid,pcpu,comm
+$ ps -eo pid,tid,class,rtprio,ni,pri,psr,pcpu,stat,wchan:14,comm
+ 
+$ ps -l # shows priority and niceness value 
+$ ps -axo user,pid,ppid,pcpu,pmem,rss,time,stime,comm | sort -rk 4 | head   # sort according to CPU
+
 $ kill -l 
-$ kill <processid> 
-$ kill <processname>
+$ kill -9 <processid> # ends a process 
+$ pkill f <processname>  # ends a process using processname
 $ killall <processname>
 
 $ man ps
@@ -563,8 +702,7 @@ $ bg  # List stopped or background jobs,resume a stopped job in the background
 $ jobs  # Lists all processes that are running in the background
 
 
-$ htop || sudo apt install htop && htop
-# checks if htop is installed if not installs and runs it 
+$ htop || sudo apt install htop && htop  # checks if htop is installed if not installs and runs it 
 
 ______________________________________
 
@@ -573,15 +711,17 @@ ______________________________________
 ####### Package Management ########
 
 APT Package Manager
+# /etc/apt
+# /usr/lib/apt
+# /var/log/apt
+
 $ man apt 
 $ apt --help 
 
 $ sudo apt update && sudo apt upgrade
 # updates the repositories and downloads all the updates 
 
-
 $ sudo apt edit-resources
-
 
 $ sudo apt update # update apt repo sources 
 $ sudo apt upgrade # upgrade all package, install new versions 
@@ -639,7 +779,14 @@ $ sudo snap remove <package> --purge
 $ snap log 
 
 
-Flatpack Package Manager
+Flatpak Package Manager
+# /var/lib/flatpak
+# /var/lib/flatpak/app
+# /home/<user>/.var/app/
+# /home/<user>/.local/share/flatpak
+
+$ sudo apt install flatpak # install the flatpak package manager
+$ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 $ flatpak install flathub
 $ flatpak --user install flathub 
@@ -650,10 +797,10 @@ $ flatpak list
 $ flatpak list --app
 $ flatpak update <package> 
 $ flatpak uninstall <package> 
-$ flatpak uninstall --unused <package> 
+$ flatpak uninstall --unused  
 $ flatpak run <package> 
 $ flatpak ps 
-$ flatpak kill 
+$ flatpak kill <app_name> 
 
 ______________________________________
 
@@ -662,6 +809,9 @@ ______________________________________
 ######### Service Handling #########
 
 $ cat /etc/services 
+/etc/systemd/system
+/run/systemd/system
+/lib/systemd/system
 
 /lib/systemd     # systemctl
 /etc/init.d      # service
@@ -677,6 +827,8 @@ $ sudo systemctl is-enabled <servicename>
 $ sudo systemctl list-units --all 
 $ sudo systemctl list-units --type=service 
 $ sudo systemctl list-unit-files 
+
+$ systemd-analyze blame
 
 ______________________________________
 
@@ -695,6 +847,7 @@ $ sudo systemctl status/enable ufw
 $ sudo systemctl start ufw 
 
 $ sudo ufw status 
+$ sudo ufw status verbose
 $ sudo ufw status numbered 
 $ sudo ufw delete <number>
 $ sudo ufw enable/disable/reload 
@@ -706,6 +859,7 @@ $ sudo ufw allow from <ipaddress> to any port <portno>
 $ sudo ufw allow from <ipaddress> to any port <portno> proto <protocol>
 $ sudo ufw allow from <ipaddress> to any port 22 proto tcp
 $ sudo ufw allow/deny from <subnet>
+$ sudo ufw allow from <ip> to any port 22
 
 $ sudo ufw default allow outgoing
 $ sudo ufw default deny incoming
@@ -730,13 +884,14 @@ tar
 gzip -> gzip command compresses file 
 gunzip
 zip and unzip 
+zstd 
 
 Gzip and Gunzip
 
 # Gzip only works on a file, it fails to work on directory 
 # To compress a directory we use zip or combine gzip with tar 
 
-$ gzip --version || sudo apt install gzip && gzip --version # check if gzip is installed and if not installs it 
+$ gzip --version || sudo apt install gzip && gzip --version    # check if gzip is installed and if not installs it 
 $ man gzip
 $ gzip --help
 
@@ -753,48 +908,30 @@ $ gunzip <file>.gz # decompresses
 .tar.gz – archive file compressed with gzip tool
 .tar.bz2 – archive file compressed with bzip2 tool
 
-
-Tar <options> <source> <destination>
-
--c	Create a new archive.
--z	Use gzip compression.
--v	Provide verbose output.
--f	Archive file name.
--x	Extract from a compressed file.
 -A	Append tar files to an existing archive.
 -d	Show differences between an archive and a local filesystem.
 -delete 	Delete from the archive.
--r	Append files to the end of an archive.
--t	List the contents of an archive.
 -u	Append but don’t overwrite the current archive.
 
 $ man tar 
 $ tar --help
 
-$ tar -cvf file.tar <multiple_files>  
-# creating a tar Archive
-$ tar -cvf file.tar <folder>  
-# creating a tar Archive from folder
+$ tar -cvf file.tar <multiple_files>    # creates a new tar file (-c) with filename (-f) & verbose flag (-v) 
+$ tar -cvf file.tar <folder>            # creating a tar Archive from folder
 
-$ tar -tvf file.tar # list the contents of archive 
-$ tar -tvf file.tar | wc -l # printing the no of files in tar archive 
+$ tar -tvf file.tar                     # list the contents of archive (-t)
+$ tar -tvf file.tar | wc -l             # printing the no of files in tar archive 
 
-$ tar -xvf file.tar 
-# Extracting files from Archive
+$ tar -xvf file.tar                     # Extracting files (-x) from Archive from file (-f) & verbose flag (-v) 
 
-
-$ tar -czvf <file>.tar.gz <folder>   
-# gzip compression on the tar Archive
-
-$ tar -tvf <file>.tar.gz # listing the contents of tar.gz file
-
-$ tar -xvzf <file>.tar.gz  
-# Extracting a gzip tar Archive *.tar.gz 
+$ tar -rvf existing-archive-name.tar <folder>  # Add files to the existing archive (-r)
 
 
-$ tar -rvf existing-archive-name.tar <folder>
-# Add content to the existing archive 
- 
+$ tar -czvf <file>.tar.gz <folder>      # creates a new gzip compressed (-z) tar file (-c) with filename (-f) & verbose flag (-v) 
+
+$ tar -tvf <file>.tar.gz                # listing the contents of tar.gz file (-t) 
+
+$ tar -xvzf <file>.tar.gz               # Extracting a gzip tar Archive *.tar.gz (-x) 
 
 $ tar -czf file.tar | wc -c  # checking size of tar 
 $ tar -czf file1.tar.gz | wc -c  # checking size of tar.gz
@@ -806,17 +943,46 @@ $ zip --version || sudo apt install zip && zip --version
 $ man zip
 $ zip --help
 
-$ zip <file>.zip <files_to_be_zipped>
+$ zip <file>.zip <files_to_be_zipped> # compress files
 $ zip <file>.zip <folder>
-$ zip -v <file>.zip <folder>
+$ zip -2 <file>.zip <files_to_be_zipped>  # specify compression level (1-9)
+$ zip my_archive.zip file1.txt file2.txt 
+
+$ zip -v <file>.zip <folder>  # verbose 
+
 $ zip -r <file>.zip <directory> # creates a zip file recursively 
-$ zip <file>.zip <folder> -x <file_to_exclude>
-$ zip -d <file>.zip <files_to_delete> # deletes a file from within the archive 
+$ # zip -r backup.zip . 
+
+$ zip <file>.zip <folder> -x <file_to_exclude>   # exclude files from the zip 
+
+$ zip -d <file>.zip <files_to_delete>            # deletes a file from within the archive 
+$ zip -d my_archive.zip file_to_remove.txt
+
 $ zip -u <file>.zip <files_to_add> 
+
+$ zip -e secure_archive.zip sensitive_file.txt   # create a password-protected ZIP file 
+$ zip -re <name>.zip <folder>                    # zip & encrypt a folder with a password
 
 $ unzip --help
 $ unzip <file>.zip
 $ unzip <file>.zip -d <destination_path>
+
+zstd
+
+$ zstd || sudo apt install zstd
+
+$ zstd -2 <file>  # specify compression level (1-19)
+
+$ zstd --rm <file> -o <file>.zst # removes the source file after compression
+
+$ zstd file.txt -o compressed.zst  # compress file 
+$ zstd -vv file.txt -o compressed.zst  # compress file 
+$ zstd -r <folder> -o myfile.zst # compress a folder 
+
+$ zstd -d file.txt.zst # decompress
+$ zstd -d file.txt.zst -o restored.txt # decompress 
+
+$ unzstd file.txt.zst # decompress
 
 ______________________________________
 
@@ -917,5 +1083,6 @@ $ sudo nano -l /etc/environment
 $ source /etc/environment
 
 ______________________________________
+
 
 
