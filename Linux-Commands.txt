@@ -18,6 +18,10 @@ Ctrl + Z -> Backgrounds the process
 Alt Del -> Delete word by word
 Alt Arrow Keys -> move word by word
 
+
+bind '"\el":"clear\n"'  # alt l  # creating custom key binding for bash
+bind '"\ef":"open $(pwd) \n"' # alt f
+
 ______________________________________
 
 
@@ -260,6 +264,7 @@ $ rmdir -v <directory>
 $ man rm 
 $ rm --help
 $ rm <file> # removes a file 
+$ rm -i <file> # removes file interactively 
 $ rm -rf <dir> # removes contents of directories recursively
 $ rm -rfv <dir> # removes contents of directories recursively with verbose (-v)
 
@@ -308,6 +313,7 @@ $ fd -e pdf # find all pdfs inside the current dir
 $ fd -e txt -E "*test*" # find all txt files test the file with test in it
 $ fd -S +12m -e pdf   # find all pdf files with a size greater than 12MB
 $ fd -S -12m -e docx   # find all docx files with a size less than 12MB
+$ fd -e zip -x unzip
 
 $ chmod <file_permissions> <file>   # changes file mod 
 $ tree                     # Lists the contents of a directory recursively
@@ -1083,6 +1089,7 @@ $ sudo nano -l /etc/environment
 $ source /etc/environment
 
 ______________________________________
+
 
 
 
