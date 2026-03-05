@@ -155,6 +155,7 @@ rm
 find 
 tree 
 chmod 
+chown
 cat 
 diff 
 ln
@@ -264,6 +265,7 @@ $ rmdir -v <directory>
 $ man rm 
 $ rm --help
 $ rm <file> # removes a file 
+$ rm -f <file> # removes a file 
 $ rm -i <file> # removes file interactively 
 $ rm -rf <dir> # removes contents of directories recursively
 $ rm -rfv <dir> # removes contents of directories recursively with verbose (-v)
@@ -315,8 +317,17 @@ $ fd -S +12m -e pdf   # find all pdf files with a size greater than 12MB
 $ fd -S -12m -e docx   # find all docx files with a size less than 12MB
 $ fd -e zip -x unzip
 
-$ chmod <file_permissions> <file>   # changes file mod 
-$ tree                     # Lists the contents of a directory recursively
+$ chmod <file_permissions> <file> # changes file mod 
+# 1 -> execute, 2 -> write, 4 -> read 
+$ chmod 755 <file> # give the read, write & execute permission to the owner, read & execute permission to group & others
+$ chmod 600 <file> # give read, write permission to owner and no permissions to group and owner 
+$ chmod u+x <file> # # Add execute permission for owner
+$ chmod g-w <file> # # Remove write permission from group
+$ chmod o+r <file> # # Give read permission to others
+
+# chown
+
+$ tree  # Lists the contents of a directory recursively
 
 $ ln <source> <file_link> $ creates a hard link 
 $ ln -s <source> <file_link> # creates a soft link
@@ -674,15 +685,24 @@ $ top
 $ nice 
 $ renice
 $ ps   
+$ ps -e / -A  # shows all processes
+$ ps -ef / -Af 
+
 $ ps -aux or ps aux # shows all processes (-a) with user as root (-u) & have a tty (-x)
-$ ps -r 
-$ ps -axo user,pid,ppid,pcpu,pmem,rss,time,stime,comm 
-$ ps -u <username> -o user,pid,ppid,pcpu,pmem,rss,time,stime,comm
+
+$ ps -Ao user,stat,pid,ppid,pcpu,pmem,pri,psr,vsz,stime,comm
+
+$ ps -u <username> -o user,stat,pid,ppid,pcpu,pmem,rss,stime,comm
 $ ps axo stat,euid,ruid,tty,tpgid,sess,pgrp,ppid,pid,pcpu,comm
 $ ps -eo pid,tid,class,rtprio,ni,pri,psr,pcpu,stat,wchan:14,comm
- 
+
+$ ps -eo pid,user,args --sort user
+$ ps -A --sort=uid,-ppid,+pid
+$ ps -A -o user,stat,pid,ppid,pcpu,pmem,pri,psr,vsz,stime,comm --sort -pcpu
+
 $ ps -l # shows priority and niceness value 
-$ ps -axo user,pid,ppid,pcpu,pmem,rss,time,stime,comm | sort -rk 4 | head   # sort according to CPU
+$ ps -axo user,pid,ppid,pcpu,pmem,rss,time,stime,comm | sort -rk 4 | head  # sort according to CPU
+
 
 $ kill -l 
 $ kill -9 <processid> # ends a process 
