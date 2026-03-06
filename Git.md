@@ -19,13 +19,14 @@ $ git config --global --list # list all the global git configurations
 $ git config -l # list all the git configurations
 
 $ git config --global alias.<alias_name> "<cmd>"
+# Eg:- git config --global alias.co "checkout" # create an alias for git checkout command
+# git co <branch_name> # use the alias to checkout a branch
 
 $ git config --global diff.tool <editor> # set any editor as default diff tool
 
 $ git config --global merge.tool <editor> # set any editor as default merge tool
 
 $ git config --global core.editor <editor> # set any editor as default
-
 # Eg:- git config --global core.editor "code --wait"
 
 $ git config --glabal branch.sort -committerdate # sort branches by committer date, latest commit first
@@ -114,6 +115,8 @@ $ git checkout -b <branch> # creates a new branch and Switches to new branch
 
 $ git checkout -d <branch> # delete a branch and switch to the branch you want to switch to
 
+$ git checkout - # switch to the previous branch
+
 $ git branch -a  # List all local and remote branches
 
 $ git branch -r  # List all remote branches
@@ -138,7 +141,7 @@ $ git log -n <n> # list of <n> commits
 
 $ git log --decorate --stat # show stats of commits with the reference names of any commits that are shown
 
-$ git log --graph --decorate --oneline
+$ git log --graph --decorate --oneline # show commits in a graph format with the reference names of any commits that are shown, and the commit messages in a single line
 
 $ git log --author="<author_name>" # list of commits by the given author
 
@@ -239,7 +242,7 @@ $ git stash -u # stash everything including new untracked files
 
 $ git stash create # creates a stash but does not save it, returns the stash reference
 
-$ git stash save "<msg>" # stash with a msg
+$ git stash save "<msg>" # stash with a msg to reference the stash later
 
 $ git stash list # list all stashes
 
@@ -316,6 +319,8 @@ $ touch .gitignore # add files or folders to .gitignore you want git to ignore a
 $ git rebase main/master # rebase feature branch on top of main/master
 
 $ git rebase --abort # abort the rebase
+
+$ git rebase --interactive main/master # interactively rebase feature branch on top of main/master, allows you to edit, reorder, squash commits during the rebase process
 ```
 
 <br>
@@ -334,7 +339,9 @@ $ git remote -v
 $ git remote add <remote_name> <url>
 
 $ git push <remote_name> <branch> #  uploading your commits to the remote repository
-Eg:- git push origin main/master
+# Eg:- git push origin main/master
+
+$ git push <remote_name> <branch> --force # force push your commits to the remote repository, use with caution as it can overwrite changes in the remote repository
 
 $ git remote rm <remote_name> # remove a remote
 ```
